@@ -1,0 +1,42 @@
+//--- 320px - 543px iphone vert/horz-------
+@media (min-width: 20em) {
+//  body { background-color: #f00; }
+}
+
+//--- 544px - 767px xs -------
+@media (min-width: 34em) {
+//  body { background-color: #c00; }
+  @each $header, $size in (h1: 2.5, h2: 2, h3: 1.75, h4: 1.5, h5: 1.25, h6: 1) {
+    #{$header} {
+      font-size: #{$size}rem;
+    }
+  }
+  .lead { font-size: 1.25rem; }
+  #logo {
+    width: 250px;
+    height: 141px;
+  }
+  .margin-y-3 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+}
+
+//--- 768px - 991px sm -------
+@media (min-width: 48em)  {
+//  body { background-color: red; }
+  #footer-icons a {
+    margin-left: 1rem;
+    margin-right: 0rem;
+  }
+}
+
+//--- 992px - 1199px md -------
+@media (min-width: 62em) {
+//  body { background-color: blue; }
+}
+
+//--- 1200 -  lg
+@media (min-width: 75em) {
+//  body { background-color: green; }
+}
