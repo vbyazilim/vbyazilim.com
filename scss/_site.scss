@@ -32,17 +32,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .list-group-vb {
-    margin-bottom: 2rem;
-    li {
-      &:first-child,
-      &:last-child {
-        border-radius: 0;
-      }
+  a {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  margin-bottom: 2rem;
+  li {
+    &:first-child,
+    &:last-child {
+      border-radius: 0;
     }
-    .label-pill {
-      margin-left: .2rem;
-      margin-top: .26rem;
-    }
+  }
+  .label-pill {
+    margin-left: .2rem;
+    margin-top: .26rem;
+  }
 }
 
 .label-primary-vb {
