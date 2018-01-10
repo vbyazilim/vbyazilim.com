@@ -51,10 +51,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .label-primary-vb {
   background-color: $webbox-color;
+  border-radius: 0;
+  padding: 4px 8px;
+  min-width: 6rem;
 }
 
 #footer {
-  background-color: $webbox-color;
+  background-color: $vb-color;
   color: white;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -67,7 +70,34 @@ h1, h2, h3, h4, h5, h6 {
   &:hover { color: lighten($webbox-color, 15); }
 }
 
+.margin-y-sm-1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.margin-y-2,
 .margin-y-3 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.margin-y-3-2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.list-vb {
+  li {
+    margin: .5rem 0;
+  }
+}
+
+
+.labels-boxes {
+  margin-bottom: 1rem;
+  span {
+    min-width: initial;
+    margin-right: .5rem;
+    margin-bottom: .5rem;
+  }
 }
