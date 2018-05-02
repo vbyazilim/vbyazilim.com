@@ -20,7 +20,7 @@ task :deploy do
   now = Time.now.strftime("%Y-%m-%d-%H-%M")
   system %{
     git checkout gh-pages &&
-    git pull --rebase gh-pages &&
+    git pull --rebase &&
     git rebase master &&
     git push origin gh-pages &&
     git checkout master
