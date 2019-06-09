@@ -296,6 +296,10 @@ section.training {
         justify-content: flex-end;
       }
     }
+    
+    span.break-tablet {
+      display: block;
+    }
 }
 
 @media (min-width: 1024px) {
