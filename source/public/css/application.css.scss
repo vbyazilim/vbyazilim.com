@@ -250,9 +250,47 @@ section.training {
 }
 
 
+@for $i from 0 through 8 {
+  .mb-#{$i}-mobile { margin-bottom: 1em * $i !important; }
+  .mt-#{$i}-mobile { margin-top: 1em * $i !important; }
+  .my-#{$i}-mobile { margin-top: 1em * $i !important; margin-bottom: 1em * $i !important; }
+  .pb-#{$i}-mobile { padding-bottom: 1em * $i !important; }
+  .pt-#{$i}-mobile { padding-top: 1em * $i !important; }
+  .py-#{$i}-mobile { padding-top: 1em * $i !important; padding-bottom: 1em * $i !important; }
+  .pl-#{$i}-mobile { padding-left: 1em * $i !important; }
+}
+
+
+@media (max-width: 768px) {
+  section.mobile-only {
+    &.first {
+      padding-top: 3em;
+    }
+    padding-top: 1em;
+    padding-bottom: 1em !important;
+    &.last {
+      padding-bottom: 3em !important;
+    }
+  }
+  
+  article .meta {
+    small, span.category { display: block; }
+  }
+}
+
 /* ------------------------------------------------------------------------- */
 @media (min-width: 769px) {
     p.debug::after { content: " tablet"; }
+
+    @for $i from 0 through 8 {
+      .mb-#{$i}-tablet { margin-bottom: 1em * $i !important; }
+      .mt-#{$i}-tablet { margin-top: 1em * $i !important; }
+      .my-#{$i}-tablet { margin-top: 1em * $i !important; margin-bottom: 1em * $i !important; }
+      .pb-#{$i}-tablet { padding-bottom: 1em * $i !important; }
+      .pt-#{$i}-tablet { padding-top: 1em * $i !important; }
+      .py-#{$i}-tablet { padding-top: 1em * $i !important; padding-bottom: 1em * $i !important; }
+    }
+
     div.footer-right-icons-tablet {
       .icon {
         justify-content: flex-end;

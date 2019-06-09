@@ -15,9 +15,9 @@ article_tags = current_page.tags
                 <article>
                     <div class="content is-medium">
                         <div class="meta">
-                            <% if article_author %><small><%= article_author %></small> &mdash; <% end %>
+                            <% if article_author %><small><%= article_author %> &mdash; </small><% end %>
                             <time pubdate datetime="<%= current_page.date.xmlschema %>" title="<%= article_date %>"><%= article_date %></time>
-                             <% if article_category %> &mdash; Filed under <a href="<%= category_path(article_category) %>"><%= article_category %></a><% end %>
+                             <% if article_category %><span class="category"> &mdash; Filed under <a href="<%= category_path(article_category) %>"><%= article_category %></a></span><% end %>
                         </div>
 
                         <h1 class="title"><%= article_title %></h1>
