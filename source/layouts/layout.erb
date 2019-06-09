@@ -13,27 +13,28 @@ page_subtitle = " | #{page_subtitle}" if page_subtitle
 
     <% if development? %>
     <%= stylesheet_link_tag 'bulma.min' %>
-     <% else %>
+    <% else %>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <% end %>
 
-    <%= yield_content :extra_css %>
     <%= stylesheet_link_tag 'syntax' %>
+    <%= yield_content :extra_css %>
     <%= stylesheet_link_tag 'application' %>
-    
-    <% if development? %>
-    <%= javascript_include_tag 'fontawesome.5.3.1' %>
-    <% else %>
-    <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <% end %>
-
-    <%= javascript_include_tag 'app' %>
 </head>
 <body>
     <% if development? %><p class="debug"></p><% end %>
     <%= partial 'partials/header' %>
     <%= yield %>
     <%= partial 'partials/footer' %>
+
+    <% if development? %>
+    <%= javascript_include_tag 'fontawesome.5.3.1' %>
+    <%= javascript_include_tag 'jquery-3.3.1.slim.min' %>
+    <% else %>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <% end %>
     <%= yield_content :extra_js %>
+    <%= javascript_include_tag 'app' %>
 </body>
 </html>

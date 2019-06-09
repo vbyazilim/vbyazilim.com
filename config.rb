@@ -33,15 +33,6 @@ activate :blog do |blog|
         template: 'templates/category.html'
       }
   }
-
-  # This will add a prefix to all links, template references and source paths
-  # blog.prefix = "blog"
-
-  # blog.summary_length = 250
-  # blog.month_link = "{year}/{month}.html"
-  # blog.day_link = "{year}/{month}/{day}.html"
-  # blog.default_extension = ".markdown"
-
   blog.sources = "posts/{year}-{month}-{day}-{title}.html"
   blog.layout = "blog_detail_layout"
   blog.tag_template = "templates/tag.html"

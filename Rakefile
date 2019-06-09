@@ -17,7 +17,6 @@ task :runserver do
 end
 
 namespace :new do
-
   # rake new:article["hello world uğur","2016 june 20"]
   desc "Post new Article"
   task :article, [:title, :date] do |t, args|
@@ -44,4 +43,16 @@ namespace :new do
     File.write article_file, output.join("\n")
     puts "Post is ready to cook: #{article_file}"
   end
+end
+
+desc "Deploy"
+task :deploy do
+  system "rm -rf build/"
+  system "bundle exec middleman deploy"
+end
+
+desc "Build site"
+task :build do
+  system "rm -rf build/"
+  system "bundle exec middleman build --verbose"
 end
