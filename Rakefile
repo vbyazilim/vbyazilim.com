@@ -47,12 +47,21 @@ end
 
 desc "Deploy"
 task :deploy do
-  system "rm -rf build/"
-  system "bundle exec middleman deploy"
+  now = Time.now.strftime("%Y-%m-%d-%H-%M")
+  system %{
+    bundle exec middleman build --verbose &&
+    cd build/ &&
+    git add . &&
+    git commit -m "release #{now}" &&
+    git push &&
+    cd ../
+  }
+  puts "Deployed..."
 end
 
-desc "Build site"
-task :build do
-  system "rm -rf build/"
-  system "bundle exec middleman build --verbose"
-end
+
+# desc "Build site"
+# task :build do
+#   system "rm -rf build/"
+#   system "bundle exec middleman build --verbose"
+# end
