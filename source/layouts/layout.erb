@@ -20,6 +20,15 @@ page_subtitle = " | #{page_subtitle}" if page_subtitle
     <%= stylesheet_link_tag 'syntax' %>
     <%= yield_content :extra_css %>
     <%= stylesheet_link_tag 'application' %>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52664816-9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-52664816-9');
+    </script>
 </head>
 <body>
     <% if development? %><p class="debug"></p><% end %>
