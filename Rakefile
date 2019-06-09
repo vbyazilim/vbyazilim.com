@@ -59,8 +59,7 @@ task :deploy do
 end
 
 
-# desc "Build site"
-# task :build do
-#   system "rm -rf build/"
-#   system "bundle exec middleman build --verbose"
-# end
+desc "Build site"
+task :build do
+  system "bundle exec middleman build --verbose"
+end

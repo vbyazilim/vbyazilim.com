@@ -224,13 +224,21 @@ h3 {
   }
 }
 
+#ga-notice button {
+  right: 1.4rem !important;
+  top: 2rem !important;
+}
+
 @for $i from 0 through 8 {
   .mb-#{$i} { margin-bottom: 1em * $i !important; }
   .mt-#{$i} { margin-top: 1em * $i !important; }
   .my-#{$i} { margin-top: 1em * $i !important; margin-bottom: 1em * $i !important; }
+  .mr-#{$i} { margin-right: 1em * $i !important; }
+
   .pb-#{$i} { padding-bottom: 1em * $i !important; }
   .pt-#{$i} { padding-top: 1em * $i !important; }
   .py-#{$i} { padding-top: 1em * $i !important; padding-bottom: 1em * $i !important; }
+  .pa-#{$i} { padding: 1em * $i !important; }
 }
 
 .vb-conferences {
@@ -254,6 +262,12 @@ section.training {
 
 @media (min-width: 1024px) {
     p.debug::after { content: " desktop"; }
+    
+    #ga-notice button {
+      right: 1.4rem !important;
+      top: 1.4rem !important;
+    }
+
     
     @for $i from 0 through 8 {
       .mb-#{$i}-desktop { margin-bottom: 1em * $i !important; }

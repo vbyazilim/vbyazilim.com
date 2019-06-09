@@ -14,17 +14,21 @@ var CookieConsent = {
     },
 
     getCookie: function(name){
-        var cookieArray = decodeURIComponent(document.cookie).split(';');
         var getResult = false;
-        $.each(cookieArray, function(i, kv){
-            var kvArray = kv.split('=');
-            var cookieName = kvArray[0].replace(' ', '');
-            var cookieValue = kvArray[1].replace(' ', '');
-            if (name == cookieName) {
-                getResult = cookieValue;
-                return;
-            }
-        });
+        var cookieString = decodeURIComponent(document.cookie);
+        if(cookieString.length > 0){
+            var cookieArray = cookieString.split(';'); 
+            $.each(cookieArray, function(i, kv){
+                var kvArray = kv.split('=');
+                var cookieName = kvArray[0].replace(' ', '');
+                var cookieValue = kvArray[1].replace(' ', '');
+                if (name == cookieName) {
+                    getResult = cookieValue;
+                    return;
+                }
+            });
+        }
+
         return getResult;
     }
     ,
