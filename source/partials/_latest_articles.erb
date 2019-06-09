@@ -14,14 +14,16 @@ sorted_articles = blog.articles.sort_by{|a| a.date}.reverse
         article_tags = article.tags || nil
         %>
         <li>
-            <% link_to article, class: 'is-size-4-desktop' do %><%= article.title %><% end %>
-            <time pubdate datetime="<%= article.date.xmlschema %>" title="<%= article_date %>">
-                <%= article_date %>
-                <% if article_category %> &dash; <a href="<%= category_path(article_category) %>"><%= article_category %></a><% end %>
-                <% if article_tags %> &dash;<% article_tags.each do |tag| %> [ <a href="<%= tag_path(tag) %>"><%= tag %></a> ]<% end %>
+            <%= link_to article.title, article, class: 'is-size-4-desktop', title: 'Click to read detail' %>
+            <time class="mb-1" pubdate datetime="<%= article.date.xmlschema %>">
+                <span title="<%= article_date %>"><%= article_date %></span>
+                <% if article_category %> &dash; <%= link_to article_category.titlecase, category_path(article_category), title: "View other posts in: #{article_category.titlecase} category" %><% end %>
+                <% if article_tags.size > 0 %> &dash;<% article_tags.each do |tag| %> [ <%= link_to tag, tag_path(tag), title: "View other posts tagged with: #{tag}" %> ]<% end %>
                 <% end %>
             </time>
-            <div class="is-size-5-desktop"><%= article.summary %></div>
+            <div class="is-size-5-desktop mb-2 summary">
+                <p><%= link_to strip_tags(article.summary).chomp, article, title: 'Click to read detail' %></p>
+            </div>
         </li>
     <% end %>
     </ul>

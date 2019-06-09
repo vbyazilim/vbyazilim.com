@@ -1,0 +1,248 @@
+---
+title: "How much do you care to write good Django code?"
+date: Jun 02, 2019 10:30
+category: development
+tags: django
+author: "Uğur Özyılmazel"
+# published: false
+---
+
+I’ve been having often conversations with fellow Djangonauts. I always ask one
+little question during the talk...
+
+READ_MORE
+
+### Have you ever read the Django’s “Writing code” article ?
+
+I’ve been doing Django hire interviews lately. Before I criticize or start
+review the code, I always ask the **question**... Unfortunately, most of the
+developers are unaware of that document. They don’t even know if It exists.
+
+If you navigate through the [Contributing to Django][01] page, you’ll see the
+[Writing code][02] section under the list items. Probably, most users never
+contrive to look at the docs unless they’re planning to contribute source code.
+Rules of writing Django code is already out there...
+
+### Coding style
+
+If you [click the link][03], you’ll navigate to coding style page in Django
+documentation. I’m skipping *Python style* part since you need to know that
+already!
+
+#### Sorting imports
+
+Document tells us to sort our `import` statements with `isort`.
+
+```bash
+$ python -m pip install isort
+$ isort -rc .
+```
+
+More detailed information can ben found [here][04]. You can also integrate
+this with your code editing tool/ide etc. I mostly use this configuration:
+
+```toml
+[settings]
+line_length = 60
+multi_line_output = 3
+use_parentheses = true
+include_trailing_comma = true
+quiet = true
+force_grid_wrap = 0
+known_django = django
+sections = FUTURE,STDLIB,DJANGO,THIRDPARTY,FIRSTPARTY,LOCALFOLDER
+```
+
+Small example after sort process:
+
+```python
+import logging
+from collections import Counter
+
+from django.db import models, router, transaction
+from django.db.models.deletion import Collector
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
+
+from ..utils import console
+from .signals import post_undelete, pre_undelete
+```
+
+When you integrate `isort` to your editor or maybe a git-hook, you don’t need
+to worry about the order of imports anymore...
+
+```python
+import logging
+
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+from baseapp.utils import save_file as custom_save_file
+```
+
+Also, sorting imports are explained very well in the Django docs:
+
+```python
+# future
+from __future__ import unicode_literals
+
+# standard library
+import json
+from itertools import chain
+
+# third-party
+import bcrypt
+
+# Django
+from django.http import Http404
+from django.http.response import (
+    Http404, HttpResponse, HttpResponseNotAllowed, StreamingHttpResponse,
+    cookie,
+)
+
+# local Django
+from .models import LogEntry
+
+# try/except
+try:
+    import yaml
+except ImportError:
+    yaml = None
+
+CONSTANT = 'foo'
+
+
+class Example:
+    # ...
+```
+
+#### What about models ?
+
+Django model, represents a table in database and single entity of data. That’s
+why model name should be **singular**, not plural! If you want to store blog
+posts in a database, you must name It to `Post` not ~~`Posts`~~. Also, model name
+is a Python Class. You must follow the naming convention of Python which is
+`InitialCaps`
+
+Field names should be singular except `ManyToMany` or similar field types. Naming
+should be `snake_case`. There are good examples, **DO**es, **DON’T**s in the
+docs page. Here is a good one:
+
+```python
+from django.db import models
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=40)
+```
+
+I’ve seen two most common behavior about relation models such as `ForeignKey`
+and `MonyToMany` fields.
+
+### Please use `to='ModelName'` convention
+
+Fields takes `kwargs` and `args`. Most of the candidates did the same writing:
+
+```python
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+from .models import Category
+
+class Post(models.Model):
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='posts',
+        verbose_name=_('category'),
+    )
+```
+
+Please define relation fields with using `to` keyword argument:
+
+```python
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+class Post(models.Model):
+    category = models.ForeignKey(
+        to='Category',
+        on_delete=models.CASCADE,
+        related_name='posts',
+        verbose_name=_('category'),
+    )
+```
+
+This helps in two ways:
+
+1. You are safe from **circular import** situation. You are free to import any
+   model in anywhere...
+1. This is more pythonic and readable... We define all others such as
+   `on_delete`, `related_name` why not showing which model is targeted ?
+
+### The order of model inner classes
+
+Django docs tell:
+
+- All database fields
+- Custom manager attributes
+- `class Meta`
+- `def __str__()`
+- `def save()`
+- `def get_absolute_url()`
+- Any custom methods
+
+Please follow the convention. Again, **you are not writing** code to contribute
+Django. You are writing code for your self, your company, your family, your
+anything... If there are some conventions, let’s follow them... Why ?
+
+## Convention over configuration
+
+I heard this term for the first time from [Ruby on Rails][06] community. Let’s
+keep the conventions also in `choices` fields too:
+
+
+> If choices is defined for a given model field, define each choice as a list of
+tuples, with an all-uppercase name as a class attribute on the model
+
+Example:
+
+```python
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+class Post(models.Model):
+    STATUS_OFFLINE = 0
+    STATUS_ONLINE = 1
+    STATUS_DELETED = 2
+    STATUS_DRAFT = 3
+    STATUS_CHOICES = [
+        (STATUS_OFFLINE, _('Offline')),
+        (STATUS_ONLINE, _('Online')),
+        (STATUS_DELETED, _('Deleted')),
+        (STATUS_DRAFT, _('Draft')),
+    ]
+```
+
+---
+
+Document also covers;
+
+- Template style
+- View style
+- Use of `django.conf.settings`
+
+and few other miscellaneous information, [please read][03] It when you need It.
+
+
+[01]: https://docs.djangoproject.com/en/dev/internals/contributing/
+[02]: https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/
+[03]: https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/
+[04]: https://isort.readthedocs.io/en/latest/
+[05]: https://www.wikiwand.com/en/Convention_over_configuration
+[06]: https://rubyonrails.org

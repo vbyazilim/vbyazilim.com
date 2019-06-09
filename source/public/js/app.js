@@ -48,7 +48,9 @@ $(document).ready(function() {
     $(".zoomable img").on("click", function(){
         $(this).toggleClass('zoom');
     });
-    
+
+    $(".yield a").addClass('is-external-link');
+
     $("a.is-external-link").each(function(i){
         this.target = "_blank";
     });
