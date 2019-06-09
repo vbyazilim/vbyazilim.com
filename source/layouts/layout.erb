@@ -11,16 +11,19 @@ page_subtitle = " | #{page_subtitle}" if page_subtitle
     <title>vb YAZILIM | Development, Training and Consultancy<%= page_subtitle %></title>
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
 
+    <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
+    <meta name="keywords" content="python,ruby,bash,javascript,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
+
     <% if development? %>
     <%= stylesheet_link_tag 'bulma.min' %>
     <% else %>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <% end %>
-
+    <link rel="icon" href="/public/images/favicon-32.png">
     <%= stylesheet_link_tag 'syntax' %>
     <%= yield_content :extra_css %>
     <%= stylesheet_link_tag 'application' %>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <%= yield_content :opengraph %>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52664816-9"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -32,8 +35,18 @@ page_subtitle = " | #{page_subtitle}" if page_subtitle
 </head>
 <body>
     <% if development? %><p class="debug"></p><% end %>
+
     <%= partial 'partials/header' %>
     <%= yield %>
+
+    <div id="ga-notice" class="is-hidden">
+        <div class="notification has-text-centered is-radiusless">
+            <button class="delete"></button>
+            We are using Google Analytics on our page to track visit counts and other statistic related datas.
+            We would like to inform you about that...
+        </div>
+    </div>
+
     <%= partial 'partials/footer' %>
 
     <% if development? %>

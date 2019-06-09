@@ -10,3 +10,4 @@ gem 'stringex', '~> 2.8', '>= 2.8.5'
 
 gem 'builder', '~> 3.2', '>= 3.2.3'
 gem 'nokogiri'
+gem 'image_size', '~> 2.0', '>= 2.0.1'

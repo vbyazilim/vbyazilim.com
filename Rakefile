@@ -36,7 +36,6 @@ namespace :new do
     output << "---"
     output << ""
     output << "Article summary..."
-    output << ""
     output << "READ_MORE"
     output << ""
     

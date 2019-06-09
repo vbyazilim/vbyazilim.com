@@ -12,7 +12,7 @@ title: Training
                     <h2 class="subtitle mt-1-desktop">Every course includes special <strong>git-repo</strong> access,<br/><strong>pdf</strong> documents and <strong>video</strong> recordings of session!</h2>
                 </div>
                 <div class="column is-4 is-hidden-mobile">
-                    <div class="zoomable"><%= image_tag "cli-macbook-pro.png", class: 'no-shadow' %></div>
+                    <div class="zoomable"><%= image_tag "clip-macbook-pro.png", class: 'no-shadow' %></div>
                 </div>
             </div>
         </div>
@@ -817,3 +817,18 @@ title: Training
 <div class="container">
     <p class="mb-2"><a href="#top">Go back to top ↑</a> | <a href="#bash-training">Go back to Bash ↑</a></p>
 </div>
+
+<% content_for :opengraph do %>
+<meta property="og:title" content="vb YAZILIM" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vbyazilim.com/training/" />
+
+    <meta property="og:image" content="https://vbyazilim.com/public/images/clip-macbook-pro.png" />
+    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/clip-macbook-pro.png" />
+    <meta property="og:image:width" content="1000" />
+    <meta property="og:image:height" content="583" />
+
+    <meta property="og:description" content="Training services of vb YAZILIM">
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content="vb YAZILIM" />
+<% end %>
