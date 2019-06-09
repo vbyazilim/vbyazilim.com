@@ -1,0 +1,39 @@
+<%
+page_subtitle = "#{current_article.title}" unless current_article.nil?
+page_subtitle = current_page.metadata[:page][:title] if current_page.metadata[:page][:title]
+page_subtitle = " | #{page_subtitle}" if page_subtitle
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vb YAZILIM | Development, Training and Consultancy<%= page_subtitle %></title>
+    <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
+
+    <% if development? %>
+    <%= stylesheet_link_tag 'bulma.min' %>
+     <% else %>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <% end %>
+
+    <%= yield_content :extra_css %>
+    <%= stylesheet_link_tag 'syntax' %>
+    <%= stylesheet_link_tag 'application' %>
+    
+    <% if development? %>
+    <%= javascript_include_tag 'fontawesome.5.3.1' %>
+    <% else %>
+    <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <% end %>
+
+    <%= javascript_include_tag 'app' %>
+</head>
+<body>
+    <% if development? %><p class="debug"></p><% end %>
+    <%= partial 'partials/header' %>
+    <%= yield %>
+    <%= partial 'partials/footer' %>
+    <%= yield_content :extra_js %>
+</body>
+</html>

@@ -1,0 +1,15 @@
+---
+pageable: true
+per_page: 20
+---
+
+<%= partial 'partials/list_articles', locals: {
+    need_articles: page_articles,
+    need_title: "Browsing posts filed under &ldquo;#{category}&rdquo; category",
+} %>
+
+<%= partial 'partials/pagination', locals: {
+    need_articles: page_articles,
+    placeholder: ":category",
+    url_schema: "/posts/category/{placeholder}/",
+} %>

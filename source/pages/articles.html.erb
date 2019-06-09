@@ -1,0 +1,15 @@
+---
+pageable: true
+per_page: 20
+---
+
+<%= partial 'partials/list_articles', locals: {
+    need_articles: page_articles,
+    need_title: "Blog",
+    enable_search: true,
+} %>
+
+<%= partial 'partials/pagination', locals: {
+    need_articles: page_articles,
+    url_schema: "/posts/",
+} %>

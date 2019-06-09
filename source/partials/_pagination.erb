@@ -1,0 +1,34 @@
+<%
+if locals[:placeholder]
+    if locals[:placeholder].start_with?(':')
+      need_var = locals[placeholder.sub(':', '').to_sym]
+    else
+      need_var = locals[placeholder]
+    end
+end
+%>
+
+<% if paginate && num_pages > 1 %>
+<section class="section">
+    <div class="container">
+        <nav class="pagination" role="navigation" aria-label="pagination">
+            <% if prev_page %><a class="pagination-previous" title="Previous page" href="<%= prev_page.url %>">Previous</a><% end %>
+            <% if next_page %><a class="pagination-next" title="Next page" href="<%= next_page.url %>">Next</a><% end %>
+            <ul class="pagination-list">
+                <%
+                (1..num_pages).each do |n|
+                    if locals[:placeholder]
+                        pagination_link = "#{url_schema}page/{num}/".sub('{placeholder}', need_var.to_s).sub('{num}', n.to_s)
+                        pagination_link = url_schema.sub('{placeholder}', need_var.to_s) if n == 1
+                    else
+                        pagination_link = "#{url_schema}page/{num}/".sub('{num}', n.to_s)
+                        pagination_link = "#{url_schema}" if n == 1
+                    end
+                %>
+                <li><a class="pagination-link<% if n == page_number %> is-current<% end %>" aria-label="Page <%= n %>" href="<%= pagination_link %>"<% if n == page_number %> aria-current="page"<% end %>><%= n %></a></li>
+                <% end %>
+            </ul>
+        </nav>
+    </div>
+</section>
+<% end %>

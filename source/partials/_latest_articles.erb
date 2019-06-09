@@ -1,0 +1,28 @@
+<%
+sorted_articles = blog.articles.sort_by{|a| a.date}.reverse
+%>
+
+<div class="list-articles">
+    <div class="content">
+        <h1 class="title">Latests Blog Posts</h1>
+    </div>
+    <ul>
+    <% sorted_articles.first(10).each do |article| %>
+        <%
+        article_date = I18n.l article.date, :format => "%d %B %Y, %A %H:%M"
+        article_category = article.metadata[:page][:category] || nil
+        article_tags = article.tags || nil
+        %>
+        <li>
+            <% link_to article, class: 'is-size-4-desktop' do %><%= article.title %><% end %>
+            <time pubdate datetime="<%= article.date.xmlschema %>" title="<%= article_date %>">
+                <%= article_date %>
+                <% if article_category %> &dash; <a href="<%= category_path(article_category) %>"><%= article_category %></a><% end %>
+                <% if article_tags %> &dash;<% article_tags.each do |tag| %> [ <a href="<%= tag_path(tag) %>"><%= tag %></a> ]<% end %>
+                <% end %>
+            </time>
+            <div class="is-size-5-desktop"><%= article.summary %></div>
+        </li>
+    <% end %>
+    </ul>
+</div>

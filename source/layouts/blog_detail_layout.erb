@@ -1,0 +1,51 @@
+<% wrap_layout :layout do %>
+<%
+article_date = I18n.l current_page.date, :format => "%d %B %Y, %A %H:%M"
+article_title = current_page.title
+article_subtitle = current_page.metadata[:page][:subtitle] || nil
+article_author = current_page.metadata[:page][:author] || nil
+article_category = current_page.metadata[:page][:category] || nil
+article_tags = current_page.tags
+%>
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-9-desktop">
+                <article>
+                    <div class="content is-medium">
+                        <div class="meta">
+                            <% if article_author %><small><%= article_author %></small> &mdash; <% end %>
+                            <time pubdate datetime="<%= current_page.date.xmlschema %>" title="<%= article_date %>"><%= article_date %></time>
+                             <% if article_category %> &mdash; Filed under <a href="<%= category_path(article_category) %>"><%= article_category %></a><% end %>
+                        </div>
+
+                        <h1 class="title"><%= article_title %></h1>
+                        <% if article_subtitle %><h2 class="subtitle is-size-4-desktop"><%= article_subtitle %></h2><% end %>
+                        <% if article_tags %>
+                        <div class="tags">
+                            <% article_tags.each do |tag| %>
+                            <span class="tag is-info"><a title="Posts with &ldquo;<%= tag %>&rdquo; tag" href="<%= tag_path(tag) %>"><%= tag %></a></span>
+                            <% end %>
+                    
+                        </div>
+                        <% end %>
+                
+                
+                        <div class="yield mt-3-desktop">
+                            <%= yield %>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="column is-3-desktop has-background-white-is is-hidden-touch">
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<% end %>
