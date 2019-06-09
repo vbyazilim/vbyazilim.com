@@ -23,7 +23,7 @@ namespace :new do
 
     article_title = args.title ? args.title : "new-article"
     article_date = args.date ? Time.parse(args.date) : Time.now
-    article_file = "source/posts/#{article_date.strftime(ARTICLE_FILE_DATE_FORMAT)}-#{article_title.to_url}.html.markdown"
+    article_file = "source/posts/#{article_date.strftime(ARTICLE_FILE_DATE_FORMAT)}-#{article_title.to_url}.html.markdown.erb"
     
     output = []
     output << "---"
