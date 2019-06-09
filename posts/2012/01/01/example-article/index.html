@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vb YAZILIM | Development, Training and Consultancy | Example Article</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+
+    <link href="/public/css/syntax.css" rel="stylesheet" />
+    
+    <link href="/public/css/application.css" rel="stylesheet" />
+</head>
+<body>
+    
+    <section class="section">
+    <div class="container">
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <a href="/" title="Home"><img src="/public/images/vb-yazilim-logo.svg" class="vb-logo" alt="Vb yazilim logo" /></a>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item"><a title="Blog posts" href="/posts/">Blog</a></div>
+                <div class="level-item"><a title="Services" href="/services/">Services</a></div>
+                <div class="level-item"><a title="Training" href="/training/">Training</a></div>
+                <div class="level-item"><a title="Atom feed" href="/feed.xml"><span class="icon"><i class="fas fa-rss-square"></i></span></a></div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+    
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-9-desktop">
+                <article>
+                    <div class="content is-medium">
+                        <div class="meta">
+                            <small>Uğur Özyılmazel</small> &mdash; 
+                            <time pubdate datetime="2012-01-01T12:22:00+02:00" title="01 January 2012, Sunday 12:22">01 January 2012, Sunday 12:22</time>
+                              &mdash; Filed under <a href="/posts/category/django/">django</a>
+                        </div>
+
+                        <h1 class="title">Example Article</h1>
+                        <h2 class="subtitle is-size-4-desktop">Subtitle of the Article</h2>
+                        <div class="tags">
+                            <span class="tag is-info"><a title="Posts with &ldquo;migration&rdquo; tag" href="/posts/tag/migration/">migration</a></span>
+                    
+                        </div>
+                
+                
+                        <div class="yield mt-3-desktop">
+                            <p>This is an example article. You probably want to delete it and write your own articles!</p>
+
+<p></p>
+<div class="highlight"><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'stringex'</span>
+<span class="nb">require</span> <span class="s1">'time'</span>
+<span class="nb">require</span> <span class="s1">'active_support/all'</span>
+
+<span class="n">page</span> <span class="s1">'/*.xml'</span><span class="p">,</span> <span class="ss">layout: </span><span class="kp">false</span>
+<span class="n">page</span> <span class="s1">'/*.json'</span><span class="p">,</span> <span class="ss">layout: </span><span class="kp">false</span>
+<span class="n">page</span> <span class="s1">'/*.txt'</span><span class="p">,</span> <span class="ss">layout: </span><span class="kp">false</span>
+
+<span class="no">Time</span><span class="p">.</span><span class="nf">zone</span> <span class="o">=</span> <span class="s2">"Europe/Istanbul"</span>
+<span class="n">helpers</span> <span class="no">ActiveSupport</span><span class="o">::</span><span class="no">NumberHelper</span>
+
+<span class="n">activate</span> <span class="ss">:livereload</span>
+<span class="n">activate</span> <span class="ss">:i18n</span><span class="p">,</span> <span class="ss">:mount_at_root</span> <span class="o">=&gt;</span> <span class="ss">:tr</span>
+
+<span class="n">set</span> <span class="ss">:css_dir</span><span class="p">,</span>    <span class="s1">'public/css'</span>
+<span class="n">set</span> <span class="ss">:js_dir</span><span class="p">,</span>     <span class="s1">'public/js'</span>
+<span class="n">set</span> <span class="ss">:images_dir</span><span class="p">,</span> <span class="s1">'public/images'</span>
+
+<span class="n">activate</span> <span class="ss">:syntax</span>
+<span class="n">set</span> <span class="ss">:markdown_engine</span><span class="p">,</span> <span class="ss">:redcarpet</span>
+<span class="n">set</span> <span class="ss">:markdown</span><span class="p">,</span> <span class="p">{</span>
+  <span class="ss">fenced_code_blocks: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">smartypants: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">tables: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">autolink: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">strikethrough: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">superscript: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">underline: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">highlight: </span><span class="kp">true</span><span class="p">,</span>
+  <span class="ss">footnotes: </span><span class="kp">true</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">config_data</span> <span class="o">=</span> <span class="no">YAML</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"config.yaml"</span><span class="p">))</span>
+
+<span class="n">convert_hash</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">h</span><span class="o">|</span>
+  <span class="no">Hash</span> <span class="o">===</span> <span class="n">h</span> <span class="p">?</span> 
+    <span class="no">Hash</span><span class="p">[</span>
+      <span class="n">h</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="o">|</span> 
+        <span class="p">[</span><span class="n">k</span><span class="p">.</span><span class="nf">respond_to?</span><span class="p">(:</span><span class="n">to_sym</span><span class="p">)</span> <span class="p">?</span> <span class="n">k</span><span class="p">.</span><span class="nf">to_sym</span> <span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="n">convert_hash</span><span class="p">[</span><span class="n">v</span><span class="p">]]</span> 
+      <span class="k">end</span> 
+    <span class="p">]</span> <span class="p">:</span> <span class="n">h</span>
+<span class="k">end</span>
+<span class="n">config</span><span class="p">[</span><span class="ss">:site</span><span class="p">]</span> <span class="o">=</span> <span class="n">convert_hash</span><span class="p">[</span><span class="n">config_data</span><span class="p">][</span><span class="ss">:site</span><span class="p">]</span>
+
+<span class="k">begin</span>
+  <span class="n">custom_config</span> <span class="o">=</span> <span class="no">YAML</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s2">"config_custom.yaml"</span><span class="p">))</span>
+  <span class="n">custom_config</span><span class="p">[</span><span class="s2">"main_author"</span><span class="p">].</span><span class="nf">each</span><span class="p">{</span><span class="o">|</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="o">|</span> <span class="n">config</span><span class="p">[</span><span class="ss">:site</span><span class="p">][</span><span class="ss">:main_author</span><span class="p">][</span><span class="n">k</span><span class="p">.</span><span class="nf">to_sym</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">}</span>
+<span class="k">rescue</span> <span class="no">Exception</span> <span class="o">=&gt;</span> <span class="n">e</span>
+<span class="k">end</span>
+
+<span class="n">configure</span> <span class="ss">:build</span> <span class="k">do</span>
+  <span class="n">activate</span> <span class="ss">:minify_css</span>
+  <span class="n">activate</span> <span class="ss">:minify_javascript</span>
+<span class="k">end</span>
+
+<span class="n">activate</span> <span class="ss">:blog</span> <span class="k">do</span> <span class="o">|</span><span class="n">blog</span><span class="o">|</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">sources</span> <span class="o">=</span> <span class="s1">'posts/{year}-{month}-{day}-{title}.html'</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">paginate</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">layout</span> <span class="o">=</span> <span class="s2">"blog_layout"</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">summary_separator</span> <span class="o">=</span> <span class="sr">/READ_MORE/</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">summary_length</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">taglink</span> <span class="o">=</span> <span class="s2">"etiket/{tag}.html"</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">tag_template</span> <span class="o">=</span> <span class="s2">"pages/tag.html"</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">calendar_template</span> <span class="o">=</span> <span class="s2">"pages/calendar.html"</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">page_link</span> <span class="o">=</span> <span class="s2">"sayfa/{num}"</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">year_link</span> <span class="o">=</span> <span class="s2">"arsiv/{year}/index.html"</span>
+  <span class="n">blog</span><span class="p">.</span><span class="nf">month_link</span> <span class="o">=</span> <span class="s2">"arsiv/{year}/{month}.html"</span>
+<span class="k">end</span>
+<span class="n">activate</span> <span class="ss">:directory_indexes</span>
+
+<span class="n">proxy</span> <span class="s2">"/arsiv/index.html"</span><span class="p">,</span> <span class="s2">"/pages/archive.html"</span>
+<span class="n">proxy</span> <span class="s2">"/hakkinda/index.html"</span><span class="p">,</span> <span class="s2">"/pages/about.html"</span>
+
+<span class="n">activate</span> <span class="ss">:deploy</span> <span class="k">do</span> <span class="o">|</span><span class="n">deploy</span><span class="o">|</span>
+  <span class="n">deploy</span><span class="p">.</span><span class="nf">build_before</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="n">deploy</span><span class="p">.</span><span class="nf">method</span>   <span class="o">=</span> <span class="ss">:git</span>
+  <span class="n">deploy</span><span class="p">.</span><span class="nf">remote</span> <span class="o">=</span> <span class="s2">"origin"</span>
+  <span class="n">deploy</span><span class="p">.</span><span class="nf">branch</span> <span class="o">=</span> <span class="s2">"gh-pages"</span>
+<span class="k">end</span>
+</code></pre></div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="column is-3-desktop has-background-white-is is-hidden-touch">
+                <div class="content">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer class="footer has-background-color-vb has-text-white">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <div class="content">
+                    <p><strong>vb YAZILIM</strong> - Uğur Özyılmazel</p>
+                    <address>
+                        Meşrutiyet Mah. Samanyolu sk. 11/7<br/>
+                        34363 - Şişli / İstanbul<br/>
+                        Türkiye<br/><br/>
+                        <a href="tel:+905333774300"><span class="icon"><i class="fas fa-phone-square"></i></span>+90-(0)533-3774300</a><br/>
+                        <a href="mailto:hello@vbyazilim.com"><span class="icon"><i class="fas fa-envelope-square"></i></span>hello@vbyazilim.com</a>
+                    </address>
+                </div>
+            </div>
+            <div class="column has-text-right-tablet footer-right-icons-tablet">
+                <p>
+                    <a title="GitHub repo of vb YAZILIM" target="_blank" href="https://github.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-github-square fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-twitter-square fa-2x"></i>
+                        </span>
+                    </a>
+                </p>
+                <p class="mt-1">
+                    made with <a class="is-external-link" href="https://middlemanapp.com">Middleman</a><br/>
+                    
+                    <a class="is-external-link" href="https://www.ruby-lang.org">Ruby</a> 
+                    <a class="is-external-link" href="https://sass-lang.com">Sass</a><br/>
+                    
+                    <a class="is-external-link" href="https://bulma.io">Bulma</a> 
+                    <a class="is-external-link" href="https://fontawesome.com">Font Awesome</a><br/>
+
+                    <a class="is-external-link" href="https://www.w3.org/TR/html/">HTML</a> 
+                    <a class="is-external-link" href="https://www.w3.org/Style/CSS/">CSS</a> 
+                    <a class="is-external-link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> 
+                </p>
+                <p class="mt-1">hosted at <a class="is-external-link" href="https://pages.github.com">GitHub Pages</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    
+    <script src="/public/js/app.js"></script>
+</body>
+</html>
