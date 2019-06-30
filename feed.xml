@@ -11,8 +11,8 @@
   </author>
   <entry>
     <title>How much do you care to write good Django code?</title>
-    <link rel="alternate" href="http://vbyazilim.com/posts/2019/06/02/how-much-do-you-care-to-write-good-django-code/"/>
-    <id>http://vbyazilim.com/posts/2019/06/02/how-much-do-you-care-to-write-good-django-code/</id>
+    <link rel="alternate" href="http://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/"/>
+    <id>http://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/</id>
     <published>2019-06-02T10:30:00+03:00</published>
     <updated>2019-06-09T23:08:02+03:00</updated>
     <author>
@@ -237,8 +237,8 @@ tuples, with an all-uppercase name as a class attribute on the model&lt;/p&gt;
   </entry>
   <entry>
     <title>hello world</title>
-    <link rel="alternate" href="http://vbyazilim.com/posts/2019/06/01/hello-world/"/>
-    <id>http://vbyazilim.com/posts/2019/06/01/hello-world/</id>
+    <link rel="alternate" href="http://vbyazilim.com/blog/2019/06/01/hello-world/"/>
+    <id>http://vbyazilim.com/blog/2019/06/01/hello-world/</id>
     <published>2019-06-01T10:00:00+03:00</published>
     <updated>2019-06-09T16:58:14+03:00</updated>
     <author>
