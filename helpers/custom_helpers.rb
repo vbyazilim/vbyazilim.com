@@ -13,7 +13,7 @@ module CustomHelpers
     out = []
     out << "<div class=\"zoomable#{zoomable_class}\">"
     out << "<figure class=\"image\">"
-    out << "<img#{img_class} src=\"/public/images/posts/#{file}\" alt=\"#{alt}\" />"
+    out << "<img#{img_class} src=\"/public/images/blog/#{file}\" alt=\"#{alt}\" />"
     out << "<figcaption>#{caption}</figcaption>" if caption
     out << "</figure>"
     out << "</div>"
