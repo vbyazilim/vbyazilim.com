@@ -1,15 +1,16 @@
 ---
 pageable: true
 per_page: 20
+title: Blog posts by year
 ---
 
 <%= partial 'partials/list_articles', locals: {
     need_articles: page_articles,
-    need_title: "XXX",
+    need_title: "Displaying posts by year #{year}",
 } %>
 
 <%= partial 'partials/pagination', locals: {
     need_articles: page_articles,
     placeholder: "year",
-    url_schema: "/posts/year/{placeholder}/",
+    url_schema: "/blog/year/{placeholder}/",
 } %>

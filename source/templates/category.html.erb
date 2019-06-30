@@ -1,6 +1,7 @@
 ---
 pageable: true
 per_page: 20
+title: "Blog posts by category"
 ---
 
 <%= partial 'partials/list_articles', locals: {
@@ -11,5 +12,5 @@ per_page: 20
 <%= partial 'partials/pagination', locals: {
     need_articles: page_articles,
     placeholder: ":category",
-    url_schema: "/posts/category/{placeholder}/",
+    url_schema: "/blog/category/{placeholder}/",
 } %>

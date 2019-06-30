@@ -34,7 +34,7 @@ var CookieConsent = {
     ,
 
     createAcceptCookie: function () {
-        this.createCookie('cookie_accepted', '1', 10 * 365);
+        this.createCookie('cookie_accepted', '1', 365);
     }
 
 };

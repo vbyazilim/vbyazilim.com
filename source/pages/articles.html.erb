@@ -1,6 +1,7 @@
 ---
 pageable: true
 per_page: 20
+title: Blog
 ---
 
 <%= partial 'partials/list_articles', locals: {
@@ -11,14 +12,14 @@ per_page: 20
 
 <%= partial 'partials/pagination', locals: {
     need_articles: page_articles,
-    url_schema: "/posts/",
+    url_schema: "/blog/",
 } %>
 
 
 <% content_for :opengraph do %>
 <meta property="og:title" content="vb YAZILIM" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vbyazilim.com/posts/" />
+    <meta property="og:url" content="https://vbyazilim.com/blog/" />
 
     <meta property="og:image" content="https://vbyazilim.com/public/images/opengraph.jpg" />
     <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/opengraph.jpg" />

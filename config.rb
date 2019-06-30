@@ -22,25 +22,25 @@ set :markdown, {
   footnotes: true,
 }
 
-proxy "/posts/index.html", "/pages/articles.html", :ignore => true
+proxy "/blog/index.html", "/pages/articles.html", :ignore => true
 proxy "/services/index.html", "/pages/services.html"
 proxy "/training/index.html", "/pages/training.html"
 
 activate :blog do |blog|
   blog.custom_collections = {
       category: {
-        link: 'posts/category/{category}.html',
+        link: 'blog/category/{category}.html',
         template: 'templates/category.html'
       }
   }
-  blog.sources = "posts/{year}-{month}-{day}-{title}.html"
+  blog.sources = "blog/{year}-{month}-{day}-{title}.html"
   blog.layout = "blog_detail_layout"
   blog.tag_template = "templates/tag.html"
   blog.calendar_template = "templates/calendar.html"
   blog.summary_separator = /READ_MORE/
-  blog.permalink = "posts/{year}/{month}/{day}/{title}.html"
-  blog.taglink = "posts/tag/{tag}/index.html"
-  blog.year_link = "posts/year/{year}.html"
+  blog.permalink = "blog/{year}/{month}/{day}/{title}.html"
+  blog.taglink = "blog/tag/{tag}/index.html"
+  blog.year_link = "blog/year/{year}.html"
   blog.paginate = true
   blog.page_link = "page/{num}"
 end
