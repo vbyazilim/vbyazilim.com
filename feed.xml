@@ -14,7 +14,7 @@
     <link rel="alternate" href="http://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/"/>
     <id>http://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/</id>
     <published>2019-06-02T10:30:00+03:00</published>
-    <updated>2019-06-09T23:08:02+03:00</updated>
+    <updated>2019-06-30T10:12:49+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -240,7 +240,7 @@ tuples, with an all-uppercase name as a class attribute on the model&lt;/p&gt;
     <link rel="alternate" href="http://vbyazilim.com/blog/2019/06/01/hello-world/"/>
     <id>http://vbyazilim.com/blog/2019/06/01/hello-world/</id>
     <published>2019-06-01T10:00:00+03:00</published>
-    <updated>2019-06-09T16:58:14+03:00</updated>
+    <updated>2019-06-30T10:12:49+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -249,7 +249,7 @@ tuples, with an all-uppercase name as a class attribute on the model&lt;/p&gt;
     <content type="html">&lt;p&gt;Hello and welcome to our &lt;strong&gt;first&lt;/strong&gt; official blog post!
 &lt;/p&gt;
 
-&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/posts/2019-06-01-vbyazilim.jpg" alt="Image" /&gt;&lt;/figure&gt;&lt;/div&gt;
+&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2019-06-01-vbyazilim.jpg" alt="Image" /&gt;&lt;/figure&gt;&lt;/div&gt;
 
 &lt;p&gt;I’m Uğur “vigo” Özyılmazel and I’m a software developer and founder of &lt;strong&gt;vb
 YAZILIM&lt;/strong&gt;. I’ve been writing code since the early 8-bit computer days.
