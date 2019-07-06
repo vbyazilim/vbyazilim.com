@@ -1,16 +1,16 @@
 var CookieConsent = {
 
     createCookie: function (name, value, days) {
-        var date = new Date(),
-            expires = '';
-        if (days) {
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toGMTString();
-        } else {
-            expires = "";
-        }
-        document.cookie = name + "=" + value + expires + "; path=/";
-        console.log('cookie created...');
+        var expire_date = new Date();
+        expire_date.setDate(expire_date.getDate() + days);
+        cookie_str = ''
+            + encodeURIComponent(name) + '=' + encodeURIComponent(value) + ';'
+            + 'domain=' + window.location.hostname + ';'
+            + 'max-age=' + (60 * 60 * 24 * days) +';'
+            + 'expires=' + expire_date.toGMTString() + ';'
+            + 'samesite=lax;'
+            + 'path=/';
+        document.cookie = cookie_str;
     },
 
     getCookie: function(name){
@@ -34,7 +34,7 @@ var CookieConsent = {
     ,
 
     createAcceptCookie: function () {
-        this.createCookie('cookie_accepted', '1', 365);
+        this.createCookie('cookie_accepted', 'ok', 365);
     }
 
 };
