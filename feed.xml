@@ -2,17 +2,17 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>vb YAZILIM - Blog</title>
   <subtitle>Heavy development warning...</subtitle>
-  <id>http://vbyazilim.com/</id>
-  <link href="http://vbyazilim.com/"/>
-  <link href="http://vbyazilim.com/feed.xml" rel="self"/>
+  <id>https://vbyazilim.com/</id>
+  <link href="https://vbyazilim.com/"/>
+  <link href="https://vbyazilim.com/feed.xml" rel="self"/>
   <updated>2019-06-02T10:30:00+03:00</updated>
   <author>
     <name>Uğur Özyılmazel</name>
   </author>
   <entry>
     <title>How much do you care to write good Django code?</title>
-    <link rel="alternate" href="http://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/"/>
-    <id>http://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/</id>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/"/>
+    <id>https://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/</id>
     <published>2019-06-02T10:30:00+03:00</published>
     <updated>2019-06-30T10:12:49+03:00</updated>
     <author>
@@ -237,8 +237,8 @@ tuples, with an all-uppercase name as a class attribute on the model&lt;/p&gt;
   </entry>
   <entry>
     <title>hello world</title>
-    <link rel="alternate" href="http://vbyazilim.com/blog/2019/06/01/hello-world/"/>
-    <id>http://vbyazilim.com/blog/2019/06/01/hello-world/</id>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/01/hello-world/"/>
+    <id>https://vbyazilim.com/blog/2019/06/01/hello-world/</id>
     <published>2019-06-01T10:00:00+03:00</published>
     <updated>2019-06-30T10:12:49+03:00</updated>
     <author>
