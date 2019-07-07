@@ -46,10 +46,8 @@ end
                         </div>
                     </div>
                 </article>
-                
-                <% unless development? %>
-                <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
-                <% end %>
+
+                <div class="sharethis-inline-share-buttons"></div>
             </div>
             
             <div class="column is-3-desktop article-right-column is-hidden-touch">
@@ -98,4 +96,10 @@ end
     <% end %>
 <% end %>
 
+<% end %>
+
+<% content_for :extra_js do %>
+    <% unless development? %>
+    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+    <% end %>
 <% end %>
