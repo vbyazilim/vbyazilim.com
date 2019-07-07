@@ -78,6 +78,14 @@ end
     </div>
 </section>
 
+<% content_for :extra_js do %>
+    <% if build? %>
+    <!-- sharethis -->
+    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+    <% end %>
+<% end %>
+
+
 <% content_for :opengraph do %>
 <meta property="og:title" content="vb YAZILIM | <%= current_page.title %>" />
     <meta property="og:type" content="website" />
@@ -96,10 +104,4 @@ end
     <% end %>
 <% end %>
 
-<% end %>
-
-<% content_for :extra_js do %>
-    <% unless development? %>
-    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
-    <% end %>
 <% end %>
