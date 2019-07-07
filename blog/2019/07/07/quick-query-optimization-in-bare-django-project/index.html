@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vb YAZILIM | Development, Training and Consultancy | Quick query optimization in bare django project</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
+    <meta name="keywords" content="python,ruby,bash,javascript,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link rel="icon" href="/public/images/favicon-32.png">
+    <link href="/public/css/syntax.css" rel="stylesheet" />
+    
+    <link href="/public/css/application.css" rel="stylesheet" />
+    <meta property="og:title" content="vb YAZILIM | Quick query optimization in bare django project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" />
+    
+    <meta property="og:description" content="You’ve just installed Django and started new project without any models or
+anything else. Created superuser and jumped in to User Admin… What will
+you see ? 35 queries…">
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="vb YAZILIM" />
+    
+    <meta property="og:image" content="https://vbyazilim.com/public/images/blog/2019-07-07-og-django-admin-query-optimization.png" />
+    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/blog/2019-07-07-og-django-admin-query-optimization.png" />
+    <meta property="og:image:width" content="1000" />
+    <meta property="og:image:height" content="562" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52664816-9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-52664816-9');
+    </script>
+</head>
+<body>
+    
+
+    <section class="section">
+    <div class="container">
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <a href="/" title="Home"><img src="/public/images/vb-yazilim-logo.svg" class="vb-logo" alt="Vb yazilim logo" /></a>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item"><a title="Blog posts" href="/blog/">Blog</a></div>
+                <div class="level-item"><a title="Services" href="/services/">Services</a></div>
+                <div class="level-item"><a title="Training" href="/training/">Training</a></div>
+                <div class="level-item"><a title="Atom feed" href="/feed.xml"><span class="icon"><i class="fas fa-rss-square"></i></span></a></div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+    
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-9-desktop">
+                <article>
+                    <div class="content is-medium">
+                        <div class="meta">
+                            <small>Uğur Özyılmazel &mdash; </small>
+                            <time pubdate datetime="2019-07-07T14:37:00+03:00" title="07 July 2019, Sunday 14:37">07 July 2019, Sunday 14:37</time>
+                             <span class="category"> &mdash; Filed under <a href="/blog/category/development/">development</a></span>
+                        </div>
+
+                        <h1 class="title">Quick query optimization in bare django project</h1>
+                        
+                        <div class="tags">
+                            <span class="tag is-info"><a title="Posts with &ldquo;django&rdquo; tag" href="/blog/tag/django/">django</a></span>
+                            <span class="tag is-info"><a title="Posts with &ldquo;djangoadmin&rdquo; tag" href="/blog/tag/djangoadmin/">djangoadmin</a></span>
+                    
+                        </div>
+                
+                
+                        <div class="yield mt-3-desktop">
+                            <p>You’ve just installed Django and started new project without any models or
+anything else. Created superuser and jumped in to User Admin&hellip; What will
+you see ? <strong>35</strong> queries&hellip;
+</p>
+
+<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2019-07-07-01-user-model-before-optimization.png" alt="Image" /><figcaption>Pure Django User Admin</figcaption></figure></div>
+
+<p>Why ? <code>Permission</code> model’s <code>ForeignKey</code> relation with <code>ContentType</code> model mostly
+causes this performance issue. If you check the source code, you’ll see the problem;</p>
+<div class="highlight"><pre class="highlight python"><code><span class="k">class</span> <span class="nc">Permission</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="p">:</span>
+    <span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">"</span><span class="si">%</span><span class="s">s | </span><span class="si">%</span><span class="s">s | </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span>    <span class="c"># &lt;- this</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span>              <span class="c"># &lt;- this</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="p">)</span>
+</code></pre></div>
+<p>Well, let’s not call this a problem&hellip; We are lucky because Django provides
+great solutions. Before we fix this, let’s verify that two fields are making
+this big queries: <code>user_permissions</code> and <code>groups</code> in <code>User</code> model. How I
+verified ? Just excluded those two fields from Admin Form:</p>
+<div class="highlight"><pre class="highlight python"><code><span class="c"># for the sake of example, there is no app installed, no models, nothing.</span>
+<span class="c"># therefore i'm using `urls.py` for demonstration</span>
+<span class="c"># urls.py</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_filter</span> <span class="o">=</span> <span class="p">[</span><span class="s">'is_staff'</span><span class="p">]</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'email'</span><span class="p">,</span> <span class="s">'first_name'</span><span class="p">,</span> <span class="s">'last_name'</span><span class="p">)</span>
+    <span class="n">exclude</span> <span class="o">=</span> <span class="p">(</span><span class="s">'groups'</span><span class="p">,</span> <span class="s">'user_permissions'</span><span class="p">)</span>
+
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>            <span class="c"># get rid of Django's default UserAdmin</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span>   <span class="c"># register our UserAdmin</span>
+</code></pre></div>
+<p>Woow! We have generated <strong>5 queries</strong> only&hellip; From <strong>35</strong> to <strong>5</strong> by excluding two
+fields&hellip;</p>
+
+<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2019-07-07-02-user-model-exclude-groups-and-user-permissions.png" alt="Image" /><figcaption>Exclude &ldquo;user_permissions&rdquo; and &ldquo;groups&rdquo;</figcaption></figure></div>
+
+<p>Now the best is coming&hellip; After Django version 2, <code>ModelAdmin</code> gained a new
+feature/option called <code>autocomplete_fields</code>. Let’s transform previous code:</p>
+<div class="highlight"><pre class="highlight python"><code><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Permission</span>
+
+<span class="k">class</span> <span class="nc">PermissionAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">search_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'name'</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_filter</span> <span class="o">=</span> <span class="p">[</span><span class="s">'is_staff'</span><span class="p">]</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'email'</span><span class="p">,</span> <span class="s">'first_name'</span><span class="p">,</span> <span class="s">'last_name'</span><span class="p">)</span>
+    <span class="n">autocomplete_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'groups'</span><span class="p">,</span> <span class="s">'user_permissions'</span><span class="p">]</span>
+
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Permission</span><span class="p">,</span> <span class="n">PermissionAdmin</span><span class="p">)</span>
+</code></pre></div>
+<p>Now we have generated <strong>7 queries only!</strong> If you hit refresh, Django will
+used cached query and you’ll see 6 queries only :)</p>
+
+<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2019-07-07-03-user-model-after-autocomplete-fields.png" alt="Image" /><figcaption>Power of &ldquo;autocomplete_fields&rdquo;</figcaption></figure></div>
+
+<p>You can also override ModelAdmin’s <code>formfield_for_manytomany</code> and make
+<code>select_related</code> and <code>prefetch_related</code> queries on <code>kwargs[&#39;queryset&#39;]</code> or
+you can modify UserAdminForm on <code>__init__</code> level too. ModelAdmin’s
+<code>autocomplete_fields</code> option is a query and life saver!</p>
+
+<p>Again, do not use <code>urls.py</code> for adding custom Admin. Use your model’s Admin
+<code>admin.py</code>. I mostly use custom User model in my projects therefore I put
+related code there.</p>
+
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="column is-3-desktop article-right-column is-hidden-touch">
+                <div class="content is-medium">
+<h4 class="title">Related Posts</h4><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/">How much do you care to write good Django code?</a></p><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/">How much do you care to write good Django code?</a></p><p><a href="/blog/2019/06/01/hello-world/">hello world</a></p>                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    <div id="ga-notice" class="is-hidden">
+        <div class="notification is-size-7-touch has-text-centered is-radiusless">
+            <button class="delete mr-1"></button>
+            We are using Google Analytics on our page to track visit counts and other statistic related datas.
+            We would like to inform you about that...
+        </div>
+    </div>
+
+    <footer class="footer has-background-color-vb has-text-white">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <div class="content">
+                    <p><strong>vb YAZILIM</strong> - Uğur Özyılmazel</p>
+                    <address>
+                        Meşrutiyet Mah. Samanyolu sk. 11/7<br/>
+                        34363 - Şişli / İstanbul<br/>
+                        Türkiye<br/><br/>
+                        <a href="tel:+905333774300"><span class="icon"><i class="fas fa-phone-square"></i></span>+90-(0)533-3774300</a><br/>
+                        <a href="mailto:hello@vbyazilim.com"><span class="icon"><i class="fas fa-envelope-square"></i></span>hello@vbyazilim.com</a>
+                    </address>
+                </div>
+            </div>
+            <div class="column has-text-right-tablet footer-right-icons-tablet">
+                <p>
+                    <a title="GitHub repo of vb YAZILIM" target="_blank" href="https://github.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-github-square fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-twitter-square fa-2x"></i>
+                        </span>
+                    </a>
+                </p>
+                <p class="mt-1">
+                    made with <a class="is-external-link" href="https://middlemanapp.com">Middleman</a><br/>
+                    
+                    <a class="is-external-link" href="https://www.ruby-lang.org">Ruby</a> 
+                    <a class="is-external-link" href="https://sass-lang.com">Sass</a><br/>
+                    
+                    <a class="is-external-link" href="https://bulma.io">Bulma</a> 
+                    <a class="is-external-link" href="https://fontawesome.com">Font Awesome</a><br/>
+
+                    <a class="is-external-link" href="https://www.w3.org/TR/html/">HTML</a> 
+                    <a class="is-external-link" href="https://www.w3.org/Style/CSS/">CSS</a> 
+                    <a class="is-external-link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> 
+                </p>
+                <p class="mt-1">hosted at <a class="is-external-link" href="https://pages.github.com">GitHub Pages</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    
+    <script src="/public/js/app.js"></script>
+</body>
+</html>
