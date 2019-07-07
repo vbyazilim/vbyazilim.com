@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/"/>
     <id>https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/</id>
     <published>2019-07-07T14:37:00+03:00</published>
-    <updated>2019-07-07T16:47:24+03:00</updated>
+    <updated>2019-07-07T16:48:04+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -99,6 +99,65 @@ you can modify UserAdminForm on &lt;code&gt;__init__&lt;/code&gt; level too. Mod
 &lt;code&gt;admin.py&lt;/code&gt;. I mostly use custom User model in my projects therefore I put
 related code there.&lt;/p&gt;
 </content>
+  </entry>
+  <entry>
+    <title>Better tool for listing virtual environment</title>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/"/>
+    <id>https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/</id>
+    <published>2019-06-03T10:00:00+03:00</published>
+    <updated>2019-07-07T18:22:59+03:00</updated>
+    <author>
+      <name>Uğur Özyılmazel</name>
+    </author>
+    <summary type="html">&lt;p&gt;I love &lt;code&gt;virtualenvwrapper&lt;/code&gt;. You can manage your virtual environments such as
+create/delete or list. Also you can kick additional variables on activation.
+&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;I love &lt;code&gt;virtualenvwrapper&lt;/code&gt;. You can manage your virtual environments such as
+create/delete or list. Also you can kick additional variables on activation.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;virtualenvwrapper&lt;/code&gt; stores environments under &lt;code&gt;~/.virtualenvs/&lt;/code&gt;. When you ask
+for listings of installed environments in your user environment, It basically
+iterates over folder names under &lt;code&gt;~/.virtualenvs/&lt;/code&gt; folder.&lt;/p&gt;
+
+&lt;p&gt;I currently have &lt;strong&gt;24&lt;/strong&gt; folders, which means 24 virtual environments are
+available. Let’s ask for list:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;time &lt;/span&gt;lsvirtualenv
+
+real    0m5.254s
+user    0m3.627s
+sys     0m1.241s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What was the operation ?&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;cd&lt;/code&gt; to &lt;code&gt;~/.virtualenvs/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;loop through folders and print their name&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;It took &lt;strong&gt;5 seconds&lt;/strong&gt; on a &lt;strong&gt;2,9 GHz Intel Core i7&lt;/strong&gt; MacBook Pro :) Don’t you
+think It’s a bit too much ? I tried to implement same functionality via Bash
+script:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;time &lt;/span&gt;ls-virtual-env
+real    0m0.514s
+user    0m0.114s
+sys     0m0.169s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It took almost half of a second. I wondered, If I can boost the speed up more!
+Yes I can&amp;hellip; I implemented the same functionality on &lt;strong&gt;Golang&lt;/strong&gt; and added
+extra features such as getting the Python version, coloring etc&amp;hellip;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;time &lt;/span&gt;lsvirtualenvs
+real    0m0.066s
+user    0m0.139s
+sys     0m0.190s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Unbelievable! All done in mili-seconds. Most of the time consumed while
+executing &lt;code&gt;python --version&lt;/code&gt; command. You can download or inspect the
+code on &lt;a href="https://github.com/vigo/lsvirtualenvs"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can install via;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;go get &lt;span class="nt"&gt;-u&lt;/span&gt; github.com/vigo/lsvirtualenvs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
   </entry>
   <entry>
     <title>How much do you care to write good Django code?</title>
