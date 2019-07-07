@@ -77,9 +77,12 @@ footer {
   }
 }
 
-.has-background-white-is {
+.article-right-column {
   background-color: #fbfbfb;
-  border: 1px solid #eee;
+  color: $color-vb-lighter;
+  h4 { color: inherit; }
+//  border: 1px solid #eee;
+//  border-left: 1px solid #eee;
   padding: 1.5em;
 }
 

@@ -1,0 +1,96 @@
+---
+title: "Quick query optimization in bare django project"
+date: Jul 07, 2019 14:37
+category: development
+tags: django, djangoadmin
+author: "Uğur Özyılmazel"
+opengraph_image: "2019-07-07-og-django-admin-query-optimization.png"
+# published: false
+---
+
+You’ve just installed Django and started new project without any models or
+anything else. Created superuser and jumped in to User Admin... What will
+you see ? **35** queries...
+READ_MORE
+
+<%= image '2019-07-07-01-user-model-before-optimization.png', img_class: 'mini-zoom', caption: 'Pure Django User Admin' %>
+
+Why ? `Permission` model’s `ForeignKey` relation with `ContentType` model mostly
+causes this performance issue. If you check the source code, you’ll see the problem;
+
+```python
+class Permission(models.Model):
+    :
+    :
+    def __str__(self):
+        return "%s | %s | %s" % (
+            self.content_type.app_label,    # <- this
+            self.content_type,              # <- this
+            self.name,
+        )
+```
+
+Well, let’s not call this a problem... We are lucky because Django provides
+great solutions. Before we fix this, let’s verify that two fields are making
+this big queries: `user_permissions` and `groups` in `User` model. How I
+verified ? Just excluded those two fields from Admin Form:
+
+```python
+# for the sake of example, there is no app installed, no models, nothing.
+# therefore i'm using `urls.py` for demonstration
+# urls.py
+
+from django.contrib import admin
+from django.contrib.auth.models import User
+from django.urls import path
+
+class UserAdmin(admin.ModelAdmin):
+    list_filter = ['is_staff']
+    list_display = ('email', 'first_name', 'last_name')
+    exclude = ('groups', 'user_permissions')
+
+admin.site.unregister(User)            # get rid of Django's default UserAdmin
+admin.site.register(User, UserAdmin)   # register our UserAdmin
+```
+
+Woow! We have generated **5 queries** only... From **35** to **5** by excluding two
+fields...
+
+<%= image '2019-07-07-02-user-model-exclude-groups-and-user-permissions.png', img_class: 'mini-zoom', caption: 'Exclude "user_permissions" and "groups"' %>
+
+Now the best is coming... After Django version 2, `ModelAdmin` gained a new
+feature/option called `autocomplete_fields`. Let’s transform previous code:
+
+```python
+from django.conf import settings
+from django.contrib import admin
+from django.urls import include, path
+from django.contrib.auth.models import User, Permission
+
+class PermissionAdmin(admin.ModelAdmin):
+    search_fields = ['name']
+
+class UserAdmin(admin.ModelAdmin):
+    list_filter = ['is_staff']
+    list_display = ('email', 'first_name', 'last_name')
+    autocomplete_fields = ['groups', 'user_permissions']
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
+admin.site.register(Permission, PermissionAdmin)
+```
+
+
+Now we have generated **7 queries only!** If you hit refresh, Django will
+used cached query and you’ll see 6 queries only :)
+
+<%= image '2019-07-07-03-user-model-after-autocomplete-fields.png', img_class: 'mini-zoom', caption: 'Power of "autocomplete_fields"' %>
+
+You can also override ModelAdmin’s `formfield_for_manytomany` and make
+`select_related` and `prefetch_related` queries on `kwargs['queryset']` or
+you can modify UserAdminForm on `__init__` level too. ModelAdmin’s
+`autocomplete_fields` option is a query and life saver!
+
+Again, do not use `urls.py` for adding custom Admin. Use your model’s Admin
+`admin.py`. I mostly use custom User model in my projects therefore I put
+related code there.

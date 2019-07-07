@@ -6,6 +6,15 @@ article_subtitle = current_page.metadata[:page][:subtitle] || nil
 article_author = current_page.metadata[:page][:author] || nil
 article_category = current_page.metadata[:page][:category] || nil
 article_tags = current_page.tags
+
+related_articles = []
+current_page.tags.each do |tag|
+  blog.tags[tag].each do |article|
+    unless article == current_page
+      related_articles << article unless related_articles.include?(article)
+    end
+  end
+end
 %>
 
 <section class="section">
@@ -39,9 +48,24 @@ article_tags = current_page.tags
                 </article>
             </div>
             
-            <div class="column is-3-desktop has-background-white-is is-hidden-touch">
-                <div class="content">
-                    <p>Work in progress...</p>
+            <div class="column is-3-desktop article-right-column is-hidden-touch">
+                <div class="content is-medium">
+                    <%
+                    if related_articles.count > 0
+                      concat content_tag(:h4, "Related Posts", class: "title")
+                      related_articles.each do |article|
+                          concat content_tag(:p, link_to(article.title, article))
+                      end
+                      concat tag(:hr)
+                    end
+                    
+                    concat content_tag(:h4, "Lastest Posts", class: "title")
+                    blog.articles[0..5].each do |article|
+                        unless article == current_page
+                            concat content_tag(:p, link_to(article.title, article))
+                        end
+                    end
+                    %>
                 </div>
             </div>
         </div>

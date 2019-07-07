@@ -25,7 +25,7 @@ namespace :new do
     article_title = args.title ? args.title : "new-article"
     article_date = args.date ? Time.parse(args.date) : Time.now
 
-    article_file = "source/posts/#{article_date.strftime(ARTICLE_FILE_DATE_FORMAT)}-#{article_title.to_url}.html.markdown.erb"
+    article_file = "source/blog/#{article_date.strftime(ARTICLE_FILE_DATE_FORMAT)}-#{article_title.to_url}.html.markdown.erb"
 
     output = []
     output << "---"
@@ -34,6 +34,7 @@ namespace :new do
     output << "# category: news"
     output << "# tags: tag1,tag2"
     output << "author: \"Uğur Özyılmazel\""
+    output << "opengraph_image: \"#{article_date.strftime(ARTICLE_FILE_DATE_FORMAT)}-og-IMAGE.jpg\""
     output << "# published: false"
     output << "---"
     output << ""
@@ -42,7 +43,7 @@ namespace :new do
     output << ""
 
     File.write article_file, output.join("\n")
-    puts "Post is ready to cook: #{article_file}"
+    puts "Blog post is ready to cook: #{article_file}"
   end
 end
 
