@@ -81,8 +81,8 @@ footer {
   background-color: #fbfbfb;
   color: $color-vb-lighter;
   h4 { color: inherit; }
-//  border: 1px solid #eee;
-//  border-left: 1px solid #eee;
+  p { margin-bottom: 0 !important; }
+  time { display: block; margin-bottom: 1.5em; font-size: .75em; }
   padding: 1.5em;
 }
 

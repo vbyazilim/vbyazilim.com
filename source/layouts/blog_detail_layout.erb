@@ -54,7 +54,9 @@ end
                     if related_articles.count > 0
                       concat content_tag(:h4, "Related Posts", class: "title")
                       related_articles.each do |article|
-                          concat content_tag(:p, link_to(article.title, article))
+                          article_date = I18n.l article.date, format: "%d %B %Y, %A %H:%M"
+                          concat content_tag(:p, link_to(article.title, article, title: article.title))
+                          concat content_tag(:time, article_date, datetime: article.date.xmlschema)
                       end
                       concat tag(:hr)
                     end
@@ -62,7 +64,9 @@ end
                     concat content_tag(:h4, "Lastest Posts", class: "title")
                     blog.articles[0..5].each do |article|
                         unless article == current_page
-                            concat content_tag(:p, link_to(article.title, article))
+                            article_date = I18n.l article.date, format: "%d %B %Y, %A %H:%M"
+                            concat content_tag(:p, link_to(article.title, article, title: article.title))
+                            concat content_tag(:time, article_date, datetime: article.date.xmlschema)
                         end
                     end
                     %>
