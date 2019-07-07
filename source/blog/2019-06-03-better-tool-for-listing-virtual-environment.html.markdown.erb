@@ -1,0 +1,65 @@
+---
+title: "Better tool for listing virtual environment"
+date: Jun 03, 2019 10:00
+category: development
+tags: golang
+author: "Uğur Özyılmazel"
+# opengraph_image: "2019-06-02-og-IMAGE.jpg"
+# published: false
+---
+
+I love `virtualenvwrapper`. You can manage your virtual environments such as
+create/delete or list. Also you can kick additional variables on activation.
+READ_MORE
+
+`virtualenvwrapper` stores environments under `~/.virtualenvs/`. When you ask
+for listings of installed environments in your user environment, It basically
+iterates over folder names under `~/.virtualenvs/` folder.
+
+I currently have **24** folders, which means 24 virtual environments are
+available. Let’s ask for list:
+
+```bash
+$ time lsvirtualenv
+
+real    0m5.254s
+user    0m3.627s
+sys     0m1.241s
+```
+
+What was the operation ?
+
+1. `cd` to `~/.virtualenvs/`
+1. loop through folders and print their name
+
+It took **5 seconds** on a **2,9 GHz Intel Core i7** MacBook Pro :) Don’t you
+think It’s a bit too much ? I tried to implement same functionality via Bash
+script:
+
+```bash
+$ time ls-virtual-env
+real    0m0.514s
+user    0m0.114s
+sys     0m0.169s
+```
+
+It took almost half of a second. I wondered, If I can boost the speed up more!
+Yes I can... I implemented the same functionality on **Golang** and added
+extra features such as getting the Python version, coloring etc...
+
+```bash
+$ time lsvirtualenvs
+real    0m0.066s
+user    0m0.139s
+sys     0m0.190s
+```
+
+Unbelievable! All done in mili-seconds. Most of the time consumed while
+executing `python --version` command. You can download or inspect the
+code on [GitHub](https://github.com/vigo/lsvirtualenvs)
+
+You can install via;
+
+```bash
+$ go get -u github.com/vigo/lsvirtualenvs
+```
