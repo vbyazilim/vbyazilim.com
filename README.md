@@ -15,6 +15,8 @@ $ rake
 # tasks
 $ rake -T
 
+rake build                    # Build site
+rake deploy                   # Deploy
 rake new:article[title,date]  # Post new Article
 rake runserver                # Run development server
 ```
