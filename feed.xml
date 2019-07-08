@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/"/>
     <id>https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/</id>
     <published>2019-07-07T14:37:00+03:00</published>
-    <updated>2019-07-07T16:48:04+03:00</updated>
+    <updated>2019-07-08T13:45:49+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -86,7 +86,7 @@ feature/option called &lt;code&gt;autocomplete_fields&lt;/code&gt;. Let’s tran
 &lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Permission&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PermissionAdmin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now we have generated &lt;strong&gt;7 queries only!&lt;/strong&gt; If you hit refresh, Django will
-used cached query and you’ll see 6 queries only :)&lt;/p&gt;
+use cached query and you’ll see 6 queries only :)&lt;/p&gt;
 
 &lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2019-07-07-03-user-model-after-autocomplete-fields.png" alt="Image" /&gt;&lt;figcaption&gt;Power of &amp;ldquo;autocomplete_fields&amp;rdquo;&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
 
@@ -105,7 +105,7 @@ related code there.&lt;/p&gt;
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/"/>
     <id>https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/</id>
     <published>2019-06-03T10:00:00+03:00</published>
-    <updated>2019-07-07T18:28:36+03:00</updated>
+    <updated>2019-07-08T13:42:30+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -164,7 +164,7 @@ code on &lt;a href="https://github.com/vigo/lsvirtualenvs"&gt;GitHub&lt;/a&gt;&l
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/"/>
     <id>https://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/</id>
     <published>2019-06-02T10:30:00+03:00</published>
-    <updated>2019-06-30T10:12:49+03:00</updated>
+    <updated>2019-07-08T13:42:30+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -390,7 +390,7 @@ tuples, with an all-uppercase name as a class attribute on the model&lt;/p&gt;
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/01/hello-world/"/>
     <id>https://vbyazilim.com/blog/2019/06/01/hello-world/</id>
     <published>2019-06-01T10:00:00+03:00</published>
-    <updated>2019-06-30T10:12:49+03:00</updated>
+    <updated>2019-07-08T13:42:30+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
