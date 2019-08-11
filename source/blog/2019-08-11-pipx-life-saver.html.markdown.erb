@@ -1,0 +1,90 @@
+---
+title: "pipx : life saver"
+date: Aug 11, 2019 17:00
+category: development
+tags: python,pipx
+author: "Uğur Özyılmazel"
+opengraph_image: "2019-08-11-og-pipx.png"
+# published: false
+---
+
+If you are a Python developer, you probably use different virtual environments
+depending on your project’s requirements.
+READ_MORE
+
+<%= image '2019-08-11-pipx.png', img_class: 'mini-zoom' %>
+
+I manage my Python environments via [pyenv][pyenv]. It’s great tool for Python
+version and package isolation. Some of the Python packages include binary
+tools for global usage such as `pip`, `django-admin` and many more.
+
+When you switch Python version via changing directory or activating a virtualenv,
+you loose global binary helpers. All of the binary/executables are isolated
+and you can not access those tools on a global scope.
+
+My global Python version is set on `~/.bashrc`. Without activating any
+virtualenv, my global Python is under the `~/.pyenv/shims/python` and whenever
+I `pip install package`, can be accessible from `~/.pyenv/versions/3.7.0/bin/`.
+
+If I activate any environment, `pyenv` shims the `$PATH` and accessing
+previously installed binaries were almost impossible until [pipx][pipx].
+
+`pipx` creates isolated environments for each package and provides system-wide
+access to your `pipx` based installed modules. By default, `pipx` creates and
+installs everything based on `~/.local/pipx` folder.
+
+I like to use [bumpversion][bumpversion] for my projects. I installed `bumpversion`
+package via `pipx` and after that, `bumpversion` became available for any
+Python version or any virtualenv without activating or doing extra tricks.
+
+## Installation
+
+First, install `pipx` via `pip` and fix your `$PATH` variable;
+
+```bash
+$ pip install --user pipx
+
+# fix your $PATH, ~/.bashrc ?
+export PATH="${HOME}/.local/bin:${PATH}"
+```
+
+Now try;
+
+```bash
+$ pipx --help
+```
+
+for bash-completion support, add this to your shell startup (such as `~/.bashrc`)
+
+```bash
+eval "$(register-python-argcomplete pipx)"
+```
+
+## Usage
+
+Now, install any Python package via `pipx install PACKAGE`. You can let `pipx`
+to install package dependencies via `pipx install PACKAGE --include-deps`
+
+```bash
+$ pipx install bumpversion
+$ pipx install twine
+```
+
+Check what you’ve installed:
+
+```bash
+$ pipx list
+```
+
+Now your Python executables are accessible from anywhere in your environment!
+
+---
+
+- Creator/Maintainer: [Chad Smith][cs01]
+- Logo by [@IrishMorales][IrishMorales].
+
+[pyenv]: https://github.com/pyenv/pyenv
+[bumpversion]: https://github.com/peritus/bumpversion
+[pipx]: https://pipxproject.github.io/pipx/
+[IrishMorales]: https://github.com/IrishMorales
+[cs01]: https://github.com/cs01/
