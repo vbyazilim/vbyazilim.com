@@ -77,10 +77,9 @@ end
     </div>
 </section>
 
-<% content_for :extra_js do %>
-    <% if build? %>
-    <!-- sharethis -->
-    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+<% if build? %>
+    <% content_for :extra_js do %>
+        <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
     <% end %>
 <% end %>
 
