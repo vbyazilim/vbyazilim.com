@@ -96,19 +96,19 @@ causes this performance issue. If you check the source code, you’ll see the pr
     <span class="p">:</span>
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s">"</span><span class="si">%</span><span class="s">s | </span><span class="si">%</span><span class="s">s | </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span>    <span class="c"># &lt;- this</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span>              <span class="c"># &lt;- this</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span>    <span class="c1"># &lt;- this
+</span>            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span>              <span class="c1"># &lt;- this
+</span>            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
         <span class="p">)</span>
 </code></pre></div>
 <p>Well, let’s not call this a problem&hellip; We are lucky because Django provides
 great solutions. Before we fix this, let’s verify that two fields are making
 this big queries: <code>user_permissions</code> and <code>groups</code> in <code>User</code> model. How I
 verified ? Just excluded those two fields from Admin Form:</p>
-<div class="highlight"><pre class="highlight python"><code><span class="c"># for the sake of example, there is no app installed, no models, nothing.</span>
-<span class="c"># therefore i'm using `urls.py` for demonstration</span>
-<span class="c"># urls.py</span>
-
+<div class="highlight"><pre class="highlight python"><code><span class="c1"># for the sake of example, there is no app installed, no models, nothing.
+# therefore i'm using `urls.py` for demonstration
+# urls.py
+</span>
 <span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
@@ -118,9 +118,9 @@ verified ? Just excluded those two fields from Admin Form:</p>
     <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'email'</span><span class="p">,</span> <span class="s">'first_name'</span><span class="p">,</span> <span class="s">'last_name'</span><span class="p">)</span>
     <span class="n">exclude</span> <span class="o">=</span> <span class="p">(</span><span class="s">'groups'</span><span class="p">,</span> <span class="s">'user_permissions'</span><span class="p">)</span>
 
-<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>            <span class="c"># get rid of Django's default UserAdmin</span>
-<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span>   <span class="c"># register our UserAdmin</span>
-</code></pre></div>
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>            <span class="c1"># get rid of Django's default UserAdmin
+</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span>   <span class="c1"># register our UserAdmin
+</span></code></pre></div>
 <p>Woow! We have generated <strong>5 queries</strong> only&hellip; From <strong>35</strong> to <strong>5</strong> by excluding two
 fields&hellip;</p>
 
@@ -167,7 +167,7 @@ related code there.</p>
             
             <div class="column is-3-desktop article-right-column is-hidden-touch">
                 <div class="content is-medium">
-<h4 class="title">Related Posts</h4><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><p><a href="/blog/2019/06/01/hello-world/" title="hello world">hello world</a></p><time datetime="2019-06-01T10:00:00+03:00">01 June 2019, Saturday 10:00</time>                </div>
+<h4 class="title">Related Posts</h4><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><p><a href="/blog/2019/06/01/hello-world/" title="hello world">hello world</a></p><time datetime="2019-06-01T10:00:00+03:00">01 June 2019, Saturday 10:00</time>                </div>
             </div>
         </div>
     </div>
@@ -236,8 +236,7 @@ related code there.</p>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-        <!-- sharethis -->
-    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+            <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
 
     <script src="/public/js/app.js"></script>
 </body>

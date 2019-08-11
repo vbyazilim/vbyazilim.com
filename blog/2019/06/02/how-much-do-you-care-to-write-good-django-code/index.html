@@ -102,7 +102,7 @@ already!</p>
 <h4>Sorting imports</h4>
 
 <p>Document tells us to sort our <code>import</code> statements with <code>isort</code>.</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>python <span class="nt">-m</span> pip install isort
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>python <span class="nt">-m</span> pip <span class="nb">install </span>isort
 <span class="nv">$ </span>isort <span class="nt">-rc</span> <span class="nb">.</span>
 </code></pre></div>
 <p>More detailed information can ben found <a href="https://isort.readthedocs.io/en/latest/">here</a>. You can also integrate
@@ -144,28 +144,28 @@ to worry about the order of imports anymore&hellip;</p>
 <span class="kn">from</span> <span class="nn">baseapp.utils</span> <span class="kn">import</span> <span class="n">save_file</span> <span class="k">as</span> <span class="n">custom_save_file</span>
 </code></pre></div>
 <p>Also, sorting imports are explained very well in the Django docs:</p>
-<div class="highlight"><pre class="highlight python"><code><span class="c"># future</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+<div class="highlight"><pre class="highlight python"><code><span class="c1"># future
+</span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
 
-<span class="c"># standard library</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<span class="c1"># standard library
+</span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 
-<span class="c"># third-party</span>
-<span class="kn">import</span> <span class="nn">bcrypt</span>
+<span class="c1"># third-party
+</span><span class="kn">import</span> <span class="nn">bcrypt</span>
 
-<span class="c"># Django</span>
-<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span>
+<span class="c1"># Django
+</span><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">Http404</span>
 <span class="kn">from</span> <span class="nn">django.http.response</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Http404</span><span class="p">,</span> <span class="n">HttpResponse</span><span class="p">,</span> <span class="n">HttpResponseNotAllowed</span><span class="p">,</span> <span class="n">StreamingHttpResponse</span><span class="p">,</span>
     <span class="n">cookie</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="c"># local Django</span>
-<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">LogEntry</span>
+<span class="c1"># local Django
+</span><span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">LogEntry</span>
 
-<span class="c"># try/except</span>
-<span class="k">try</span><span class="p">:</span>
+<span class="c1"># try/except
+</span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">yaml</span>
 <span class="k">except</span> <span class="nb">ImportError</span><span class="p">:</span>
     <span class="n">yaml</span> <span class="o">=</span> <span class="bp">None</span>
@@ -174,8 +174,8 @@ to worry about the order of imports anymore&hellip;</p>
 
 
 <span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
-    <span class="c"># ...</span>
-</code></pre></div>
+    <span class="c1"># ...
+</span></code></pre></div>
 <h4>What about models ?</h4>
 
 <p>Django model, represents a table in database and single entity of data. That’s
@@ -297,7 +297,7 @@ tuples, with an all-uppercase name as a class attribute on the model</p>
             
             <div class="column is-3-desktop article-right-column is-hidden-touch">
                 <div class="content is-medium">
-<h4 class="title">Related Posts</h4><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><p><a href="/blog/2019/06/01/hello-world/" title="hello world">hello world</a></p><time datetime="2019-06-01T10:00:00+03:00">01 June 2019, Saturday 10:00</time>                </div>
+<h4 class="title">Related Posts</h4><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><p><a href="/blog/2019/06/01/hello-world/" title="hello world">hello world</a></p><time datetime="2019-06-01T10:00:00+03:00">01 June 2019, Saturday 10:00</time>                </div>
             </div>
         </div>
     </div>
@@ -366,8 +366,7 @@ tuples, with an all-uppercase name as a class attribute on the model</p>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-        <!-- sharethis -->
-    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+            <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
 
     <script src="/public/js/app.js"></script>
 </body>

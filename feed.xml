@@ -5,10 +5,85 @@
   <id>https://vbyazilim.com/</id>
   <link href="https://vbyazilim.com/"/>
   <link href="https://vbyazilim.com/feed.xml" rel="self"/>
-  <updated>2019-07-07T14:37:00+03:00</updated>
+  <updated>2019-08-11T17:00:00+03:00</updated>
   <author>
     <name>Uğur Özyılmazel</name>
   </author>
+  <entry>
+    <title>pipx : life saver</title>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/"/>
+    <id>https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/</id>
+    <published>2019-08-11T17:00:00+03:00</published>
+    <updated>2019-08-11T17:26:48+03:00</updated>
+    <author>
+      <name>Uğur Özyılmazel</name>
+    </author>
+    <summary type="html">&lt;p&gt;If you are a Python developer, you probably use different virtual environments
+depending on your project’s requirements.
+&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;If you are a Python developer, you probably use different virtual environments
+depending on your project’s requirements.
+&lt;/p&gt;
+
+&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2019-08-11-pipx.png" alt="Image" /&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;I manage my Python environments via &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt;. It’s great tool for Python
+version and package isolation. Some of the Python packages include binary
+tools for global usage such as &lt;code&gt;pip&lt;/code&gt;, &lt;code&gt;django-admin&lt;/code&gt; and many more.&lt;/p&gt;
+
+&lt;p&gt;When you switch Python version via changing directory or activating a virtualenv,
+you loose global binary helpers. All of the binary/executables are isolated
+and you can not access those tools on a global scope.&lt;/p&gt;
+
+&lt;p&gt;My global Python version is set on &lt;code&gt;~/.bashrc&lt;/code&gt;. Without activating any
+virtualenv, my global Python is under the &lt;code&gt;~/.pyenv/shims/python&lt;/code&gt; and whenever
+I &lt;code&gt;pip install package&lt;/code&gt;, can be accessible from &lt;code&gt;~/.pyenv/versions/3.7.0/bin/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If I activate any environment, &lt;code&gt;pyenv&lt;/code&gt; shims the &lt;code&gt;$PATH&lt;/code&gt; and accessing
+previously installed binaries were almost impossible until &lt;a href="https://pipxproject.github.io/pipx/"&gt;pipx&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;pipx&lt;/code&gt; creates isolated environments for each package and provides system-wide
+access to your &lt;code&gt;pipx&lt;/code&gt; based installed modules. By default, &lt;code&gt;pipx&lt;/code&gt; creates and
+installs everything based on &lt;code&gt;~/.local/pipx&lt;/code&gt; folder.&lt;/p&gt;
+
+&lt;p&gt;I like to use &lt;a href="https://github.com/peritus/bumpversion"&gt;bumpversion&lt;/a&gt; for my projects. I installed &lt;code&gt;bumpversion&lt;/code&gt;
+package via &lt;code&gt;pipx&lt;/code&gt; and after that, &lt;code&gt;bumpversion&lt;/code&gt; became available for any
+Python version or any virtualenv without activating or doing extra tricks.&lt;/p&gt;
+
+&lt;h2&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;First, install &lt;code&gt;pipx&lt;/code&gt; via &lt;code&gt;pip&lt;/code&gt; and fix your &lt;code&gt;$PATH&lt;/code&gt; variable;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip &lt;span class="nb"&gt;install&lt;/span&gt; &lt;span class="nt"&gt;--user&lt;/span&gt; pipx
+
+&lt;span class="c"&gt;# fix your $PATH, ~/.bashrc ?&lt;/span&gt;
+&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="k"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/.local/bin:&lt;/span&gt;&lt;span class="k"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="k"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now try;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pipx &lt;span class="nt"&gt;--help&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;for bash-completion support, add this to your shell startup (such as &lt;code&gt;~/.bashrc&lt;/code&gt;)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;$(&lt;/span&gt;register-python-argcomplete pipx&lt;span class="si"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Usage&lt;/h2&gt;
+
+&lt;p&gt;Now, install any Python package via &lt;code&gt;pipx install PACKAGE&lt;/code&gt;. You can let &lt;code&gt;pipx&lt;/code&gt;
+to install package dependencies via &lt;code&gt;pipx install PACKAGE --include-deps&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pipx &lt;span class="nb"&gt;install &lt;/span&gt;bumpversion
+&lt;span class="nv"&gt;$ &lt;/span&gt;pipx &lt;span class="nb"&gt;install &lt;/span&gt;twine
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Check what you’ve installed:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pipx list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now your Python executables are accessible from anywhere in your environment!&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Creator/Maintainer: &lt;a href="https://github.com/cs01/"&gt;Chad Smith&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Logo by &lt;a href="https://github.com/IrishMorales"&gt;@IrishMorales&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>Quick query optimization in bare Django project</title>
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/"/>
@@ -36,19 +111,19 @@ causes this performance issue. If you check the source code, you’ll see the pr
     &lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__str__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;s | &lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;s | &lt;/span&gt;&lt;span class="si"&gt;%&lt;/span&gt;&lt;span class="s"&gt;s"&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content_type&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;    &lt;span class="c"&gt;# &amp;lt;- this&lt;/span&gt;
-            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;              &lt;span class="c"&gt;# &amp;lt;- this&lt;/span&gt;
-            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content_type&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;    &lt;span class="c1"&gt;# &amp;lt;- this
+&lt;/span&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;              &lt;span class="c1"&gt;# &amp;lt;- this
+&lt;/span&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
         &lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Well, let’s not call this a problem&amp;hellip; We are lucky because Django provides
 great solutions. Before we fix this, let’s verify that two fields are making
 this big queries: &lt;code&gt;user_permissions&lt;/code&gt; and &lt;code&gt;groups&lt;/code&gt; in &lt;code&gt;User&lt;/code&gt; model. How I
 verified ? Just excluded those two fields from Admin Form:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;# for the sake of example, there is no app installed, no models, nothing.&lt;/span&gt;
-&lt;span class="c"&gt;# therefore i'm using `urls.py` for demonstration&lt;/span&gt;
-&lt;span class="c"&gt;# urls.py&lt;/span&gt;
-
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c1"&gt;# for the sake of example, there is no app installed, no models, nothing.
+# therefore i'm using `urls.py` for demonstration
+# urls.py
+&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;admin&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib.auth.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.urls&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;
@@ -58,9 +133,9 @@ verified ? Just excluded those two fields from Admin Form:&lt;/p&gt;
     &lt;span class="n"&gt;list_display&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'email'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'first_name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'last_name'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;exclude&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'groups'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'user_permissions'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unregister&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;            &lt;span class="c"&gt;# get rid of Django's default UserAdmin&lt;/span&gt;
-&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;UserAdmin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c"&gt;# register our UserAdmin&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unregister&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;            &lt;span class="c1"&gt;# get rid of Django's default UserAdmin
+&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;UserAdmin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# register our UserAdmin
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Woow! We have generated &lt;strong&gt;5 queries&lt;/strong&gt; only&amp;hellip; From &lt;strong&gt;35&lt;/strong&gt; to &lt;strong&gt;5&lt;/strong&gt; by excluding two
 fields&amp;hellip;&lt;/p&gt;
 
@@ -197,7 +272,7 @@ already!&lt;/p&gt;
 &lt;h4&gt;Sorting imports&lt;/h4&gt;
 
 &lt;p&gt;Document tells us to sort our &lt;code&gt;import&lt;/code&gt; statements with &lt;code&gt;isort&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python &lt;span class="nt"&gt;-m&lt;/span&gt; pip install isort
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python &lt;span class="nt"&gt;-m&lt;/span&gt; pip &lt;span class="nb"&gt;install &lt;/span&gt;isort
 &lt;span class="nv"&gt;$ &lt;/span&gt;isort &lt;span class="nt"&gt;-rc&lt;/span&gt; &lt;span class="nb"&gt;.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;More detailed information can ben found &lt;a href="https://isort.readthedocs.io/en/latest/"&gt;here&lt;/a&gt;. You can also integrate
@@ -239,28 +314,28 @@ to worry about the order of imports anymore&amp;hellip;&lt;/p&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;baseapp.utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;save_file&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;custom_save_file&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Also, sorting imports are explained very well in the Django docs:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c"&gt;# future&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c1"&gt;# future
+&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
 
-&lt;span class="c"&gt;# standard library&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="c1"&gt;# standard library
+&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;chain&lt;/span&gt;
 
-&lt;span class="c"&gt;# third-party&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;bcrypt&lt;/span&gt;
+&lt;span class="c1"&gt;# third-party
+&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;bcrypt&lt;/span&gt;
 
-&lt;span class="c"&gt;# Django&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.http&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Http404&lt;/span&gt;
+&lt;span class="c1"&gt;# Django
+&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.http&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Http404&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.http.response&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="n"&gt;Http404&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HttpResponse&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HttpResponseNotAllowed&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;StreamingHttpResponse&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
     &lt;span class="n"&gt;cookie&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="c"&gt;# local Django&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LogEntry&lt;/span&gt;
+&lt;span class="c1"&gt;# local Django
+&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LogEntry&lt;/span&gt;
 
-&lt;span class="c"&gt;# try/except&lt;/span&gt;
-&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="c1"&gt;# try/except
+&lt;/span&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;yaml&lt;/span&gt;
 &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="nb"&gt;ImportError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;yaml&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
@@ -269,8 +344,8 @@ to worry about the order of imports anymore&amp;hellip;&lt;/p&gt;
 
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="c"&gt;# ...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    &lt;span class="c1"&gt;# ...
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4&gt;What about models ?&lt;/h4&gt;
 
 &lt;p&gt;Django model, represents a table in database and single entity of data. That’s

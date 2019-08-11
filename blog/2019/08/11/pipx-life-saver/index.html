@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>vb YAZILIM | Development, Training and Consultancy | hello world</title>
+    <title>vb YAZILIM | Development, Training and Consultancy | pipx : life saver</title>
     <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
 
     <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
@@ -14,16 +14,17 @@
     <link href="/public/css/syntax.css" rel="stylesheet" />
     
     <link href="/public/css/application.css" rel="stylesheet" />
-    <meta property="og:title" content="vb YAZILIM | hello world" />
+    <meta property="og:title" content="vb YAZILIM | pipx : life saver" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vbyazilim.com/blog/2019/06/01/hello-world/" />
+    <meta property="og:url" content="https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/" />
     
-    <meta property="og:description" content="Hello and welcome to our first official blog post!">
+    <meta property="og:description" content="If you are a Python developer, you probably use different virtual environments
+depending on your project’s requirements.">
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="vb YAZILIM" />
     
-    <meta property="og:image" content="https://vbyazilim.com/public/images/blog/2019-06-01-vbyazilim.jpg" />
-    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/blog/2019-06-01-vbyazilim.jpg" />
+    <meta property="og:image" content="https://vbyazilim.com/public/images/blog/2019-08-11-og-pipx.png" />
+    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/blog/2019-08-11-og-pipx.png" />
     <meta property="og:image:width" content="1000" />
     <meta property="og:image:height" content="562" />
 
@@ -66,80 +67,81 @@
                     <div class="content is-medium">
                         <div class="meta">
                             <small>Uğur Özyılmazel &mdash; </small>
-                            <time pubdate datetime="2019-06-01T10:00:00+03:00" title="01 June 2019, Saturday 10:00">01 June 2019, Saturday 10:00</time>
-                             <span class="category"> &mdash; Filed under <a href="/blog/category/news/">news</a></span>
+                            <time pubdate datetime="2019-08-11T17:00:00+03:00" title="11 August 2019, Sunday 17:00">11 August 2019, Sunday 17:00</time>
+                             <span class="category"> &mdash; Filed under <a href="/blog/category/development/">development</a></span>
                         </div>
 
-                        <h1 class="title">hello world</h1>
+                        <h1 class="title">pipx : life saver</h1>
                         
                         <div class="tags">
+                            <span class="tag is-info"><a title="Posts with &ldquo;python&rdquo; tag" href="/blog/tag/python/">python</a></span>
+                            <span class="tag is-info"><a title="Posts with &ldquo;pipx&rdquo; tag" href="/blog/tag/pipx/">pipx</a></span>
                     
                         </div>
                 
                 
                         <div class="yield mt-3-desktop">
-                            <p>Hello and welcome to our <strong>first</strong> official blog post!
+                            <p>If you are a Python developer, you probably use different virtual environments
+depending on your project’s requirements.
 </p>
 
-<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2019-06-01-vbyazilim.jpg" alt="Image" /></figure></div>
+<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2019-08-11-pipx.png" alt="Image" /></figure></div>
 
-<p>I’m Uğur “vigo” Özyılmazel and I’m a software developer and founder of <strong>vb
-YAZILIM</strong>. I’ve been writing code since the early 8-bit computer days.
-I have a long running career for a 47 y/o developer. I’ve spend my last ~18
-years with building web applications. Some of them were heavy, some of them
-were super easy&hellip; At the end of day, they were all html outputted web sites.</p>
+<p>I manage my Python environments via <a href="https://github.com/pyenv/pyenv">pyenv</a>. It’s great tool for Python
+version and package isolation. Some of the Python packages include binary
+tools for global usage such as <code>pip</code>, <code>django-admin</code> and many more.</p>
 
-<p>I learned a lot while building sites, apps and related things such as
-operating systems, databases, saas platforms and more&hellip; My journey started
-with 6502 Assembly language&hellip; Yes, <strong>Commodore 64</strong> my first true <span class="icon"><i class="fas fa-heart"></i></span>.
-Then 68000 Assembly language for coding demos, intros and games for <strong>AmigA</strong>&hellip;
-I’m still using those awesome machines and there are still tons of new releases!</p>
+<p>When you switch Python version via changing directory or activating a virtualenv,
+you loose global binary helpers. All of the binary/executables are isolated
+and you can not access those tools on a global scope.</p>
 
-<h3>Django</h3>
+<p>My global Python version is set on <code>~/.bashrc</code>. Without activating any
+virtualenv, my global Python is under the <code>~/.pyenv/shims/python</code> and whenever
+I <code>pip install package</code>, can be accessible from <code>~/.pyenv/versions/3.7.0/bin/</code>.</p>
 
-<p>My curse, my gift&hellip; I’ve been building Django applications since 2008. I remember
-the version I met <code>Django==0.96</code>. I witnessed the evolution of Django over the
-years. It’s free and open source Python web-framework for everybody! I made
-many web apps with PHP back-in days. First time I saw the Django Admin panel
-and I crashed! I guess, that’s the most exciting feature! and very attractive&hellip;</p>
+<p>If I activate any environment, <code>pyenv</code> shims the <code>$PATH</code> and accessing
+previously installed binaries were almost impossible until <a href="https://pipxproject.github.io/pipx/">pipx</a>.</p>
 
-<p>I made couple hundred web apps with Django over the years. I was working in a
-University and I injected Python to our team. Sometimes small-mini web sites,
-sometimes huge, heavy apps&hellip; All done with Django&hellip;</p>
+<p><code>pipx</code> creates isolated environments for each package and provides system-wide
+access to your <code>pipx</code> based installed modules. By default, <code>pipx</code> creates and
+installs everything based on <code>~/.local/pipx</code> folder.</p>
 
-<h3>Polyglot</h3>
+<p>I like to use <a href="https://github.com/peritus/bumpversion">bumpversion</a> for my projects. I installed <code>bumpversion</code>
+package via <code>pipx</code> and after that, <code>bumpversion</code> became available for any
+Python version or any virtualenv without activating or doing extra tricks.</p>
 
-<p>I heard this term from <a href="https://www.kennethreitz.org">Kenneth Reitz</a>. He was Python overlord at <a href="https://heroku.com">Heroku</a>
-back in 2013. Yes, I’m also a polyglot programmer. This means, I know few other
-programming languages too. I use Python, Ruby, Bash, AppleScript, sometimes
-JavaScript (<em>not fan of It</em>) and little bit of Golang in my daily routine.</p>
+<h2>Installation</h2>
 
-<p>I’m very enthusiastic about learning new languages such as Swift, Rust.
-Due to my oldskool background, I’ve never had a chance to code in compiled
-languages such as C, C++. After Assembly, I’ve jumped straight to run-time,
-script-ish languages such as ASP 3.0 (old, classic), PHP, Perl&hellip;</p>
+<p>First, install <code>pipx</code> via <code>pip</code> and fix your <code>$PATH</code> variable;</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>pip <span class="nb">install</span> <span class="nt">--user</span> pipx
 
-<p>I meet Ruby in 2011 and that that was another ground breaking thing for me.
-Blending my Python knowledge with Ruby opened my mind&hellip; I followed the
-pioneers of the industry. How they write code ? What are their best practices ?
-Yes, conventions are always over the configurations!</p>
+<span class="c"># fix your $PATH, ~/.bashrc ?</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="k">${</span><span class="nv">HOME</span><span class="k">}</span><span class="s2">/.local/bin:</span><span class="k">${</span><span class="nv">PATH</span><span class="k">}</span><span class="s2">"</span>
+</code></pre></div>
+<p>Now try;</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>pipx <span class="nt">--help</span>
+</code></pre></div>
+<p>for bash-completion support, add this to your shell startup (such as <code>~/.bashrc</code>)</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>register-python-argcomplete pipx<span class="si">)</span><span class="s2">"</span>
+</code></pre></div>
+<h2>Usage</h2>
 
-<h3>What about vb YAZILIM ?</h3>
+<p>Now, install any Python package via <code>pipx install PACKAGE</code>. You can let <code>pipx</code>
+to install package dependencies via <code>pipx install PACKAGE --include-deps</code></p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>pipx <span class="nb">install </span>bumpversion
+<span class="nv">$ </span>pipx <span class="nb">install </span>twine
+</code></pre></div>
+<p>Check what you’ve installed:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>pipx list
+</code></pre></div>
+<p>Now your Python executables are accessible from anywhere in your environment!</p>
 
-<p>Founded in late 2013. Mostly known from smashing hit conferences between 2013
-- 2015. We tried to help and support open-source related movements and
-activities. We were two times sponsor of <a href="http://railsgirls.com/">Rails Girls</a> Istanbul and Ankara,
-<a href="https://ozgurwebgunleri.org.tr/2013/">Özgür Web Teknolojileri Günleri</a> 2013, Rails Girls Summer of Code 2014,
-<a href="https://www.meetup.com/jstanbul/">Jstanbul Meetup</a> and <a href="https://www.meetup.com/IstanbulPHP/">PHP İstanbul</a></p>
+<hr>
 
-<p>Highly focused on heavy Django application development and weekend
-training sessions. It’s been six years and finally I’ve managed to find
-enough time to re-design, re-build my humble company website.</p>
-
-<p>I’ll publish mostly development related articles, examples, reviews and
-same sort of topics here in my company website.</p>
-
-<p>Keep following <strong>vb YAZILIM</strong>, get in touch !</p>
+<ul>
+<li>Creator/Maintainer: <a href="https://github.com/cs01/">Chad Smith</a></li>
+<li>Logo by <a href="https://github.com/IrishMorales">@IrishMorales</a>.</li>
+</ul>
 
                         </div>
                     </div>
@@ -149,7 +151,7 @@ same sort of topics here in my company website.</p>
             
             <div class="column is-3-desktop article-right-column is-hidden-touch">
                 <div class="content is-medium">
-<h4 class="title">Lastest Posts</h4><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time>                </div>
+<h4 class="title">Lastest Posts</h4><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><p><a href="/blog/2019/06/01/hello-world/" title="hello world">hello world</a></p><time datetime="2019-06-01T10:00:00+03:00">01 June 2019, Saturday 10:00</time>                </div>
             </div>
         </div>
     </div>
