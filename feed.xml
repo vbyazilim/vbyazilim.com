@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/"/>
     <id>https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/</id>
     <published>2019-08-11T17:00:00+03:00</published>
-    <updated>2019-08-11T17:26:48+03:00</updated>
+    <updated>2020-02-09T12:26:22+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -89,7 +89,7 @@ to install package dependencies via &lt;code&gt;pipx install PACKAGE --include-d
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/"/>
     <id>https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/</id>
     <published>2019-07-07T14:37:00+03:00</published>
-    <updated>2019-07-08T13:45:49+03:00</updated>
+    <updated>2020-02-09T12:26:22+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -180,7 +180,7 @@ related code there.&lt;/p&gt;
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/"/>
     <id>https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/</id>
     <published>2019-06-03T10:00:00+03:00</published>
-    <updated>2019-07-08T13:42:30+03:00</updated>
+    <updated>2019-07-07T18:28:36+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -239,7 +239,7 @@ code on &lt;a href="https://github.com/vigo/lsvirtualenvs"&gt;GitHub&lt;/a&gt;&l
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/"/>
     <id>https://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/</id>
     <published>2019-06-02T10:30:00+03:00</published>
-    <updated>2019-07-08T13:42:30+03:00</updated>
+    <updated>2019-06-30T10:12:49+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -465,7 +465,7 @@ tuples, with an all-uppercase name as a class attribute on the model&lt;/p&gt;
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/01/hello-world/"/>
     <id>https://vbyazilim.com/blog/2019/06/01/hello-world/</id>
     <published>2019-06-01T10:00:00+03:00</published>
-    <updated>2019-07-08T13:42:30+03:00</updated>
+    <updated>2019-06-30T10:12:49+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
