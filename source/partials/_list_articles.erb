@@ -42,6 +42,14 @@ total_post_count = page_articles.length * num_pages
                                 <%= article_date %>
                             </time>
                             <div class="is-size-5-desktop"><%= article.summary %></div>
+                            <% if article.tags %>
+                                <div class="tags mt-1 mb-2">
+                                    <% article.tags.each do |tag| %>
+                                    <span class="tag"><a title="Posts with &ldquo;<%= tag %>&rdquo; tag" target="_blank" href="<%= tag_path(tag) %>"><%= tag %></a></span>
+                                    <% end %>
+                                    
+                                </div>
+                            <% end %>
                         </li>
                         <% end %>
                     </ul>

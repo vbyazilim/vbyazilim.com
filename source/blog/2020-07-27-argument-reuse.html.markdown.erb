@@ -1,0 +1,78 @@
+---
+title: "Argument reuse"
+date: Jul 27, 2020 13:38
+category: development
+tags: golang
+author: "Uğur Özyılmazel"
+opengraph_image: "2020-07-27-og-golang.png"
+# published: false
+---
+
+Golang’s `fmt` package provides many features for formatting and printing.
+READ_MORE
+
+<%= image '2020-07-27-golang.png', img_class: 'mini-zoom' %>
+
+Here is a small example:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	s := "Hello"
+	fmt.Printf("%s\n", s) // Hello
+}
+```
+
+Sometimes you need to use same object for displaying in different formats.
+Most people use this way:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	s := "Hello"
+	fmt.Printf("value: %s, type: %T\n", s, s) // value: Hello, type: string
+}
+```
+
+As you see, we use `s` twice. We have another option: `[INDEX]` usage:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	s := "Hello"
+	fmt.Printf("value: %[1]s, type: %[1]T\n", s) // value: Hello, type: string
+}
+```
+
+`%[1]s` means, use the first argument... Now, we are passing `s` to `Printf`
+function only once. Here is a bit complex example:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	s := "Hello"
+	n := 1
+	
+	fmt.Printf("value of s: %[1]s, type of s: %[1]T\nvalue of n: %[2]d, type of n: %[2]T\n", s, n) 
+	// value of s: Hello, type of s: string
+	// value of n: 1, type of n: int
+}
+```
+
+Happy coding!
+
+---
+
+Golang logo is a trade mark of [Google](https://blog.golang.org/go-brand)
