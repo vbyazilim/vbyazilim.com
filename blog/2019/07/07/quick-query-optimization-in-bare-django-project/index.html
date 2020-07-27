@@ -46,7 +46,7 @@ you see ? 35 queries…">
         <nav class="level is-mobile">
             <div class="level-left">
                 <div class="level-item">
-                    <a href="/" title="Home"><img src="/public/images/vb-yazilim-logo.svg" class="vb-logo" alt="Vb yazilim logo" /></a>
+                    <a href="/" title="Home"><img src="/public/images/vb-yazilim-logo.svg" class="vb-logo" alt="" /></a>
                 </div>
             </div>
             <div class="level-right">
@@ -91,14 +91,14 @@ you see ? <strong>35</strong> queries&hellip;
 
 <p>Why ? <code>Permission</code> model’s <code>ForeignKey</code> relation with <code>ContentType</code> model mostly
 causes this performance issue. If you check the source code, you’ll see the problem;</p>
-<div class="highlight"><pre class="highlight python"><code><span class="k">class</span> <span class="nc">Permission</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<div class="highlight"><pre class="highlight python"><code><span class="k">class</span> <span class="nc">Permission</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="p">:</span>
     <span class="p">:</span>
     <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">"</span><span class="si">%</span><span class="s">s | </span><span class="si">%</span><span class="s">s | </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="o">.</span><span class="n">app_label</span><span class="p">,</span>    <span class="c1"># &lt;- this
-</span>            <span class="bp">self</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span>              <span class="c1"># &lt;- this
-</span>            <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+        <span class="k">return</span> <span class="s">"%s | %s | %s"</span> <span class="o">%</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">content_type</span><span class="p">.</span><span class="n">app_label</span><span class="p">,</span>    <span class="c1"># &lt;- this
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">content_type</span><span class="p">,</span>              <span class="c1"># &lt;- this
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
         <span class="p">)</span>
 </code></pre></div>
 <p>Well, let’s not call this a problem&hellip; We are lucky because Django provides
@@ -113,13 +113,13 @@ verified ? Just excluded those two fields from Admin Form:</p>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
 
-<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="p">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
     <span class="n">list_filter</span> <span class="o">=</span> <span class="p">[</span><span class="s">'is_staff'</span><span class="p">]</span>
     <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'email'</span><span class="p">,</span> <span class="s">'first_name'</span><span class="p">,</span> <span class="s">'last_name'</span><span class="p">)</span>
     <span class="n">exclude</span> <span class="o">=</span> <span class="p">(</span><span class="s">'groups'</span><span class="p">,</span> <span class="s">'user_permissions'</span><span class="p">)</span>
 
-<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>            <span class="c1"># get rid of Django's default UserAdmin
-</span><span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span>   <span class="c1"># register our UserAdmin
+<span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>            <span class="c1"># get rid of Django's default UserAdmin
+</span><span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span>   <span class="c1"># register our UserAdmin
 </span></code></pre></div>
 <p>Woow! We have generated <strong>5 queries</strong> only&hellip; From <strong>35</strong> to <strong>5</strong> by excluding two
 fields&hellip;</p>
@@ -133,17 +133,17 @@ feature/option called <code>autocomplete_fields</code>. Let’s transform previo
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">path</span>
 <span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span><span class="p">,</span> <span class="n">Permission</span>
 
-<span class="k">class</span> <span class="nc">PermissionAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">PermissionAdmin</span><span class="p">(</span><span class="n">admin</span><span class="p">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
     <span class="n">search_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'name'</span><span class="p">]</span>
 
-<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">admin</span><span class="p">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
     <span class="n">list_filter</span> <span class="o">=</span> <span class="p">[</span><span class="s">'is_staff'</span><span class="p">]</span>
     <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'email'</span><span class="p">,</span> <span class="s">'first_name'</span><span class="p">,</span> <span class="s">'last_name'</span><span class="p">)</span>
     <span class="n">autocomplete_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'groups'</span><span class="p">,</span> <span class="s">'user_permissions'</span><span class="p">]</span>
 
-<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
-<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span>
-<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Permission</span><span class="p">,</span> <span class="n">PermissionAdmin</span><span class="p">)</span>
+<span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">unregister</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+<span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">UserAdmin</span><span class="p">)</span>
+<span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">Permission</span><span class="p">,</span> <span class="n">PermissionAdmin</span><span class="p">)</span>
 </code></pre></div>
 <p>Now we have generated <strong>7 queries only!</strong> If you hit refresh, Django will
 use cached query and you’ll see 6 queries only :)</p>
@@ -167,7 +167,7 @@ related code there.</p>
             
             <div class="column is-3-desktop article-right-column is-hidden-touch">
                 <div class="content is-medium">
-<h4 class="title">Related Posts</h4><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><p><a href="/blog/2019/06/01/hello-world/" title="hello world">hello world</a></p><time datetime="2019-06-01T10:00:00+03:00">01 June 2019, Saturday 10:00</time>                </div>
+<h4 class="title">Related Posts</h4><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time><p><a href="/blog/2019/06/01/hello-world/" title="hello world">hello world</a></p><time datetime="2019-06-01T10:00:00+03:00">01 June 2019, Saturday 10:00</time>                </div>
             </div>
         </div>
     </div>
