@@ -256,6 +256,9 @@ section.training {
   h4 { text-decoration: underline; }
 }
 
+span.read-time {
+  display: block;
+}
 
 @for $i from 0 through 8 {
   .mb-#{$i}-mobile { margin-bottom: 1em * $i !important; }

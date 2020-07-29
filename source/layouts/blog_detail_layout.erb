@@ -23,10 +23,11 @@ end
             <div class="column is-9-desktop">
                 <article>
                     <div class="content is-medium">
-                        <div class="meta">
+                        <div class="meta mb-1">
                             <% if article_author %><small><%= article_author %> &mdash; </small><% end %>
                             <time pubdate datetime="<%= current_page.date.xmlschema %>" title="<%= article_date %>"><%= article_date %></time>
                              <% if article_category %><span class="category"> &mdash; Filed under <a href="<%= category_path(article_category) %>"><%= article_category %></a></span><% end %>
+                             <span class="read-time">reading time: <%= Sanitize.fragment(current_page.body).reading_time :format => :long %></span>
                         </div>
 
                         <h1 class="title"><%= article_title %></h1>
@@ -36,11 +37,9 @@ end
                             <% article_tags.each do |tag| %>
                             <span class="tag is-info"><a title="Posts with &ldquo;<%= tag %>&rdquo; tag" href="<%= tag_path(tag) %>"><%= tag %></a></span>
                             <% end %>
-                    
                         </div>
                         <% end %>
-                
-                
+
                         <div class="yield mt-3-desktop">
                             <%= yield %>
                         </div>

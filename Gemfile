@@ -11,3 +11,9 @@ gem 'stringex', '~> 2.8', '>= 2.8.5'
 gem 'builder', '~> 3.2', '>= 3.2.3'
 gem 'nokogiri'
 gem 'image_size', '~> 2.0', '>= 2.0.1'
+gem 'readingtime', '~> 0.4.0'
+gem 'sanitize', '~> 5.2', '>= 5.2.1'
+
+group :development do
+  gem 'pry', '~> 0.13.1'
+end
