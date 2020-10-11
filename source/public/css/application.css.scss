@@ -214,7 +214,9 @@ article {
   .summary {
     a { font-weight: normal; }
   }
-  .tags {}
+  .tags {
+    a { color: inherit; }
+  }
 }
 
 .hero.is-vb {

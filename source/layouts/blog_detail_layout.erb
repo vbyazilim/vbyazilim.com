@@ -7,6 +7,8 @@ article_author = current_page.metadata[:page][:author] || nil
 article_category = current_page.metadata[:page][:category] || nil
 article_tags = current_page.tags
 
+current_page.metadata[:page][:reading_time] = Sanitize.fragment(current_page.body).reading_time :format => :approx
+
 related_articles = []
 current_page.tags.each do |tag|
   blog.tags[tag].each do |article|
@@ -27,7 +29,7 @@ end
                             <% if article_author %><small><%= article_author %> &mdash; </small><% end %>
                             <time pubdate datetime="<%= current_page.date.xmlschema %>" title="<%= article_date %>"><%= article_date %></time>
                              <% if article_category %><span class="category"> &mdash; Filed under <a href="<%= category_path(article_category) %>"><%= article_category %></a></span><% end %>
-                             <span class="read-time">reading time: <%= Sanitize.fragment(current_page.body).reading_time :format => :long %></span>
+                             <span class="read-time">reading time: <%= current_page.metadata[:page][:reading_time] %></span>
                         </div>
 
                         <h1 class="title"><%= article_title %></h1>

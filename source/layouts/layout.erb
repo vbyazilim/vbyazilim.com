@@ -1,14 +1,17 @@
 <%
 page_subtitle = "#{current_article.title}" unless current_article.nil?
 page_subtitle = current_page.metadata[:page][:title] if current_page.metadata[:page][:title]
-page_subtitle = " | #{page_subtitle}" if page_subtitle
+page_subtitle = " • #{page_subtitle}" if page_subtitle
+page_subtitle = " • Blog#{page_subtitle}" if current_page.metadata[:page][:category] && page_subtitle
+page_subtitle = "#{page_subtitle} • #{current_page.metadata[:page][:reading_time]} read" if current_page.metadata[:page][:reading_time]
+
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>vb YAZILIM | Development, Training and Consultancy<%= page_subtitle %></title>
+    <title>vb YAZILIM<%= page_subtitle %></title>
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
 
     <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
