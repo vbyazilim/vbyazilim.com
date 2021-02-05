@@ -5,10 +5,78 @@
   <id>https://vbyazilim.com/</id>
   <link href="https://vbyazilim.com/"/>
   <link href="https://vbyazilim.com/feed.xml" rel="self"/>
-  <updated>2020-07-27T13:38:00+03:00</updated>
+  <updated>2021-02-04T19:44:00+03:00</updated>
   <author>
     <name>Uğur Özyılmazel</name>
   </author>
+  <entry>
+    <title>Network Addresses and Named Ports</title>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2021/02/04/network-addresses-and-named-ports/"/>
+    <id>https://vbyazilim.com/blog/2021/02/04/network-addresses-and-named-ports/</id>
+    <published>2021-02-04T19:44:00+03:00</published>
+    <updated>2021-02-05T07:59:57+03:00</updated>
+    <author>
+      <name>Uğur Özyılmazel</name>
+    </author>
+    <summary type="html">&lt;p&gt;Network address and port information defines server service to listen on
+which host and port.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Network address and port information defines server service to listen on
+which host and port.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;go&lt;/code&gt;’s &lt;code&gt;http&lt;/code&gt; package provides &lt;code&gt;ListenAndServe&lt;/code&gt; function. According to 
+godoc:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;func ListenAndServe(addr string, handler Handler) error&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;ListenAndServe&lt;/code&gt; function accepts two arguments. The first one is &lt;code&gt;addr&lt;/code&gt;
+which is &lt;strong&gt;host:port&lt;/strong&gt; definition. We can omit host information and
+define network address as &lt;code&gt;&amp;quot;:3000&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;It’s possible to use named ports. On Linux/Mac all the network services
+are defined under &lt;code&gt;/etc/services&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;#
+# Network services, Internet style
+#
+# WELL KNOWN PORT NUMBERS
+#
+rtmp              1/ddp    #Routing Table Maintenance Protocol
+tcpmux            1/udp     # TCP Port Service Multiplexer
+tcpmux            1/tcp     # TCP Port Service Multiplexer
+#                          Mark Lottor &amp;lt;MKL@nisc.sri.com&amp;gt;
+nbp               2/ddp    #Name Binding Protocol
+compressnet       2/udp     # Management Utility
+compressnet       2/tcp     # Management Utility
+compressnet       3/udp     # Compression Process
+compressnet       3/tcp     # Compression Process
+#                          Bernie Volz &amp;lt;VOLZ@PROCESS.COM&amp;gt;
+echo              4/ddp    #AppleTalk Echo Protocol
+#                 4/tcp    Unassigned
+#                 4/udp    Unassigned
+rje               5/udp     # Remote Job Entry
+rje               5/tcp     # Remote Job Entry
+#                          Jon Postel &amp;lt;postel@isi.edu&amp;gt;
+zip               6/ddp    #Zone Information Protocol
+#                 6/tcp    Unassigned
+#                 6/udp    Unassigned
+echo              7/udp     # Echo
+echo              7/tcp     # Echo
+#
+#
+http             80/udp     www www-http # World Wide Web HTTP
+http             80/tcp     www www-http # World Wide Web HTTP
+#
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This list goes on and on&amp;hellip; So, you can set &lt;code&gt;:http&lt;/code&gt; as &lt;code&gt;addr&lt;/code&gt; argument in &lt;code&gt;ListenAndServe&lt;/code&gt;
+function. Also you can use this convention almost everywhere! Enjoy named port
+definitions.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Argument reuse</title>
     <link rel="alternate" href="https://vbyazilim.com/blog/2020/07/27/argument-reuse/"/>
@@ -527,81 +595,6 @@ tuples, with an all-uppercase name as a class attribute on the model&lt;/p&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;and few other miscellaneous information, &lt;a href="https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/"&gt;please read&lt;/a&gt; It when you need It.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>hello world</title>
-    <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/01/hello-world/"/>
-    <id>https://vbyazilim.com/blog/2019/06/01/hello-world/</id>
-    <published>2019-06-01T10:00:00+03:00</published>
-    <updated>2020-11-18T12:52:33+03:00</updated>
-    <author>
-      <name>Uğur Özyılmazel</name>
-    </author>
-    <summary type="html">&lt;p&gt;Hello and welcome to our &lt;strong&gt;first&lt;/strong&gt; official blog post!
-&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;Hello and welcome to our &lt;strong&gt;first&lt;/strong&gt; official blog post!
-&lt;/p&gt;
-
-&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2019-06-01-vbyazilim.jpg" alt="Image" /&gt;&lt;/figure&gt;&lt;/div&gt;
-
-&lt;p&gt;I’m Uğur “vigo” Özyılmazel and I’m a software developer and founder of &lt;strong&gt;vb
-YAZILIM&lt;/strong&gt;. I’ve been writing code since the early 8-bit computer days.
-I have a long running career for a 47 y/o developer. I’ve spend my last ~18
-years with building web applications. Some of them were heavy, some of them
-were super easy&amp;hellip; At the end of day, they were all html outputted web sites.&lt;/p&gt;
-
-&lt;p&gt;I learned a lot while building sites, apps and related things such as
-operating systems, databases, saas platforms and more&amp;hellip; My journey started
-with 6502 Assembly language&amp;hellip; Yes, &lt;strong&gt;Commodore 64&lt;/strong&gt; my first true &lt;span class="icon"&gt;&lt;i class="fas fa-heart"&gt;&lt;/i&gt;&lt;/span&gt;.
-Then 68000 Assembly language for coding demos, intros and games for &lt;strong&gt;AmigA&lt;/strong&gt;&amp;hellip;
-I’m still using those awesome machines and there are still tons of new releases!&lt;/p&gt;
-
-&lt;h3&gt;Django&lt;/h3&gt;
-
-&lt;p&gt;My curse, my gift&amp;hellip; I’ve been building Django applications since 2008. I remember
-the version I met &lt;code&gt;Django==0.96&lt;/code&gt;. I witnessed the evolution of Django over the
-years. It’s free and open source Python web-framework for everybody! I made
-many web apps with PHP back-in days. First time I saw the Django Admin panel
-and I crashed! I guess, that’s the most exciting feature! and very attractive&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I made couple hundred web apps with Django over the years. I was working in a
-University and I injected Python to our team. Sometimes small-mini web sites,
-sometimes huge, heavy apps&amp;hellip; All done with Django&amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Polyglot&lt;/h3&gt;
-
-&lt;p&gt;I heard this term from &lt;a href="https://www.kennethreitz.org"&gt;Kenneth Reitz&lt;/a&gt;. He was Python overlord at &lt;a href="https://heroku.com"&gt;Heroku&lt;/a&gt;
-back in 2013. Yes, I’m also a polyglot programmer. This means, I know few other
-programming languages too. I use Python, Ruby, Bash, AppleScript, sometimes
-JavaScript (&lt;em&gt;not fan of It&lt;/em&gt;) and little bit of Golang in my daily routine.&lt;/p&gt;
-
-&lt;p&gt;I’m very enthusiastic about learning new languages such as Swift, Rust.
-Due to my oldskool background, I’ve never had a chance to code in compiled
-languages such as C, C++. After Assembly, I’ve jumped straight to run-time,
-script-ish languages such as ASP 3.0 (old, classic), PHP, Perl&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;I meet Ruby in 2011 and that that was another ground breaking thing for me.
-Blending my Python knowledge with Ruby opened my mind&amp;hellip; I followed the
-pioneers of the industry. How they write code ? What are their best practices ?
-Yes, conventions are always over the configurations!&lt;/p&gt;
-
-&lt;h3&gt;What about vb YAZILIM ?&lt;/h3&gt;
-
-&lt;p&gt;Founded in late 2013. Mostly known from smashing hit conferences between 2013
-- 2015. We tried to help and support open-source related movements and
-activities. We were two times sponsor of &lt;a href="http://railsgirls.com/"&gt;Rails Girls&lt;/a&gt; Istanbul and Ankara,
-&lt;a href="https://ozgurwebgunleri.org.tr/2013/"&gt;Özgür Web Teknolojileri Günleri&lt;/a&gt; 2013, Rails Girls Summer of Code 2014,
-&lt;a href="https://www.meetup.com/jstanbul/"&gt;Jstanbul Meetup&lt;/a&gt; and &lt;a href="https://www.meetup.com/IstanbulPHP/"&gt;PHP İstanbul&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Highly focused on heavy Django application development and weekend
-training sessions. It’s been six years and finally I’ve managed to find
-enough time to re-design, re-build my humble company website.&lt;/p&gt;
-
-&lt;p&gt;I’ll publish mostly development related articles, examples, reviews and
-same sort of topics here in my company website.&lt;/p&gt;
-
-&lt;p&gt;Keep following &lt;strong&gt;vb YAZILIM&lt;/strong&gt;, get in touch !&lt;/p&gt;
 </content>
   </entry>
 </feed>

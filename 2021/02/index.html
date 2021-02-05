@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>vb YAZILIM • Blog • Better tool for listing virtual environments • 1 minutes read</title>
+    <title>vb YAZILIM • Blog posts by year</title>
     <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
 
     <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
@@ -15,20 +15,7 @@
     <link href="/public/css/syntax.css" rel="stylesheet" />
     
     <link href="/public/css/application.css" rel="stylesheet" />
-    <meta property="og:title" content="vb YAZILIM | Better tool for listing virtual environments" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/" />
     
-    <meta property="og:description" content="I love virtualenvwrapper. You can manage your virtual environments such as
-create/delete or list. Also you can kick additional variables on activation.">
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:site_name" content="vb YAZILIM" />
-    
-    <meta property="og:image" content="https://vbyazilim.com/public/images/blog/2019-06-02-og-lsvirtualenvs.png" />
-    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/blog/2019-06-02-og-lsvirtualenvs.png" />
-    <meta property="og:image:width" content="1000" />
-    <meta property="og:image:height" content="562" />
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52664816-9"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -59,86 +46,79 @@ create/delete or list. Also you can kick additional variables on activation.">
     </div>
 </section>
 
-    
-<section class="section">
+    <section class="hero is-vb">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Displaying posts by year 2021</h1>
+            <h2 class="subtitle">
+                Found <strong>1</strong> post.
+                Displaying page <strong>1</strong> of 1
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section class="section has-white-background">
     <div class="container">
         <div class="columns">
-            <div class="column is-9-desktop">
-                <article>
-                    <div class="content is-medium">
-                        <div class="meta mb-1">
-                            <small>Uğur Özyılmazel &mdash; </small>
-                            <time pubdate datetime="2019-06-03T10:00:00+03:00" title="03 June 2019, Monday 10:00">03 June 2019, Monday 10:00</time>
-                             <span class="category"> &mdash; Filed under <a href="/blog/category/development/">development</a></span>
-                             <span class="read-time">reading time: 1 minutes</span>
-                        </div>
+            <div class="column is-8-desktop is-6-tablet">
+                
+                
+                <div class="list-articles">
+                    <ul>
+                        <li>
+                            <a href="/blog/2021/02/04/network-addresses-and-named-ports/" class="is-size-4-desktop">Network Addresses and Named Ports</a>
+                            <time pubdate datetime="2021-02-04T19:44:00+03:00" title="04 February 2021, Thursday 19:44">
+                                04 February 2021, Thursday 19:44
+                            </time>
+                            <div class="is-size-5-desktop"><p>Network address and port information defines server service to listen on
+which host and port.</p>
 
-                        <h1 class="title">Better tool for listing virtual environments</h1>
-                        
-                        <div class="tags">
-                            <span class="tag is-info"><a title="Posts with &ldquo;golang&rdquo; tag" href="/blog/tag/golang/">golang</a></span>
-                        </div>
-
-                        <div class="yield mt-3-desktop">
-                            <p>I love <code>virtualenvwrapper</code>. You can manage your virtual environments such as
-create/delete or list. Also you can kick additional variables on activation.
-</p>
-
-<p><code>virtualenvwrapper</code> stores environments under <code>~/.virtualenvs/</code>. When you ask
-for listings of installed environments in your user environment, It basically
-iterates over folder names under <code>~/.virtualenvs/</code> folder.</p>
-
-<p>I currently have <strong>24</strong> folders, which means 24 virtual environments are
-available. Let’s ask for list:</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">time </span>lsvirtualenv
-
-real    0m5.254s
-user    0m3.627s
-sys     0m1.241s
-</code></pre></div>
-<p>What was the operation ?</p>
-
-<ol>
-<li><code>cd</code> to <code>~/.virtualenvs/</code></li>
-<li>loop through folders and print their name</li>
-</ol>
-
-<p>It took <strong>5 seconds</strong> on a <strong>2,9 GHz Intel Core i7</strong> MacBook Pro :) Don’t you
-think It’s a bit too much ? I tried to implement same functionality via Bash
-script:</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">time </span>ls-virtual-env
-real    0m0.514s
-user    0m0.114s
-sys     0m0.169s
-</code></pre></div>
-<p>It took almost half of a second. I wondered, If I can boost the speed up more!
-Yes I can&hellip; I implemented the same functionality on <strong>Golang</strong> and added
-extra features such as getting the Python version, coloring etc&hellip;</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">time </span>lsvirtualenvs
-real    0m0.066s
-user    0m0.139s
-sys     0m0.190s
-</code></pre></div>
-<p>Unbelievable! All done in mili-seconds. Most of the time consumed while
-executing <code>python --version</code> command. You can download or inspect the
-code on <a href="https://github.com/vigo/lsvirtualenvs">GitHub</a></p>
-
-<p>You can install via;</p>
-<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>go get <span class="nt">-u</span> github.com/vigo/lsvirtualenvs
-</code></pre></div>
-                        </div>
-                    </div>
-                    <div class="sharethis-inline-share-buttons" style="margin-top: 3em;"></div>
-                </article>
+<p></p></div>
+                                <div class="tags mt-1 mb-2">
+                                    <span class="tag is-info"><a title="Posts with &ldquo;golang&rdquo; tag" target="_blank" href="/blog/tag/golang/">golang</a></span>
+                                    
+                                </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            
-            <div class="column is-3-desktop article-right-column is-hidden-touch">
-                <div class="content is-medium">
-<h4 class="title">Related Posts</h4><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time><p><a href="/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/" title="How much do you care to write good Django code?">How much do you care to write good Django code?</a></p><time datetime="2019-06-02T10:30:00+03:00">02 June 2019, Sunday 10:30</time>                </div>
+            <div class="column is-3-tablet is-2-desktop is-offset-2-desktop is-offset-3-tablet">
+                <div class="content">
+                    <h4 class="is-size-5-desktop is-size-6-tablet">By Category</h4>
+                </div>
+                <ul>
+                    <li><a href="/blog/category/development/">development</a></li>
+                    <li><a href="/blog/category/news/">news</a></li>
+                </ul>
+                <hr/>
+                <div class="content">
+                    <h4 class="is-size-5-desktop is-size-6-tablet">By Tag</h4>
+                </div>
+                <ul>
+                    <li><a href="/blog/tag/golang/">golang</a></li>
+                    <li><a href="/blog/tag/python/">python</a></li>
+                    <li><a href="/blog/tag/pipx/">pipx</a></li>
+                    <li><a href="/blog/tag/django/">django</a></li>
+                    <li><a href="/blog/tag/djangoadmin/">djangoadmin</a></li>
+                </ul>
+                <hr/>
+                
+                <div class="content">
+                    <h4 class="is-size-5-desktop is-size-6-tablet">By Year</h4>
+                </div>
+                <ul>
+                    <li><a href="/blog/year/2021/">2021 has 1 post</a></li>
+                    <li><a href="/blog/year/2020/">2020 has 1 post</a></li>
+                    <li><a href="/blog/year/2019/">2019 has 5 posts</a></li>
+                </ul>
+                
             </div>
         </div>
     </div>
 </section>
+
+
 
 
 
@@ -233,8 +213,7 @@ code on <a href="https://github.com/vigo/lsvirtualenvs">GitHub</a></p>
     </script>
     <!-- End of Async Drift Code -->
 
-            <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
-
+    
     <script src="/public/js/app.js"></script>
 </body>
 </html>
