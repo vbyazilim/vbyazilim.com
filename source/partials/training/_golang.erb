@@ -1,0 +1,24 @@
+<%
+courses_name = 'Golang'
+course_icon = 'fas fa-microchip'
+
+course_anchor_id = "#{courses_name.downcase}-training"
+courses = [
+    'golang-101',
+    'golang-102',
+    'golang-build-rest-api',
+    'golang-hands-on-grpc',
+]
+%>
+<section class="section has-white-background training<%= zebra %>">
+    <div class="container">
+
+        <%= partial "partials/courser", :locals => { 
+            :course_anchor_id => course_anchor_id,
+            :courses_name => courses_name,
+            :course_icon => course_icon,
+            :courses => courses,
+        } %>
+
+    </div>
+</section>

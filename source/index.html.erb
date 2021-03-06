@@ -10,8 +10,9 @@ title: Development, Training and Consultancy
                     <h1 class="has-text-light">
                         We are software development, training and consultancy company.
                     </h1>
-                    <h2 class="has-text-light">
-                        We provide highly skilled <strong>Django</strong> application 
+                    <h2 class="has-text-light is-hidden-mobile">
+                        We provide highly skilled <strong>backend</strong> and
+                        <strong>frontend</strong> application 
                         development, deployment and scaling services.
                     </h2>
                 </div>
@@ -34,43 +35,52 @@ title: Development, Training and Consultancy
         <div class="columns">
             <div class="column">
                 <div class="content">
-                    <h3>Providing services since <strong>2013</strong></h3>
-                    <p class="is-size-5">
-                        Besides development and consultancy services, we&rsquo;ve organized many 
-                        developer conferences, hackathons in <strong>Turkey</strong> and <strong>Austria</strong>.
-                    </p>
-                    
                     <h3>Area of expertise</h3>
-                    <p class="is-size-5">
-                        Building Django applications since <strong>2008</strong>. We are highly experienced
-                        on <strong>Python</strong> and <strong>Ruby</strong> programming languages.
-                        Following best development practices. We are mostly focused on <strong>backend</strong> development.
+                    <p class="is-size-4">
+                        We are building <strong>Django</strong> and <strong>Flask</strong> applications
+                        for a long time and highly experienced in <strong>Python</strong> and
+                        <strong>Ruby</strong> ecosystem. We also provide <strong>Golang</strong>,
+                        <strong>JavaScript</strong> backend development for micro-service 
+                        architecture approach.
                     </p>
-                    <h4>We love using and building <strong>UNIX</strong> tools!</h4>
-                    <p>
-                        <strong>Bash</strong> utilities, <strong>Ruby</strong> gems, <strong>Python</strong> packages and 
-                        small tools written <strong>Golang</strong>!.
-                        We use <code>git</code> for revision control to various deployment automation.
-                    </p>
-                    <p>
-                        We use test-driven-development (<strong>TDD</strong>) philosophy in our projects.
-                        Don&rsquo;t forget to check our <a class="is-external-link" href="/services/">services</a> page for more detailed information.
-                    </p>
-                    <h4>These keywords define us!</h4>
-                    <div class="tags mb-1">
+                    <div id="home-tags" class="mb-1 p-5">
                     <%
                     keywords = [
-                        'python', 'ruby', 'bash', 'golang', 'django', 'postgresql', 'redis', 'git', 'gentoo', 'ubuntu',
-                        'api', 'docker', 'ci', 'cd', 'migration', 'training', 'tdd', 'grpc',
-                        'scaling',
+                        'golang', 'python', 'ruby', 'bash', 'javascript',
+                        'django', 'flask', 'sinatra', 'node',
+                        'vuejs', 'reactjs',
+                        'api', 'micro-service', 'rest', 'grpc',
+                        'docker', 'kubernetes', 'ci/cd',
+                        'training', 'consultancy',
                     ]
                     keywords.each do |keyword|
-                        content_tag :span, class: 'tag is-info' do
+                        content_tag :span, class: 'tag is-info is-medium' do
                             concat keyword
                         end
                     end
                     %>
                     </div>
+
+                    <h3>Providing services since <strong>2013</strong></h3>
+                    <p class="is-size-5">
+                        Besides development and consultancy services, we&rsquo;ve organized many 
+                        developer conferences, hackathons in <strong>Turkey</strong> and <strong>Austria</strong>.
+                    </p>
+
+
+                    <h4>We love using and building <strong>UNIX</strong> tools!</h4>
+                    <p>
+                        <strong>Bash</strong> utilities, <strong>Ruby</strong> gems, 
+                        <strong>Python</strong> packages, <strong>Node</strong> packages and 
+                        small tools/utils written in <strong>Golang</strong>!.
+                        We use <code>git</code> for revision control to various deployment automation.
+                    </p>
+                    <p>
+                        We embrace test-driven-development (<strong>TDD</strong>) philosophy in our projects.
+                        More information can be found at our 
+                        <a class="is-external-link" href="/services/">services</a> page.
+                    </p>
+
                 </div>
             </div>
             <div class="column">
@@ -84,12 +94,13 @@ title: Development, Training and Consultancy
                                 <li><strong>İstanbul Bilgi University</strong><small>Django contrator and devOps</small></li>
                                 <li><strong>Biges Güvenli Hayat Teknoloji</strong><small>Django contractor</small></li>
                                 <li><strong>Hürriyet Newspaper, Web Team</strong><small>Training: python, git, unix, devops</small></li>
-                                <li><strong>ING Bank, Turkey</strong><small>Hackathon organization</small></li>
+                                <li><strong>ING Bank</strong>, Turkey<small>Hackathon organization</small></li>
                                 <li><strong>Getir.com</strong><small>Hackathon organization</small></li>
                                 <li><strong>Aslanoba</strong><small>Training, devops</small></li>
                                 <li><strong>Cosmo Code</strong>, Germany<small>Django contractor</small></li>
-                                <li><strong>PayU</strong><small>Training: python, django</small></li>
+                                <li><strong>PayU</strong>, Turkey<small>Training: python, django</small></li>
                                 <li><strong>Demirören Teknoloji</strong><small>Consultancy</small></li>
+                                <li><strong>Promptapi</strong>, Estonia<small>Python contractor</small></li>
                             </ul>
                         </div>
                     </div>
@@ -136,9 +147,9 @@ title: Development, Training and Consultancy
             <div class="column is-7-desktop">
                 <%= partial 'partials/latest_articles' %>
             </div>
-            <div class="column is-4-desktop is-offset-1-desktop">
+            <div class="column is-4-desktop is-offset-1-desktop is-hidden-mobile">
                 <div class="content">
-                    <h1 class="title has-text-color-vb">Past Events</h1>
+                    <h1 class="title has-text-color-vb">Past Organizations</h1>
                 </div>
                 <table class="table vb-conferences">
                     <thead>

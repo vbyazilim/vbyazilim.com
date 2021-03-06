@@ -100,6 +100,12 @@ footer {
   }
 }
 
+.has-zebra-on {
+  background-color: #fafafa !important;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
 .has-text-color-vb {
   color: $color-vb !important;
 }
@@ -277,6 +283,14 @@ span.read-time {
   .pl-#{$i}-mobile { padding-left: 1em * $i !important; }
 }
 
+#home-tags {
+  background-color: $color-vb;
+  text-align: center;
+  span {
+    margin: .3em;
+    font-weight: 700;
+  }
+}
 
 @media (max-width: 768px) {
   section.mobile-only {
@@ -300,6 +314,14 @@ span.read-time {
     p.debug::after { content: " tablet"; }
 
     @for $i from 0 through 8 {
+      .mb-#{$i}-mobile { margin-bottom: 0 !important; }
+      .mt-#{$i}-mobile { margin-top: 0 !important; }
+      .my-#{$i}-mobile { margin-top: 0 !important; margin-bottom: 0 !important; }
+      .pb-#{$i}-mobile { padding-bottom: 0 !important; }
+      .pt-#{$i}-mobile { padding-top: 0 !important; }
+      .py-#{$i}-mobile { padding-top: 0 !important; padding-bottom: 0 !important; }
+      .pl-#{$i}-mobile { padding-left: 0 !important; }
+
       .mb-#{$i}-tablet { margin-bottom: 1em * $i !important; }
       .mt-#{$i}-tablet { margin-top: 1em * $i !important; }
       .my-#{$i}-tablet { margin-top: 1em * $i !important; margin-bottom: 1em * $i !important; }

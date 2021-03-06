@@ -1,0 +1,22 @@
+<%
+courses_name = 'Flask'
+course_icon = 'fas fa-flask'
+
+course_anchor_id = "#{courses_name.downcase}-training"
+courses = [
+    'flask-101',
+    'flask-api',
+]
+%>
+<section class="section has-white-background training<%= zebra %>">
+    <div class="container">
+
+        <%= partial "partials/courser", :locals => { 
+            :course_anchor_id => course_anchor_id,
+            :courses_name => courses_name,
+            :course_icon => course_icon,
+            :courses => courses,
+        } %>
+
+    </div>
+</section>
