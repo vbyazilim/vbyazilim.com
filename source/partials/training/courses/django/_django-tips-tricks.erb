@@ -1,0 +1,26 @@
+<% 
+title = "Django Tips and Tricks"
+anchor = "#{title.to_url}-course" 
+%>
+<h4 id="<%= anchor %>"><%= copy_to_clipboard title, anchor %></h4>
+<p class="is-size-4">
+    We&rsquo;ll cover performance issues, <strong>DO</strong>s and <strong>DON&rsquo;T</strong>s.
+    Also, best practices from well-known Djangonauts
+</p>
+<ul>
+    <li>Better project structure! Isolate environments: test, development, production etc...</li>
+    <li>Fat Model + Skinny Controller!</li>
+    <li>ORM performance tips + new functions such as <code>Prefetch()</code> and more...</li>
+    <li>Curated list of model tips, view tips and ORM tips</li>
+    <li>Using transactions, preventing race-conditions</li>
+    <li>Examples of built-in Query Expressions: <code>F()</code>, <code>Func()</code>, <code>Value()</code>, custom Aggregate functions and more...</li>
+    <li>What is <code>Subquery</code> and <code>annotation()</code></li>
+    <li>Creating custom lookups: <code>field__my_lookup=1</code></li>
+    <li>What bulk operations are ?</li>
+    <li>Who needs Elastic Search if you have <strong>PostgreSQL</strong> ? Search Vectors and more...</li>
+    <li>Migration optimization. Always check what Django produced!</li>
+    <li>What about PostgreSQL extensions? How to enable them?</li>
+    <li>Special search operations</li>
+    <li>Faster and better tests!</li>
+    <li>All about Django Forms, hacking admin forms</li>
+</ul>

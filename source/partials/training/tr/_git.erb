@@ -1,0 +1,22 @@
+<%
+courses_name = 'Git'
+course_icon = 'fas fa-code-branch'
+
+course_anchor_id = "#{courses_name.downcase}-training"
+courses = [
+    'git-101',
+    'git-102',
+]
+%>
+<section class="section has-white-background training<%= zebra %>">
+    <div class="container">
+
+        <%= partial "partials/courser-tr", :locals => { 
+            :course_anchor_id => course_anchor_id,
+            :courses_name => courses_name,
+            :course_icon => course_icon,
+            :courses => courses,
+        } %>
+
+    </div>
+</section>

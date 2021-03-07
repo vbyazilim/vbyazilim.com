@@ -1,0 +1,28 @@
+<% 
+title = "Sinatra 101"
+anchor = "#{title.to_url}-egitimi" 
+%>
+<h4 id="<%= anchor %>"><%= copy_to_clipboard title, anchor, "tr" %></h4>
+<p class="is-size-4">
+    Dünyanın en hafif sunucu kütüphanesi <strong>Sinatra</strong> ile 
+    dakikalar içinde basit bir web uygulaması ya da karmaşık bir
+    veritabanı uygulaması ya da API geliştirmek mümkün.
+</p>
+<ul>
+    <li>Rack&rsquo;den fazla, Rails&rsquo;den az &dash; <a href="http://danbenjamin.com/" class="is-external-link">Den Benjamin</a></li>
+    <li>Sinatra&rsquo;nın DSL yapısı</li>
+    <li>İşleyiciler (<em>handlers</em>) ve HTTP metodları</li>
+    <li><strong>URL params</strong>, <strong>splat</strong>, <strong>regex</strong> ve koşullu yakalayıcılar</li>
+    <li><strong>ERB</strong> ve <strong>View</strong> mantığı</li>
+    <li>Layout kavramı</li>
+    <li>Statik dosya sunumu (<em>resimler, JavaScript/CSS dosyaları</em>)</li>
+    <li>Farklı dosya işleyicileri; <strong>Sass</strong>, <strong>Markdown</strong> ve daha fazlası</li>
+    <li>Filtre ve <strong>helper</strong> kavramı</li>
+    <li>Özelleştirilmiş filtre ve helper&rsquo;lar</li>
+    <li>http isteklerini: karşılama, iptal, yönlendirme, pas geçme, hata üretme</li>
+    <li>Ortam izolasyonu: testing, development ya da production</li>
+    <li>Oturum yönetimi</li>
+    <li>Test</li>
+    <li>Uygulama yapısı kararı, tek dosya mı? yoksa yapılandırılmış mı?</li>
+    <li>Uygulamanın <a class="is-external-link" href="https://heroku.com">Heroku</a>&rsquo;ya yüklenmesi (deployment)</li>
+</ul>

@@ -1,0 +1,23 @@
+<%
+courses_name = 'Bash'
+course_icon = 'fas fa-terminal'
+
+course_anchor_id = "#{courses_name.downcase}-training"
+courses = [
+    'bash-101',
+    'bash-build-cli',
+]
+%>
+
+<section class="section has-white-background training<%= zebra %>">
+    <div class="container">
+
+        <%= partial "partials/courser-tr", :locals => { 
+            :course_anchor_id => course_anchor_id,
+            :courses_name => courses_name,
+            :course_icon => course_icon,
+            :courses => courses,
+        } %>
+
+    </div>
+</section>

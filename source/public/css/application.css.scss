@@ -4,6 +4,11 @@ $color-vb-lighter: lighten($color-vb, 15);
 $color-vb-darker: darken($color-vb, 1);
 /* ------------------------------------------------------------------------- */
 
+a.is-active {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
 /* ------------------------------------------------------------------------- */
 p.debug {
   padding: 1em;
@@ -22,6 +27,22 @@ pre.debug {
   word-wrap: break-word !important;
 }
 /* ------------------------------------------------------------------------- */
+
+
+.video-responsive{
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+    background: black;
+}
+.video-responsive iframe{
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
 
 figcaption {
   padding: 1em;
@@ -68,12 +89,57 @@ footer {
   strong {
     color: inherit;
   }
+  a { 
+    color: white; 
+    &:hover {
+      color: #eee;
+    }
+  }
+}
+
+@mixin h1-bandage {
+  h1, h2, h3, h4, h5, h6 {
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    span { 
+      padding: .4em;
+      display: inline-block;
+      strong {
+        color: yellow;
+      }
+      background-color: black; 
+    }
+    color: white;
+  }
+}
+
+.blog {
+  background-image: url('/public/images/davisuko-5E5N49RWtbA-unsplash.jpg');
+  background-position: center;
+  background-size: cover;
+  @include h1-bandage;
+}
+
+.training-main {
+  background-image: url('/public/images/max-duzij-qAjJk-un3BI-unsplash.jpg');
+  background-position: center;
+  background-size: cover;
+  @include h1-bandage;
+}
+
+.cover {
+  background-image: url('/public/images/glenn-carstens-peters-npxXWgQ33ZQ-unsplash.jpg');
+  background-position: center;
+  background-size: cover;
+  color: white;
+  @include h1-bandage;
 }
 
 .has-background-color-vb-lighter {
   background-color: $color-vb-lighter;
   strong {
-    color: inherit;
+    color: white;
   }
 }
 
@@ -91,6 +157,9 @@ footer {
   color: $color-vb-darker;
   h1, h2, h3, h4, h5, h6, p {
     color: $color-vb;
+  }
+  h1.title {
+    strong { font-weight: 700; }
   }
   .table, strong, th {
     color: inherit !important;
@@ -125,7 +194,7 @@ ul.vb-list {
 
 .zoomable {
   img {
-    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
     transition: 0.5s all ease;
     position:relative;
     z-index: 9999;
@@ -238,6 +307,10 @@ article {
   }
 }
 
+.vb-button {
+  border-radius: 0 !important;
+}
+
 h3 {
   span.icon {
     vertical-align: top;
@@ -262,11 +335,32 @@ h3 {
 }
 
 .vb-conferences {
-  th, td { padding-left: 0; }
+  width: 100%;
+  th, td { padding-left: 0; padding-right: 0; }
+  td { vertical-align: middle; padding-top: 1em; padding-bottom: 1em; }
+  td:last-child {
+    text-align: right;
+  }
+  td:first-child {
+    strong {
+      display: block;
+    }
+  }
+  tr:last-child {
+    border-bottom: 1px solid #dbdbdb;
+  }
 }
 
 section.training {
-  h4 { text-decoration: underline; }
+  h4 { 
+    a { 
+      text-decoration: underline;
+      .icon {
+        justify-content: flex-end;
+        vertical-align: bottom;
+      }
+    }
+  }
 }
 
 span.read-time {
@@ -292,6 +386,27 @@ span.read-time {
   }
 }
 
+img.svg-icon {
+  height: 2em;
+  margin-bottom: 1em;
+//  flex: 1 0 fill;
+//  filter: grayscale(100%);
+  /* grow, shrink, basis */
+//  flex: 1 0 fit-content;
+}
+
+div.dev-icons {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #eee;
+}
+
+/* ------------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------------- */
 @media (max-width: 768px) {
   section.mobile-only {
     &.first {
@@ -308,68 +423,93 @@ span.read-time {
     small, span.category { display: block; }
   }
 }
+/* ------------------------------------------------------------------------- */
+
 
 /* ------------------------------------------------------------------------- */
 @media (min-width: 769px) {
-    p.debug::after { content: " tablet"; }
+  p.debug::after { content: " tablet"; }
 
-    @for $i from 0 through 8 {
-      .mb-#{$i}-mobile { margin-bottom: 0 !important; }
-      .mt-#{$i}-mobile { margin-top: 0 !important; }
-      .my-#{$i}-mobile { margin-top: 0 !important; margin-bottom: 0 !important; }
-      .pb-#{$i}-mobile { padding-bottom: 0 !important; }
-      .pt-#{$i}-mobile { padding-top: 0 !important; }
-      .py-#{$i}-mobile { padding-top: 0 !important; padding-bottom: 0 !important; }
-      .pl-#{$i}-mobile { padding-left: 0 !important; }
+  @for $i from 0 through 8 {
+    .mb-#{$i}-mobile { margin-bottom: 0 !important; }
+    .mt-#{$i}-mobile { margin-top: 0 !important; }
+    .my-#{$i}-mobile { margin-top: 0 !important; margin-bottom: 0 !important; }
+    .pb-#{$i}-mobile { padding-bottom: 0 !important; }
+    .pt-#{$i}-mobile { padding-top: 0 !important; }
+    .py-#{$i}-mobile { padding-top: 0 !important; padding-bottom: 0 !important; }
+    .pl-#{$i}-mobile { padding-left: 0 !important; }
 
-      .mb-#{$i}-tablet { margin-bottom: 1em * $i !important; }
-      .mt-#{$i}-tablet { margin-top: 1em * $i !important; }
-      .my-#{$i}-tablet { margin-top: 1em * $i !important; margin-bottom: 1em * $i !important; }
-      .pb-#{$i}-tablet { padding-bottom: 1em * $i !important; }
-      .pt-#{$i}-tablet { padding-top: 1em * $i !important; }
-      .py-#{$i}-tablet { padding-top: 1em * $i !important; padding-bottom: 1em * $i !important; }
-    }
+    .mb-#{$i}-tablet { margin-bottom: 1em * $i !important; }
+    .mt-#{$i}-tablet { margin-top: 1em * $i !important; }
+    .my-#{$i}-tablet { margin-top: 1em * $i !important; margin-bottom: 1em * $i !important; }
+    .pb-#{$i}-tablet { padding-bottom: 1em * $i !important; }
+    .pt-#{$i}-tablet { padding-top: 1em * $i !important; }
+    .py-#{$i}-tablet { padding-top: 1em * $i !important; padding-bottom: 1em * $i !important; }
+  }
 
-    div.footer-right-icons-tablet {
-      .icon {
-        justify-content: flex-end;
-      }
+  div.footer-right-icons-tablet {
+    .icon {
+      justify-content: flex-end;
     }
-    
-    span.break-tablet {
-      display: block;
-    }
+  }
+  
+  span.break-tablet {
+    display: block;
+  }
 }
+/* ------------------------------------------------------------------------- */
 
+
+/* ------------------------------------------------------------------------- */
 @media (min-width: 1024px) {
-    p.debug::after { content: " desktop"; }
-    
-    #ga-notice button {
-      right: 1.4rem !important;
-      top: 1.4rem !important;
-    }
+  img.svg-icon {
+    height: 3em;
+  }
 
-    
-    @for $i from 0 through 8 {
-      .mb-#{$i}-desktop { margin-bottom: 1em * $i !important; }
-      .mt-#{$i}-desktop { margin-top: 1em * $i !important; }
-      .my-#{$i}-desktop { margin-top: 1em * $i !important; margin-bottom: 1em * $i !important; }
-      .pb-#{$i}-desktop { padding-bottom: 1em * $i !important; }
-      .pt-#{$i}-desktop { padding-top: 1em * $i !important; }
-      .py-#{$i}-desktop { padding-top: 1em * $i !important; padding-bottom: 1em * $i !important; }
-    }
+  p.debug::after { content: " desktop"; }
+  
+  #ga-notice button {
+    right: 1.4rem !important;
+    top: 1.4rem !important;
+  }
 
+  
+  @for $i from 0 through 8 {
+    .mb-#{$i}-desktop { margin-bottom: 1em * $i !important; }
+    .mt-#{$i}-desktop { margin-top: 1em * $i !important; }
+    .my-#{$i}-desktop { margin-top: 1em * $i !important; margin-bottom: 1em * $i !important; }
+    .pb-#{$i}-desktop { padding-bottom: 1em * $i !important; }
+    .pt-#{$i}-desktop { padding-top: 1em * $i !important; }
+    .py-#{$i}-desktop { padding-top: 1em * $i !important; padding-bottom: 1em * $i !important; }
+  }
+  
+  .cover {
+    padding-top: 20em;
+  }
+  .blog {
+    padding-top: 20em;
+  }
+  .training-main {
+    padding-top: 20em;
+  }
 }
+/* ------------------------------------------------------------------------- */
 
+
+/* ------------------------------------------------------------------------- */
 @media (min-width: 1216px) {
-    p.debug::after { content: " wide-screen"; }
-    
-    article {
-      padding-right: 4em;
-    }
+  img.svg-icon {
+    height: 4em;
+  }
+
+  p.debug::after { content: " wide-screen"; }
+  
+  article {
+    padding-right: 4em;
+  }
 }
 
 @media (min-width: 1408px) {
-    p.debug::after { content: " full-hd"; }
+  p.debug::after { content: " full-hd"; }
 }
 /* ------------------------------------------------------------------------- */

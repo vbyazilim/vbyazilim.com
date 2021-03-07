@@ -2,10 +2,24 @@
 just_categories = blog.articles.map{|a| a.metadata[:page][:category]}.uniq
 total_post_count = page_articles.length * num_pages
 %>
+
+<section class="section blog">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column">
+                <div class="content">
+                    <h1>
+                        <span><%= need_title %></span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="hero is-vb">
     <div class="hero-body">
         <div class="container">
-            <h1 class="title"><%= need_title %></h1>
             <h2 class="subtitle">
                 Found <strong><%= total_post_count %></strong> <%= pluralize(total_post_count, 'post', 'posts') %>.
                 Displaying page <strong><%= page_number %></strong> of <%= num_pages %>

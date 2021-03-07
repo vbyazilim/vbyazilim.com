@@ -1,0 +1,161 @@
+---
+title: Servisler
+layout: layout-tr
+---
+
+<%
+right_side_bar_classes = "is-4-widescreen is-offset-2-widescreen is-hidden-touch"
+%>
+
+<section class="hero is-vb">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">Services</h1>
+            <h2 class="subtitle">
+                Kişilere, kurumlara, <strong>yazılım geliştirme</strong> hizmeti, <strong>eğitim</strong> hizmeti ve <strong>danışmanlık</strong> hizmetleri sağlıyoruz.
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section class="section py-1 has-background-light">
+    <div class="container">
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item is-size-7-mobile"><a href="#development-services" title="Yazılım Geliştirme Servisi">Yazılım Geliştirme</a></div>
+                <div class="level-item is-size-7-mobile"><a href="#consultancy-services" title="Danışmanlık Servisi">Danışmanlık</a></div>
+                <div class="level-item is-size-7-mobile"><a href="#training-services" title="Eğitim Hizmetleri">Eğitim</a></div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+<section class="section has-white-background mobile-only first">
+    <div class="container">
+
+        <div class="columns">
+            <div class="column is-6-desktop pt-0">
+                <div class="content">
+                    <h3 id="development-services">Yazılım Geliştirme</h3>
+                    <ul>
+                        <li>Django uygulaması geliştirme</li>
+                        <li>Django uygulaması sürüm güncelleme ve göç (<em>son Python ve Django sürümüne</em>)</li>
+                        <li>Django uygulaması bakımı, izlenmesi ve canlıya alınması</li>
+                        <li>Django ile backend - mikro-servis REST API geliştirme</li>
+                        <li>Django code-review ve kodu yeniden yazma/iyileştirme (<em>refactoring</em>)</li>
+                        <li>Ruby ile statik sayfa/site üretimi</li>
+                        <li>Ruby backend - mikro-servis REST API geliştirme</li>
+                        <li>Golang ile backend - mikro-servis REST API / gRPC Server geliştirme</li>
+                        <li>3.parti API servisleri için Golang&rsquo;le kullanılabilecek ara kütüphane geliştirme (<em>wrapper</em>)</li>
+                        <li><a class="is-external-link" href="https://vuejs.org">VueJS</a> ile frontend geliştirme</li>
+                        <li><a class="is-external-link" href="https://nodejs.org/">NodeJS</a> ile mikro-servis REST API geliştirme</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column <%= right_side_bar_classes %>">
+                <div class="zoomable"><%= image_tag "clip-development.png" %></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<hr/>
+
+<section class="section has-white-background mobile-only">
+    <div class="container">
+
+        <div class="columns">
+            <div class="column is-6-desktop">
+                <div class="content">
+                    <h3 id="consultancy-services">Danışmanlık</h3>
+                    
+                    <p class="my-2 is-size-4">
+                        Bir sonraki projeniz için bizimle hemen irtibata geçebilirsiniz!
+                        Hemen <a href="hello@vbyazilim.com?subject=Hello">hello@vbyazilim.com</a> adresine
+                        bir e-posta gönderin, çevrimiçi tanışma toplantısı yapalım!
+                    </p>
+                    
+                    <p>Sağladığımız danışmanlık hizmetleri:</p>
+                    <ul>
+                        <li><strong>Python</strong>, <strong>Ruby</strong>, <strong>Golang</strong> ve <strong>JavaScript</strong> tabanlı geliştirme</li>
+                        <li>Proje tasarımı, planlama ve analizi</li>
+                        <li>Sunucu / mimari altyapı planlama</li>
+                        <li>Teknoloji planlaması</li>
+                        <li>Takım ve operasyon yönetimi</li>
+                        <li>Platform göçü</li>
+                        <li>Veri altyapısı planlaması</li>
+                        <li>Konferans / etkinlik organizasyonu ve yönetimi</li>
+                        <li>Hackathon organizasyonu ve yönetimi</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column <%= right_side_bar_classes %>">
+                <div class="zoomable">
+                    <figure class="image mb-2">
+                        <%= image_tag "clip-codefront-2014.jpg" %>
+                        <figcaption class="has-text-centered"><strong>Codefront.io 2014</strong>&rsquo;den bir resim</figcaption>
+                    </figure>
+
+                    <figure class="image">
+                        <%= image_tag "clip-ing-hackathon-2015.jpg" %>
+                        <figcaption class="has-text-centered"><strong>ING Hackathon 2015</strong>&rsquo;den bir resim</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<hr/>
+
+<section class="section has-white-background mobile-only last">
+    <div class="container">
+
+        <div class="columns">
+            <div class="column is-6-desktop">
+                <div class="content">
+                    <h3 id="training-services">Eğitim</h3>
+                    <p>
+                        Aşağıdaki konularla ilgili eğitim hizmerlerimiz bulunmaktadır (<em>* pek yakında</em>)
+                    </p>
+                    <ul>
+                        <li>Python, Ruby, Golang, <em>JavaScript *</em></li>
+                        <li>Django, Flask, <em>Ruby on Rails *</em>, <em>NodeJS *</em></li>
+                        <li><em>ReactJS *</em>, <em>VueJS *</em></li>
+                        <li>GNU Linux Komut-satırı</li>
+                        <li>Linux kurulumu ve otomasyonu</li>
+                        <li>CI/CD entegrasyonu</li>
+                        <li>Git ile revizyon kontrolü</li>
+                        <li>GitHub, Gitlab platformları</li>
+                    </ul>
+                    <p>Daha detaylı bilgiyi <a class="is-external-link" href="/tr/egitimler/">eğitimler</a> sayfamızda bulabilirsiniz.</p>
+                </div>
+            </div>
+            <div class="column <%= right_side_bar_classes %>">
+                <div class="zoomable">
+                    <figure class="image">
+                        <%= image_tag "clip-training.jpg" %>
+                        <figcaption class="has-text-centered"><strong>Web geliştirme</strong> eğitiminden bir kare</figcaption>
+                    </figure>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<% content_for :opengraph do %>
+<meta property="og:title" content="vb YAZILIM" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vbyazilim.com/tr/servisler/" />
+
+    <meta property="og:image" content="https://vbyazilim.com/public/images/opengraph.jpg" />
+    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/opengraph.jpg" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+
+    <meta property="og:description" content="vb YAZILIM - Servisler">
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content="vb YAZILIM" />
+<% end %>

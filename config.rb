@@ -22,9 +22,13 @@ set :markdown, {
   footnotes: true,
 }
 
-proxy "/blog/index.html", "/pages/articles.html", :ignore => true
-proxy "/services/index.html", "/pages/services.html"
-proxy "/training/index.html", "/pages/training.html"
+proxy '/blog/index.html', '/pages/articles.html'
+proxy '/services/index.html', '/pages/services.html'
+proxy '/training/index.html', '/pages/training.html'
+
+proxy '/tr/index.html', '/pages/tr/index.html'
+proxy '/tr/servisler/index.html', '/pages/tr/services.html'
+proxy '/tr/egitimler/index.html', '/pages/tr/training.html'
 
 activate :blog do |blog|
   blog.custom_collections = {

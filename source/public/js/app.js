@@ -17,4 +17,11 @@ $(document).ready(function() {
         localStorage.setItem("consent", true);
         $("#ga-notice").remove();
     });
+    
+    $(".copy-clipboard").on("click", function(e){
+        e.preventDefault();
+        let url = $(this).data("url");
+        navigator.clipboard.writeText(url);
+        console.log("copied", url);
+    });
 });

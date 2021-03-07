@@ -4,7 +4,6 @@ page_subtitle = current_page.metadata[:page][:title] if current_page.metadata[:p
 page_subtitle = " • #{page_subtitle}" if page_subtitle
 page_subtitle = " • Blog#{page_subtitle}" if current_page.metadata[:page][:category] && page_subtitle
 page_subtitle = "#{page_subtitle} • #{current_page.metadata[:page][:reading_time]} read" if current_page.metadata[:page][:reading_time]
-
 %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +14,7 @@ page_subtitle = "#{page_subtitle} • #{current_page.metadata[:page][:reading_ti
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
 
     <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
-    <meta name="keywords" content="training,git,python,ruby,bash,javascript,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
+    <meta name="keywords" content="training,git,python,ruby,bash,golang,javascript,reactjs,vuejs,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
     <meta name="p:domain_verify" content="37faca05c6c17ec39d217c55756a7242"/>
 
     <% if development? %>

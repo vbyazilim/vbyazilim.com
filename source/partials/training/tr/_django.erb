@@ -1,0 +1,30 @@
+<%
+courses_name = 'Django'
+course_icon = 'fas fa-code'
+
+course_anchor_id = "#{courses_name.downcase}-training"
+courses = [
+    'django-101',
+    'django-advanced',
+    'django-hacking-admin',
+    'django-tips-tricks',
+    'django-class-based-views',
+    'django-authentication',
+    'django-rest-101',
+    'django-models',
+    'django-testing',
+    'django-deployment-ws',
+]
+%>
+<section class="section has-white-background training<%= zebra %>">
+    <div class="container">
+
+        <%= partial "partials/courser-tr", :locals => { 
+            :course_anchor_id => course_anchor_id,
+            :courses_name => courses_name,
+            :course_icon => course_icon,
+            :courses => courses,
+        } %>
+
+    </div>
+</section>

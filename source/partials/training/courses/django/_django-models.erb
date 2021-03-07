@@ -1,0 +1,17 @@
+<% 
+title = "Django Models"
+anchor = "#{title.to_url}-course" 
+%>
+<h4 id="<%= anchor %>"><%= copy_to_clipboard title, anchor %></h4>
+<p class="is-size-4">
+    How exactly do you need to prepare your database model?
+</p>
+<ul>
+    <li>How to design your model relations?</li>
+    <li>Consider you queries first!</li>
+    <li>How do you measure your queries?</li>
+    <li>What is your query execution plan?</li>
+    <li><code>ManyToMany</code> or <code>ManyToMany.through</code>? What are the benefits?</li>
+    <li>What about <strong>indexes</strong> and <strong>constraints</strong>?</li>
+    <li>Which is more important? <strong>size of the db</strong> or <strong>query execution time</strong>?</li>
+</ul>

@@ -1,0 +1,18 @@
+<% 
+title = "Django Deployment"
+anchor = "#{title.to_url}-egitimi" 
+%>
+<h4 id="<%= anchor %>"><%= copy_to_clipboard title, anchor, "tr" %></h4>
+<p class="is-size-4">
+    Django uygulamanız hazır, bilgisayarınızda çalışıyor. Peki dış dünyada
+    nasıl çalışacak?
+</p>
+<ul>
+    <li>Sanal makinede (Ubuntu) sıfırdan kurulum, <strong>process management</strong></li>
+    <li><strong>Gunicorn</strong> yaklaşımı</li>
+    <li><strong>uWSGI</strong> yaklaşımı</li>
+    <li>PostgreSQL ve pooling</li>
+    <li><strong>NGINX</strong> ile reverse-proxy</li>
+    <li>Uygulamanın Docker/Docker-compose ile çalıştırılması</li>
+    <li>Kubernetes ortamı için gereken işlemler</li>
+</ul>

@@ -7,9 +7,9 @@
                 </div>
             </div>
             <div class="level-right">
-                <div class="level-item"><a title="Blog posts" href="/blog/">Blog</a></div>
-                <div class="level-item"><a title="Services" href="/services/">Services</a></div>
-                <div class="level-item"><a title="Training" href="/training/">Training</a></div>
+                <div class="level-item"><a title="Blog posts" href="/blog/"<%= is_active('/blog/') %>>Blog</a></div>
+                <div class="level-item"><a title="Training" href="/training/"<%= is_active('/training/') %>>Training</a></div>
+                <div class="level-item"><a title="Türkçe" href="/tr/">TR</a></div>
                 <div class="level-item"><a title="Atom feed" href="<%= blog.options.prefix.to_s %>/feed.xml"><span class="icon"><i class="fas fa-rss-square"></i></span></a></div>
             </div>
         </nav>

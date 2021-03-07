@@ -1,0 +1,28 @@
+<%
+courses_name = 'JavaScript'
+course_icon = 'fab fa-js'
+
+course_anchor_id = "#{courses_name.downcase}-training"
+courses = [
+    'js-ecma-2021',
+    # 'js-node-101',
+    # 'js-vue3-101',
+    # 'js-vue3-rest',
+    # 'js-node-rest-server',
+    # 'js-node-websocket',
+    # 'js-react-101',
+    # 'js-npm-pkg',
+]
+%>
+<section class="section has-white-background training<%= zebra %>">
+    <div class="container">
+
+        <%= partial "partials/courser-tr", :locals => { 
+            :course_anchor_id => course_anchor_id,
+            :courses_name => courses_name,
+            :course_icon => course_icon,
+            :courses => courses,
+        } %>
+
+    </div>
+</section>

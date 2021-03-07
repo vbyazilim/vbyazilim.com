@@ -2,28 +2,14 @@
 title: Development, Training and Consultancy
 ---
 
-<section class="section cover has-background-color-vb-lighter">
+<section class="section cover">
     <div class="container">
         <div class="columns is-vcentered">
             <div class="column">
                 <div class="content">
-                    <h1 class="has-text-light">
-                        We are software development, training and consultancy company.
+                    <h1>
+                        <span>We are <strong>software</strong> training company!</span>
                     </h1>
-                    <h2 class="has-text-light is-hidden-mobile">
-                        We provide highly skilled <strong>backend</strong> and
-                        <strong>frontend</strong> application 
-                        development, deployment and scaling services.
-                    </h2>
-                </div>
-            </div>
-            <div class="column is-hidden-mobile">
-                <div class="columns">
-                    <div class="column is-8 is-offset-4">
-                        <div class="content">
-                            <div class="zoomable"><%= image_tag "textmate-screen.png" %></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -32,146 +18,56 @@ title: Development, Training and Consultancy
 
 <section class="section main has-white-background">
     <div class="container">
-        <div class="columns">
-            <div class="column">
+        <div class="columns is-multiline is-variable is-8">
+            <div class="column is-6-desktop is-full-tablet">
                 <div class="content">
-                    <h3>Area of expertise</h3>
+                    <h1 class="title">Welcome to <strong>vb YAZILIM</strong></h1>
                     <p class="is-size-4">
-                        We are building <strong>Django</strong> and <strong>Flask</strong> applications
-                        for a long time and highly experienced in <strong>Python</strong> and
-                        <strong>Ruby</strong> ecosystem. We also provide <strong>Golang</strong>,
-                        <strong>JavaScript</strong> backend development for micro-service 
-                        architecture approach.
+                        We provide programming language courses such as
+                        <strong>Python</strong>, <strong>Ruby</strong>, <strong>Golang</strong>,
+                        <strong>JavaScript</strong>, <strong>Bash</strong> for experts and beginners.
                     </p>
-                    <div id="home-tags" class="mb-1 p-5">
-                    <%
-                    keywords = [
-                        'golang', 'python', 'ruby', 'bash', 'javascript',
-                        'django', 'flask', 'sinatra', 'node',
-                        'vuejs', 'reactjs',
-                        'api', 'micro-service', 'rest', 'grpc',
-                        'docker', 'kubernetes', 'ci/cd',
-                        'training', 'consultancy',
-                    ]
-                    keywords.each do |keyword|
-                        content_tag :span, class: 'tag is-info is-medium' do
-                            concat keyword
-                        end
-                    end
-                    %>
-                    </div>
-
-                    <h3>Providing services since <strong>2013</strong></h3>
                     <p class="is-size-5">
-                        Besides development and consultancy services, we&rsquo;ve organized many 
-                        developer conferences, hackathons in <strong>Turkey</strong> and <strong>Austria</strong>.
-                    </p>
-
-
-                    <h4>We love using and building <strong>UNIX</strong> tools!</h4>
-                    <p>
-                        <strong>Bash</strong> utilities, <strong>Ruby</strong> gems, 
-                        <strong>Python</strong> packages, <strong>Node</strong> packages and 
-                        small tools/utils written in <strong>Golang</strong>!.
-                        We use <code>git</code> for revision control to various deployment automation.
+                        Popular and well-known libraries such as
+                        <strong>Django</strong>, <strong>Flask</strong>, <strong>Fast API</strong>, <strong>Django Rest Framework</strong>,
+                        <strong>Ruby on Rails</strong>, <strong>Sinatra</strong>,
+                        <strong>Fiber</strong>, <strong>Echo</strong> and
+                        many other related dependencies and extensions.
                     </p>
                     <p>
-                        We embrace test-driven-development (<strong>TDD</strong>) philosophy in our projects.
-                        More information can be found at our 
-                        <a class="is-external-link" href="/services/">services</a> page.
+                        Deployment (<em>cloud/bare metal</em>), continues integration, 
+                        packaging, <strong>testing</strong>, 3<sup>rd</sup> party platforms, UNIX and Linux tools,
+                        revision control with <strong>git</strong> and many more...
                     </p>
-
-                </div>
-            </div>
-            <div class="column">
-                <div class="columns">
-                    <div class="column is-8 is-offset-4 has-background-white-bis">
-                        <div class="vb-clients">
-                            <div class="content">
-                                <h3>Some of our clients</h3>
+                    
+                    <p>Visit our <a class="is-external-link" title="Visit our training courses" href="/training/">training</a> page for more</p>
+                    
+                    <div class="mt-4">
+                        <p>Join our mailing list for upcoming courses and news:</p>
+                        <form action="https://vbyazilim.us17.list-manage.com/subscribe/post?u=6ca6a2723d4ffbb276487006d&amp;id=d7bf7310f7" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div class="field has-addons has-addons-centered">
+                                <p class="control has-icons-left has-icons-right is-expanded">
+                                    <input class="input" name="EMAIL" type="email" placeholder="Your email address">
+                                    <span class="icon is-small is-left"><i class="fas fa-envelope fa-xs"></i></span>
+                                </p>
+                                <p class="control">
+                                    <button class="button is-info has-text-weight-semibold" type="submit">Subscribe</button>
+                                </p>
                             </div>
-                            <ul class="vb-list">
-                                <li><strong>İstanbul Bilgi University</strong><small>Django contrator and devOps</small></li>
-                                <li><strong>Biges Güvenli Hayat Teknoloji</strong><small>Django contractor</small></li>
-                                <li><strong>Hürriyet Newspaper, Web Team</strong><small>Training: python, git, unix, devops</small></li>
-                                <li><strong>ING Bank</strong>, Turkey<small>Hackathon organization</small></li>
-                                <li><strong>Getir.com</strong><small>Hackathon organization</small></li>
-                                <li><strong>Aslanoba</strong><small>Training, devops</small></li>
-                                <li><strong>Cosmo Code</strong>, Germany<small>Django contractor</small></li>
-                                <li><strong>PayU</strong>, Turkey<small>Training: python, django</small></li>
-                                <li><strong>Demirören Teknoloji</strong><small>Consultancy</small></li>
-                                <li><strong>Promptapi</strong>, Estonia<small>Python contractor</small></li>
-                            </ul>
-                        </div>
+        
+                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6ca6a2723d4ffbb276487006d_d7bf7310f7" tabindex="-1" value=""></div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<section class="section has-white-background has-background-white-bis py-4-desktop">
-    <div class="container">
-        
-        <div class="columns">
-            <div class="column is-8-desktop is-offset-2-desktop">
-
-                <div class="content has-text-centered-desktop">
-                    <h1 class="title">News Letter</h1>
-                    <h2 class="subtitle has-text-color-vb-light">Upcoming training services, blog posts, job-hires and more...</h2>
-                </div>
-                <form action="https://vbyazilim.us17.list-manage.com/subscribe/post?u=6ca6a2723d4ffbb276487006d&amp;id=d7bf7310f7" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                    <div class="field has-addons has-addons-centered">
-                        <p class="control has-icons-left has-icons-right is-expanded">
-                            <input class="input is-medium" name="EMAIL" type="email" placeholder="Your email address">
-                            <span class="icon is-small is-left"><i class="fas fa-envelope fa-xs"></i></span>
-                        </p>
-                        <p class="control">
-                            <button class="button is-info is-medium has-text-weight-semibold" type="submit">Subscribe</button>
-                        </p>
-                    </div>
-        
-                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_6ca6a2723d4ffbb276487006d_d7bf7310f7" tabindex="-1" value=""></div>
-                </form>
-
-            </div>
-        </div>
-        
-    </div>
-</section>
-
-<section class="section has-white-background mb-3">
-    <div class="container">
-        <div class="columns">
-            <div class="column is-7-desktop">
+            <div class="column is-6-desktop is-full-tablet">
                 <%= partial 'partials/latest_articles' %>
             </div>
-            <div class="column is-4-desktop is-offset-1-desktop is-hidden-mobile">
-                <div class="content">
-                    <h1 class="title has-text-color-vb">Past Organizations</h1>
-                </div>
-                <table class="table vb-conferences">
-                    <thead>
-                        <tr><th>Event</th><th>Location</th></tr>
-                    </thead>
-                    <tr><td><strong>Kod.io</strong> 2013, Developer Conference</td><td>İstanbul</td></tr>
-                    <tr><td><strong>Kod.io</strong> 2014, Developer Conference</td><td>Linz</td></tr>
-                    <tr><td><strong>Codefront.io</strong> 2014, Frontend Development Conference</td><td>Linz</td></tr>
-                    <tr><td><strong>Failconf.io</strong> 2014, Startups</td><td>İstanbul</td></tr>
-                    <tr><td><strong>Hack-ing.io</strong> 2014, ING Bank Hackathon</td><td>İstanbul</td></tr>
-                    <tr><td><strong>jsist</strong> 2014, JavaScript Conference</td><td>İstanbul</td></tr>
-                    <tr><td><strong>ING Bank Hackathon</strong> 2015</td><td>İstanbul</td></tr>
-                    <tr><td><strong>Getir Hackathon</strong> 2015</td><td>İstanbul</td></tr>
-                    <tr><td><strong>ING Bank Hackathon</strong> 2016</td><td>İstanbul</td></tr>
-                    <tr><td><strong>Cracking the Interview</strong> 2018, with Bilgem Çakır</td><td>İstanbul</td></tr>
-                </table>
-                
-            </div>
         </div>
+        
     </div>
 </section>
-
 
 <% content_for :opengraph do %>
 <meta property="og:title" content="vb YAZILIM" />

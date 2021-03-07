@@ -1,0 +1,49 @@
+<div class="columns">
+    <div class="column pt-0">
+        <div class="content">
+            <h3 id="<%= course_anchor_id %>"><%= courses_name %> &nbsp;<span class="icon"><i class="<%= course_icon %>"></i></span></h3>
+            <p class="is-size-4">
+                <%= courses_name %> ile ilgili <strong><%= courses.length %></strong> eğitim bulunuyor.
+            </p>
+            <p class="is-size-5">
+                Eğitimlerle ilgili daha detaylı bilgi almak için bize
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=<% concat courses_name %>">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                e-posta adresinden ulaşabilirsiniz.
+            </p>
+        </div>
+    </div>
+</div>
+
+<%
+slice_count = 0
+courses.each_slice(2) do |items|
+    content_tag :div, :class => 'columns is-multiline is-variable is-8 mt-2' do
+        items.each_with_index do |course, index|
+            div_class = 'column is-6-desktop'
+            div_class = "#{div_class} mt-2-mobile" unless index % 2 == 0
+            content_tag :div, :class => div_class do
+                content_tag :div, :class => 'content' do
+                    course_sub_folder = course.split('-').first
+                    concat partial "partials/training/tr/courses/#{course_sub_folder}/#{course}"
+                end
+            end
+        end
+    end
+    slice_count += 1
+end
+%>
+
+<div class="columns">
+    <div class="column">
+        <p class="mt-1">
+            <a href="#top">Yukarı dön ↑</a> | 
+            <a href="#<%= course_anchor_id %>"><%= courses_name %> bölümüne dön ↑</a>
+        </p>
+    </div>
+</div>

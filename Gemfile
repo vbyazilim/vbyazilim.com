@@ -9,10 +9,14 @@ gem 'redcarpet', '~> 3.4'
 gem 'stringex', '~> 2.8', '>= 2.8.5'
 
 gem 'builder', '~> 3.2', '>= 3.2.3'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.12', '>= 1.12.3'
 gem 'image_size', '~> 2.0', '>= 2.0.1'
 gem 'readingtime', '~> 0.4.0'
-gem 'sanitize', '~> 5.2', '>= 5.2.1'
+gem 'sanitize', '~> 6.0'
+
+gem 'addressable', '>= 2.8.0'
+gem 'rexml', '>= 3.2.5'
+gem 'kramdown', '>= 2.3.1'
 
 group :development do
   gem 'pry', '~> 0.13.1'
