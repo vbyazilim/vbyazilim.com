@@ -7,7 +7,7 @@
     <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
 
     <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
-    <meta name="keywords" content="training,git,python,ruby,bash,javascript,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
+    <meta name="keywords" content="training,git,python,ruby,bash,golang,javascript,reactjs,vuejs,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
     <meta name="p:domain_verify" content="37faca05c6c17ec39d217c55756a7242"/>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
@@ -50,28 +50,26 @@
             </div>
             <div class="level-right">
                 <div class="level-item"><a title="Blog posts" href="/blog/">Blog</a></div>
-                <div class="level-item"><a title="Services" href="/services/">Services</a></div>
-                <div class="level-item"><a title="Training" href="/training/">Training</a></div>
+                <div class="level-item"><a title="Training" href="/training/" class="is-active">Training</a></div>
+                <div class="level-item"><a title="Türkçe" href="/tr/">Türkçe</a></div>
                 <div class="level-item"><a title="Atom feed" href="/feed.xml"><span class="icon"><i class="fas fa-rss-square"></i></span></a></div>
             </div>
         </nav>
     </div>
 </section>
 
-    <section class="hero is-vb">
-    <div class="hero-body">
-        <div class="container">
-            <div class="columns">
-                <div class="column" id="top">
-                    <h1 class="title">Training</h1>
-                    <h2 class="is-size-4 is-size-5-touch">Boost your <strong>development</strong> knowledge and <strong>coder</strong> skills!</h2>
-                    <h2 class="subtitle mt-1-desktop mt-2-mobile is-size-6-touch">
-                        Every course includes special <strong>git-repo</strong> access,
-                        <span class="break-tablet"><strong>pdf</strong> documents and <strong>video</strong> recordings of session!</span>
-                    </h2>
-                </div>
-                <div class="column is-4 is-hidden-mobile">
-                    <div class="zoomable"><img src="/public/images/clip-macbook-pro.png" class="no-shadow" alt="" /></div>
+    <section class="section training-main">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column">
+                <div class="content">
+                    <h1><span>Boost your <strong>development</strong> knowledge and <strong>coder</strong> skills!</span></h2>
+                    <h3>
+                        <span>
+                            Every course includes special <strong>git-repo</strong> access,<br />
+                            <strong>pdf documents</strong> and <strong>video</strong> recordings of session!
+                        </span>
+                    </h3>
                 </div>
             </div>
         </div>
@@ -79,15 +77,15 @@
 </section>
 
 
-<section class="section py-1 has-background-light">
+<section class="section py-1 has-background-color-vb" id="top">
     <div class="container">
         <nav class="level">
             <div class="level-left is-hidden-mobile">
-<div class="level-item is-size-7-mobile"><a href="#golang-training" title="Golang Training">Golang</a></div><div class="level-item is-size-7-mobile"><a href="#django-training" title="Django Training">Django</a></div><div class="level-item is-size-7-mobile"><a href="#python-training" title="Python Training">Python</a></div><div class="level-item is-size-7-mobile"><a href="#flask-training" title="Flask Training">Flask</a></div><div class="level-item is-size-7-mobile"><a href="#ruby-training" title="Ruby Training">Ruby</a></div><div class="level-item is-size-7-mobile"><a href="#git-training" title="Git Training">Git</a></div><div class="level-item is-size-7-mobile"><a href="#bash-training" title="Bash Training">Bash</a></div><div class="level-item is-size-7-mobile"><a href="#devops-training" title="DevOps Training">DevOps</a></div><div class="level-item is-size-7-mobile"><a href="#javascript-training" title="JavaScript Training">JavaScript</a></div>            </div>
+<div class="level-item is-size-7-mobile"><a href="#golang-training" title="Golang Training">Golang</a></div><div class="level-item is-size-7-mobile"><a href="#django-training" title="Django Training">Django</a></div><div class="level-item is-size-7-mobile"><a href="#python-training" title="Python Training">Python</a></div><div class="level-item is-size-7-mobile"><a href="#flask-training" title="Flask Training">Flask</a></div><div class="level-item is-size-7-mobile"><a href="#ruby-training" title="Ruby Training">Ruby</a></div><div class="level-item is-size-7-mobile"><a href="#git-training" title="Git Training">Git</a></div><div class="level-item is-size-7-mobile"><a href="#bash-training" title="Bash Training">Bash</a></div><div class="level-item is-size-7-mobile"><a href="#devops-training" title="DevOps Training">DevOps</a></div>            </div>
             <div class="level-left is-hidden-tablet">
                 <div class="select is-fullwidth">
                     <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-<option>Select training category</option><option value="#golang-training">Golang Training</option><option value="#django-training">Django Training</option><option value="#python-training">Python Training</option><option value="#flask-training">Flask Training</option><option value="#ruby-training">Ruby Training</option><option value="#git-training">Git Training</option><option value="#bash-training">Bash Training</option><option value="#devops-training">DevOps Training</option><option value="#javascript-training">JavaScript Training</option>                    </select>
+<option>Select training category</option><option value="#golang-training">Golang Training</option><option value="#django-training">Django Training</option><option value="#python-training">Python Training</option><option value="#flask-training">Flask Training</option><option value="#ruby-training">Ruby Training</option><option value="#git-training">Git Training</option><option value="#bash-training">Bash Training</option><option value="#devops-training">DevOps Training</option>                    </select>
                 </div>
             </div>
         </nav>
@@ -102,13 +100,26 @@
     <div class="column pt-0">
         <div class="content">
             <h3 id="golang-training">Golang &nbsp;<span class="icon"><i class="fas fa-microchip"></i></span></h3>
-            <p>There are <strong>4</strong> available Golang courses.</p>
+            <p class="is-size-4">
+                There are <strong>4</strong> available Golang courses in this section.
+            </p>
+            <p class="is-size-5">
+                Feel free to communicate about course details or questions via sending email to
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=Golang">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                address.
+            </p>
         </div>
     </div>
 </div>
 
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Golang 101</h4>
-<p>Introduction to Google&rsquo;s awesome Golang!</p>
+<div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="golang-101-course"><a title="Copy Golang 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#golang-101-course">Golang 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">Introduction to Google&rsquo;s awesome Golang!</p>
 <ul>
     <li>Anatomy of a go program: <code>main.go</code></li>
     <li>Basics of coding conventions and standards</li>
@@ -130,8 +141,10 @@
     <li>Standard library: <code>io</code> package examples</li>
     <li>Standard library: <code>net/http</code> package examples</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Golang 102</h4>
-<p>We are going to focus on more complicated topics for building go apps.</p>
+
+
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="golang-102-course"><a title="Copy Golang 102 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#golang-102-course">Golang 102<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">We are going to focus on more complicated topics for building go apps.</p>
 <ul>
     <li>What is go tool chain ?</li>
     <li>Linting, checking and vetting go code</li>
@@ -151,8 +164,12 @@
 <ul>
     <li>We&rsquo;ll build basic command-line http client for release!</li>
 </ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Building Rest API with Golang</h4>
-<p>Are you ready to build your first API with golang&rsquo;s standard library? No external packages just pure built-in functions and libraries!</p>
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="building-rest-api-with-golang-course"><a title="Copy Building Rest API with Golang url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#building-rest-api-with-golang-course">Building Rest API with Golang<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    Are you ready to build your first API with golang&rsquo;s standard
+    library? No external packages just pure built-in functions and libraries!
+</p>
+
 <ul>
     <li>How to handle URLs ?</li>
     <li>What is middleware ?</li>
@@ -166,8 +183,13 @@
 <ul>
     <li>We&rsquo;ll build a basic blog backend as REST API</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Hands on gRPC and Protocol Buffers 101</h4>
-<p>Are you ready to dive right in to Google&rsquo;s other gem ? Protocol buffers aka <strong>protobuf</strong> is the fastest and solid way of microservice communication.</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="hands-on-grpc-and-protocol-buffers-101-course"><a title="Copy Hands on gRPC and Protocol Buffers 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#hands-on-grpc-and-protocol-buffers-101-course">Hands on gRPC and Protocol Buffers 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    Are you ready to dive right in to Google&rsquo;s other gem ? Protocol
+    buffers aka <strong>protobuf</strong> is the fastest and solid way of
+    microservice communication.
+</p>
+
 <ul>
     <li>Whats is protobuf ?</li>
     <li>Protocol naming conventions and coding style</li>
@@ -201,13 +223,29 @@
     <div class="column pt-0">
         <div class="content">
             <h3 id="django-training">Django &nbsp;<span class="icon"><i class="fas fa-code"></i></span></h3>
-            <p>There are <strong>8</strong> available Django courses.</p>
+            <p class="is-size-4">
+                There are <strong>10</strong> available Django courses in this section.
+            </p>
+            <p class="is-size-5">
+                Feel free to communicate about course details or questions via sending email to
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=Django">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                address.
+            </p>
         </div>
     </div>
 </div>
 
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Django 101</h4>
-<p>You can build web apps super fast with Django web application framework. Also batteries are included!</p>
+<div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="django-101-course"><a title="Copy Django 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#django-101-course">Django 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    You can build/develop web applications super fast with Django web
+    application framework. Also batteries are included!
+</p>
 <ul>
     <li>Setting up Django development environment</li>
     <li>What is <strong>Django Project</strong> ?</li>
@@ -236,8 +274,11 @@
     <li>We&rsquo;ll build a small app like GitHub&rsquo;s <a class="is-external-link" href="https://gist.github.com/">Gist</a></li>
     <li>We&rsquo;ll integrate markdown parser, syntax highlighter and more...</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Advanced Django</h4>
-<p>We&rsquo;ll dive in to more advanced topics, reveal the hidden gems of Django</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="advanced-django-course"><a title="Copy Advanced Django url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#advanced-django-course">Advanced Django<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    We&rsquo;ll dive in to more advanced topics, reveal the hidden gems of
+    Django...
+</p>
 <ul>
     <li>Class-based views in detail</li>
     <li>Multi-table inheritance</li>
@@ -265,14 +306,14 @@
     <li>Caching... What are options ?</li>
     <li>Advanced logging, custom loggers, formatters etc...</li>
 </ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Hacking the Django Admin</h4>
-<p>
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="hacking-the-django-admin-course"><a title="Copy Hacking the Django Admin url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#hacking-the-django-admin-course">Hacking the Django Admin<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
     Django shipped with awesome Admin features. Authors always mention that
     &ldquo;Admin site is for the developers only, not for clients!&rdquo;
     Let&rsquo;s change that!
 </p>
 <ul>
-    <li>Django 2.2 ships with awesome features: Autocompletion for FK and M2M</li>
+    <li>Latest features of Django Admin!</li>
     <li>Custom autocomplete views</li>
     <li>Dive into <code>django.contrib.admin</code></li>
     <li>Let&rsquo;s build our custom <code>BaseModelAdmin</code></li>
@@ -289,29 +330,33 @@
     <li>Using built-in admin widgets for good!</li>
     <li>Injecting JavaScript flavor to Admin</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Django Tips and Tricks</h4>
-<p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="django-tips-and-tricks-course"><a title="Copy Django Tips and Tricks url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#django-tips-and-tricks-course">Django Tips and Tricks<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
     We&rsquo;ll cover performance issues, <strong>DO</strong>s and <strong>DON&rsquo;T</strong>s.
     Also, best practices from well-known Djangonauts
 </p>
 <ul>
+    <li>Better project structure! Isolate environments: test, development, production etc...</li>
     <li>Fat Model + Skinny Controller!</li>
     <li>ORM performance tips + new functions such as <code>Prefetch()</code> and more...</li>
     <li>Curated list of model tips, view tips and ORM tips</li>
     <li>Using transactions, preventing race-conditions</li>
     <li>Examples of built-in Query Expressions: <code>F()</code>, <code>Func()</code>, <code>Value()</code>, custom Aggregate functions and more...</li>
+    <li>What is <code>Subquery</code> and <code>annotation()</code></li>
     <li>Creating custom lookups: <code>field__my_lookup=1</code></li>
     <li>What bulk operations are ?</li>
     <li>Who needs Elastic Search if you have <strong>PostgreSQL</strong> ? Search Vectors and more...</li>
     <li>Migration optimization. Always check what Django produced!</li>
+    <li>What about PostgreSQL extensions? How to enable them?</li>
+    <li>Special search operations</li>
+    <li>Faster and better tests!</li>
     <li>All about Django Forms, hacking admin forms</li>
 </ul>
-<h5 class="mt-2-desktop">Bonus</h5>
-<ul>
-    <li>Building apps faster then ever: <a class="is-external-link" href="https://github.com/vigo/django2-project-template">Django 2 Project Template</a></li>
-</ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Django Class-Based Views</h4>
-<p>This is introductory level of Class-Based View usage in a Django application.</p>
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="django-class-based-views-course"><a title="Copy Django Class-Based Views url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#django-class-based-views-course">Django Class-Based Views<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    This is introductory level of Class-Based View usage in a Django
+    application.
+</p>
 <ul>
     <li>Understanding Mixins and MRO</li>
     <li>Introduction to Generic Views</li>
@@ -321,17 +366,21 @@
     <li>Data validation</li>
     <li>Ajax and Class-Based Views</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Django and Authentication</h4>
-<p>Sometimes you need to authenticate users via different service backend such as <strong>LDAP</strong> or any custom service.</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="django-and-authentication-course"><a title="Copy Django and Authentication url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#django-and-authentication-course">Django and Authentication<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    Sometimes you need to authenticate users via different service backend
+    such as <strong>LDAP</strong> or any custom service.
+</p>
 <ul>
     <li>Built-in authentication mechanisms</li>
     <li>Writing custom authentication backend</li>
-    <li>What is Remote User ?</li>
+    <li>What is Remote User?</li>
     <li>Accessing 3<sup>rd</sup> party providers such as LDAP</li>
-    <li>What about social auth ? Twitter, Facebook, GitHub etc ?</li>
+    <li>What about social auth? Twitter, Facebook, GitHub etc?</li>
+    <li>What about Token authentication? </li>
 </ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Serving robust API with Django Rest Framework</h4>
-<p>
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="serving-robust-api-with-django-rest-framework-course"><a title="Copy Serving robust API with Django Rest Framework url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#serving-robust-api-with-django-rest-framework-course">Serving robust API with Django Rest Framework<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
     We&rsquo;ve already built the application. All we 
     need is <strong>DRF</strong> for API service!</p>
 <ul>
@@ -347,8 +396,8 @@
     <li>Token authentication</li>
     <li>API load balancing, throttling, rate limits and more...</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Django Deployment Workshop</h4>
-<p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="django-deployment-workshop-course"><a title="Copy Django Deployment Workshop url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#django-deployment-workshop-course">Django Deployment Workshop<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
     After watching <a class="is-external-link" href="https://jacobian.org">Jacob Kaplan-Moss</a>&rsquo; <a class="is-external-link" href="https://learning.oreilly.com/videos/django-deployment-workshop/9781449396442">Django Deployment Workshop</a> video from 
     O&rsquo;Reilly OSCON Conference, <strong>June 2010</strong>, We&rsquo;ve inspired to do soo!
 </p>
@@ -361,8 +410,35 @@
     <li>PostgreSQL pooling</li>
     <li>Load balancing with <strong>NGINX</strong></li>
     <li>Distributed Django application infrastructure</li>
+    <li>Dockerize you Django app!</li>
+    <li>Run your Django app over cloud services</li>
 </ul>
-</div></div></div>
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="django-models-course"><a title="Copy Django Models url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#django-models-course">Django Models<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    How exactly do you need to prepare your database model?
+</p>
+<ul>
+    <li>How to design your model relations?</li>
+    <li>Consider you queries first!</li>
+    <li>How do you measure your queries?</li>
+    <li>What is your query execution plan?</li>
+    <li><code>ManyToMany</code> or <code>ManyToMany.through</code>? What are the benefits?</li>
+    <li>What about <strong>indexes</strong> and <strong>constraints</strong>?</li>
+    <li>Which is more important? <strong>size of the db</strong> or <strong>query execution time</strong>?</li>
+</ul></div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="django-testing-course"><a title="Copy Django Testing url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#django-testing-course">Django Testing<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    <strong>T</strong>est <strong>D</strong>riven <strong>D</strong>evelopment
+    is the key of building better and rock solid applications!
+</p>
+<ul>
+    <li>How to design your tests?</li>
+    <li>What external libraries should you use?</li>
+    <li>How to build testing pipeline?</li>
+    <li>What to test? what to mock?</li>
+    <li>Unit tests or integration tests?</li>
+    <li>How to maintain tests?</li>
+    <li>How to speed up your tests?</li>
+</ul></div></div></div>
 <div class="columns">
     <div class="column">
         <p class="mt-1">
@@ -382,15 +458,35 @@
     <div class="column pt-0">
         <div class="content">
             <h3 id="python-training">Python &nbsp;<span class="icon"><i class="fab fa-python"></i></span></h3>
-            <p>There are <strong>6</strong> available Python courses.</p>
+            <p class="is-size-4">
+                There are <strong>6</strong> available Python courses in this section.
+            </p>
+            <p class="is-size-5">
+                Feel free to communicate about course details or questions via sending email to
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=Python">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                address.
+            </p>
         </div>
     </div>
 </div>
 
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Python 101</h4>
-<p>
+<div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="python-101-course"><a title="Copy Python 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#python-101-course">Python 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<div class="box">
+    <div class="video-responsive">
+        <iframe src="https://player.vimeo.com/video/523397052?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Python 101.mp4"></iframe>
+    </div>
+</div>
+
+<p class="is-size-4">
     Introduction to Python programming language. We&rsquo;ll cover
-    latest <strong>Python</strong> version <code>3.7+</code>
+    latest <strong>Python</strong> version <code>3.9+</code>
 </p>
 <ul>
     <li>Coding format and standards</li>
@@ -409,8 +505,8 @@
     <li>Control statements and conditions</li>
     <li>Loops, Iterators and Iterable elements</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Python 102</h4>
-<p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="python-102-course"><a title="Copy Python 102 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#python-102-course">Python 102<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
     Entering the magical world of Object Oriented Programming aka <strong>OOP</strong> in Python!
     Are you ready for <code>Classes</code>, <code>Inheritance</code> and more?
 </p>
@@ -434,8 +530,10 @@
     <li>We&rsquo;ll build TODO command-line app</li>
     <li>We&rsquo;ll pack our TODO app as Python package!</li>
 </ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Testing Python App</h4>
-<p>We&rsquo;ll discover built-in testing tools shipped with <strong>Python</strong>!</p>
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="testing-python-app-course"><a title="Copy Testing Python App url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#testing-python-app-course">Testing Python App<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    We&rsquo;ll discover built-in testing tools shipped with <strong>Python</strong>!
+</p>
 <ul>
     <li>Basics of testing, idea behind testing philosophy</li>
     <li>What parts of the code should we test ?</li>
@@ -444,25 +542,36 @@
     <li>What is <code>assertion</code> ?</li>
     <li>Overview: 3<sup>rd</sup> party testing libraries</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Distributing Python Packages</h4>
-<p>Python allows us to build and ship re-usable apps. Let&rsquo;s see that!</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="distributing-python-packages-course"><a title="Copy Distributing Python Packages url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#distributing-python-packages-course">Distributing Python Packages<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    Python allows us to build and ship re-usable apps. Let&rsquo;s see that!
+</p>
 <ul>
     <li>How to build a standard Python package ?</li>
     <li>Managing package dependencies</li>
     <li>What are the most common mistakes ?</li>
     <li>What is <strong>PyPI</strong> ?</li>
     <li>Maintaining a package on PyPI: new releases, updates etc...</li>
+    <li>How to distributor your package privately?</li>
 </ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Python Version Management</h4>
-<p>There are lot&rsquo;s of Python versions around. How can we organize project based Python version?</p>
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="python-version-management-course"><a title="Copy Python Version Management url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#python-version-management-course">Python Version Management<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    There are lot&rsquo;s of Python versions around. How can we organize
+    project based Python version?
+</p>
 <ul>
     <li>Understanding the <code>PYTHONPATH</code></li>
     <li>Introduction to <code>pyenv</code></li>
     <li>Installing <code>pyenv</code> to macOS, GNU Linux and Windows</li>
     <li>Managing virtual environments with <code>pyenv</code></li>
+    <li>Other version management tools?</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Python Development Environment</h4>
-<p>You need some tools to write better Python code. What are those?</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="python-development-environment-course"><a title="Copy Python Development Environment url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#python-development-environment-course">Python Development Environment<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    You need some tools to write better Python code. What are those?
+</p>
 <ul>
     <li>Installing Python with version management</li>
     <li>Choosing a Text Editor IDE ?</li>
@@ -490,13 +599,27 @@
     <div class="column pt-0">
         <div class="content">
             <h3 id="flask-training">Flask &nbsp;<span class="icon"><i class="fas fa-flask"></i></span></h3>
-            <p>There are <strong>2</strong> available Flask courses.</p>
+            <p class="is-size-4">
+                There are <strong>2</strong> available Flask courses in this section.
+            </p>
+            <p class="is-size-5">
+                Feel free to communicate about course details or questions via sending email to
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=Flask">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                address.
+            </p>
         </div>
     </div>
 </div>
 
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Flask 101</h4>
-<p>
+<div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="flask-101-course"><a title="Copy Flask 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#flask-101-course">Flask 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
     Did you know that the Flask was born from April Fools joke in 2010?
     It&rsquo;s great for building simpler web apps and prototypes on Python.
 </p>
@@ -513,16 +636,18 @@
     <li>How <code>flash</code> messages work?</li>
     <li>How to deploy Flask app ?</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Basic API Design with Flask</h4>
-<p>
-    We are going to build and deploy a web <strong>RESTful</strong> API aka a micro-service from scratch!
-    Let&rsquo;s build a retro computer game database!
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="basic-api-design-with-flask-course"><a title="Copy Basic API Design with Flask url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#basic-api-design-with-flask-course">Basic API Design with Flask<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    We are going to build and deploy a web <strong>RESTful</strong> API aka a
+    micro-service from scratch! Let&rsquo;s build a retro computer game
+    database!
 </p>
 <ul>
-    <li>Quick introduction to REST API design philosophy</li>
+    <li>Quick introduction to <strong>REST API</strong> design philosophy</li>
     <li>Decide and create data models</li>
-    <li>Decide and design REST endpoint URLS aka resources</li>
-    <li>What is ORM? Introduction to SQLAlchemy</li>
+    <li>Decide and design REST endpoint URLS aka <strong>resources</strong></li>
+    <li>What is ORM? Introduction to <strong>SQLAlchemy</strong></li>
     <li>Fixtures and migration basics</li>
     <li>Establish CRUD functionality for initial resources</li>
     <li>Introduction to <code>Blueprint</code> and <code>Api</code></li>
@@ -546,21 +671,42 @@
 </section>
 <section class="section has-white-background training">
     <div class="container">
-
+        
         <div class="columns">
     <div class="column pt-0">
         <div class="content">
             <h3 id="ruby-training">Ruby &nbsp;<span class="icon"><i class="fas fa-code"></i></span></h3>
-            <p>There are <strong>8</strong> available Ruby courses.</p>
+            <p class="is-size-4">
+                There are <strong>8</strong> available Ruby courses in this section.
+            </p>
+            <p class="is-size-5">
+                Feel free to communicate about course details or questions via sending email to
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=Ruby">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                address.
+            </p>
         </div>
     </div>
 </div>
 
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Ruby 101</h4>
-<p>
+<div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="ruby-101-course"><a title="Copy Ruby 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#ruby-101-course">Ruby 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<div class="box">
+    <div class="video-responsive">
+        <iframe src="https://player.vimeo.com/video/523391391?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Ruby 101.mp4"></iframe>
+    </div>
+</div>
+
+<p class="is-size-4">
     Ruby has the easiest learning curve comparing to other programing languages.
     Let&rsquo;s dive right in to easy and elegant world of <strong>Ruby</strong>!
 </p>
+
 <ul>
     <li>How Ruby works ?</li>
     <li>Ruby syntax</li>
@@ -576,25 +722,8 @@
     <li>Quicklook: File system, IO and Kernel module</li>
     <li>Basics of Rubygems</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Ruby and TDD 101</h4>
-<p>
-    Ruby is a test-first programming language. Let&rsquo;s
-    take a look at built-in testing tools.
-</p>
-<ul>
-    <li>Introduction to testing, importance</li>
-    <li>What are built-in test helpers and tools ?</li>
-    <li>What are testing kinds ?</li>
-    <li>Mocking, stubbing, test doubles notions</li>
-    <li>What is <strong>Minitest</strong> ?</li>
-    <li>Quicklook: What is <strong>Rspec</strong> ?</li>
-</ul>
-<h5 class="mt-2-desktop">Bonus</h5>
-<ul>
-    <li>We&rsquo;ll build command-line bookmark saving tool</li>
-</ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Sinatra 101</h4>
-<p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="sinatra-101-course"><a title="Copy Sinatra 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#sinatra-101-course">Sinatra 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
     You can build ruby apps in minutes. From basic apps to complex database apps
     <strong>Sinatra</strong> is the most famous light-weight web framework!
 </p>
@@ -616,32 +745,53 @@
     <li>One file app or structured app ?</li>
     <li>Deploy basic Sinatra app to Heroku</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Sinatra and Active Record</h4>
-<p>
-Active Record is the most common/famous object relational 
-mapping library aka <strong>ORM</strong> for <strong>Ruby on Rails</strong>.
-We can use it with <strong>Sinatra</strong> too!
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="ruby-and-tdd-101-course"><a title="Copy Ruby and TDD 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#ruby-and-tdd-101-course">Ruby and TDD 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    Ruby is a test-first programming language. Let&rsquo;s
+    take a look at built-in testing tools.
 </p>
 <ul>
-<li>Basics of ORM: What is It ?</li>
-<li>Introduction to Active Record, conventions and rules</li>
-<li>What is Schema ?</li>
-<li>What is Model ?</li>
-<li>What is Migration ?</li>
-<li>Data validation</li>
-<li>Prepare your app for integration</li>
-<li>Active Record related Rake tasks</li>
-<li>Fat Model - Skinny Controller</li>
-<li>CRUD with Active Record</li>
-<li>Querying database</li>
-<li>Model relations, building and querying related objects</li>
+    <li>Introduction to testing, importance</li>
+    <li>What are built-in test helpers and tools ?</li>
+    <li>What are testing kinds ?</li>
+    <li>Mocking, stubbing, test doubles notions</li>
+    <li>What is <strong>Minitest</strong> ?</li>
+    <li>Quicklook: What is <strong>Rspec</strong> ?</li>
 </ul>
 <h5 class="mt-2-desktop">Bonus</h5>
 <ul>
-<li>We&rsquo;ll build a blog application and deploy It to Heroku!</li>
+    <li>We&rsquo;ll build command-line bookmark saving tool</li>
 </ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Building Basic Rack Application</h4>
-<p>Build Ruby web apps with Rack!</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="sinatra-and-active-record-course"><a title="Copy Sinatra and Active Record url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#sinatra-and-active-record-course">Sinatra and Active Record<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    Active Record is the most common/famous object relational 
+    mapping library aka <strong>ORM</strong> for <strong>Ruby on Rails</strong>.
+    We can use it with <strong>Sinatra</strong> too!
+</p>
+<ul>
+    <li>Basics of ORM: What is It ?</li>
+    <li>Introduction to Active Record, conventions and rules</li>
+    <li>What is Schema ?</li>
+    <li>What is Model ?</li>
+    <li>What is Migration ?</li>
+    <li>Data validation</li>
+    <li>Prepare your app for integration</li>
+    <li>Active Record related Rake tasks</li>
+    <li>Fat Model - Skinny Controller</li>
+    <li>CRUD with Active Record</li>
+    <li>Querying database</li>
+    <li>Model relations, building and querying related objects</li>
+</ul>
+<h5 class="mt-2-desktop">Bonus</h5>
+<ul>
+    <li>We&rsquo;ll build a blog application and deploy It to Heroku!</li>
+</ul>
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="building-basic-rack-application-course"><a title="Copy Building Basic Rack Application url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#building-basic-rack-application-course">Building Basic Rack Application<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    Build Ruby web apps with Rack!
+</p>
 <ul>
     <li>Understanding http</li>
     <li>What is Rack? How It works ?</li>
@@ -656,8 +806,9 @@ We can use it with <strong>Sinatra</strong> too!
 <ul>
     <li>We&rsquo;re going to build a <strong>Guestbook</strong> app</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Making Static sites with Middleman</h4>
-<p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="making-static-sites-with-middleman-course"><a title="Copy Making Static sites with Middleman url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#making-static-sites-with-middleman-course">Making Static sites with Middleman<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
     At the end of the day, all we need is a bunch of html files to run a website right ?
     Let&rsquo;s build It!
 </p>
@@ -676,12 +827,13 @@ We can use it with <strong>Sinatra</strong> too!
 <ul>
     <li>We&rsquo;re going to build an e-commerce application</li>
 </ul>
-</div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>How to make gem file ?</h4>
-<p>Ruby gem is a package contains tools, helpers, sometimes frame-works. 
+</div></div></div><div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="how-to-make-gem-file-course"><a title="Copy How to make gem file? url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#how-to-make-gem-file-course">How to make gem file?<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    Ruby gem is a package contains tools, helpers, sometimes frame-works. 
     Ship and deploy re-usable code with Rubygems!
 </p>
 <ul>
-    <li>What is Bundler ?</li>
+    <li>What is Bundler?</li>
     <li>Create gem template with Bundler</li>
     <li>Managing manifest files, revisions, releases</li>
     <li>Gem development environment and dependencies</li>
@@ -692,8 +844,8 @@ We can use it with <strong>Sinatra</strong> too!
 <ul>
     <li>We&rsquo;re going to build GitHub Issue tracker!</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>It&rsquo;s not a <code>Makefile</code> It&rsquo;s <code>Rakefile</code></h4>
-<p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="its-not-a-makefile-its-rakefile-course"><a title="Copy It&rsquo;s not a <code>Makefile</code> It&rsquo;s <code>Rakefile</code> url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#its-not-a-makefile-its-rakefile-course">It&rsquo;s not a <code>Makefile</code> It&rsquo;s <code>Rakefile</code><span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
     You can automate your daily tasks, common operations as-easy-as writing a Ruby code!
     Welcome to wonderful world of <code>Rakefile</code>
 </p>
@@ -731,13 +883,29 @@ We can use it with <strong>Sinatra</strong> too!
     <div class="column pt-0">
         <div class="content">
             <h3 id="git-training">Git &nbsp;<span class="icon"><i class="fas fa-code-branch"></i></span></h3>
-            <p>There are <strong>2</strong> available Git courses.</p>
+            <p class="is-size-4">
+                There are <strong>2</strong> available Git courses in this section.
+            </p>
+            <p class="is-size-5">
+                Feel free to communicate about course details or questions via sending email to
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=Git">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                address.
+            </p>
         </div>
     </div>
 </div>
 
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Git 101: Git for everyone!</h4>
-<p>Day to day basic usage of <code>git</code> from command-line. Yes you can!</p>
+<div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="git-101-git-for-everyone-course"><a title="Copy Git 101: Git for everyone! url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#git-101-git-for-everyone-course">Git 101: Git for everyone!<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    Day to day basic usage of <code>git</code> from command-line!
+</p>
 <ul>
     <li>How to install <code>git</code> to most common operating systems</li>
     <li>What is <code>git</code> configuration ?</li>
@@ -761,8 +929,10 @@ We can use it with <strong>Sinatra</strong> too!
 <ul>
     <li>Git cheat-sheet</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Advanced Git</h4>
-<p>We&rsquo;ll dive deep in to amazing world of <code>git</code>.</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="advanced-git-course"><a title="Copy Advanced Git url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#advanced-git-course">Advanced Git<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    We&rsquo;ll dive deep in to amazing world of <code>git</code>.
+</p>
 <ul>
     <li>Intermediate inspection of git config file</li>
     <li>How to compress files</li>
@@ -809,13 +979,30 @@ We can use it with <strong>Sinatra</strong> too!
     <div class="column pt-0">
         <div class="content">
             <h3 id="bash-training">Bash &nbsp;<span class="icon"><i class="fas fa-terminal"></i></span></h3>
-            <p>There are <strong>2</strong> available Bash courses.</p>
+            <p class="is-size-4">
+                There are <strong>2</strong> available Bash courses in this section.
+            </p>
+            <p class="is-size-5">
+                Feel free to communicate about course details or questions via sending email to
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=Bash">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                address.
+            </p>
         </div>
     </div>
 </div>
 
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Bash 101</h4>
-<p>Bash is an open-door to Kernel! Every *NIX bases operating systems have a shell entrance!</p>
+<div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="bash-101-course"><a title="Copy Bash 101 url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#bash-101-course">Bash 101<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    Bash is an open-door to Kernel! Every *NIX bases operating systems have a
+    shell entrance!
+</p>
 <ul>
     <li>Variables and environment</li>
     <li>Built-in commands</li>
@@ -836,8 +1023,12 @@ We can use it with <strong>Sinatra</strong> too!
     <li>Anatomy of a Bash completion</li>
     <li>I18N and localization examples</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Building Command-Line Apps with Bash</h4>
-<p>You can build almost anything with Bash. From small tools to complicated apps, even a web server!</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="building-command-line-apps-with-bash-course"><a title="Copy Building Command-Line Apps with Bash url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#building-command-line-apps-with-bash-course">Building Command-Line Apps with Bash<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    You can build almost anything with Bash. From small tools to complicated
+    apps, even a web server!
+</p>
 <ul>
     <li>Parsing command-line arguments</li>
     <li>Errors and exceptions in Bash way</li>
@@ -869,13 +1060,29 @@ We can use it with <strong>Sinatra</strong> too!
     <div class="column pt-0">
         <div class="content">
             <h3 id="devops-training">DevOps &nbsp;<span class="icon"><i class="fas fa-cogs"></i></span></h3>
-            <p>There are <strong>2</strong> available DevOps courses.</p>
+            <p class="is-size-4">
+                There are <strong>2</strong> available DevOps courses in this section.
+            </p>
+            <p class="is-size-5">
+                Feel free to communicate about course details or questions via sending email to
+                <script type="text/javascript">
+                    document.write('<a href="mailto:');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('?subject=DevOps">');
+                    document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                    document.write('</a>');
+                </script>
+                address.
+            </p>
         </div>
     </div>
 </div>
 
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>Introduction to Docker</h4>
-<p>Let&rsquo;s build and ship our apps with <a class="is-external-link" href="https://docker.com">Docker</a></p>
+<div class="columns is-multiline is-variable is-8 mt-2"><div class="column is-6-desktop"><div class="content"><h4 id="introduction-to-docker-course"><a title="Copy Introduction to Docker url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#introduction-to-docker-course">Introduction to Docker<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+<p class="is-size-4">
+    Let&rsquo;s build and ship our apps with 
+    <a class="is-external-link" href="https://docker.com">Docker</a>
+</p>
 <ul>
     <li>What is Docker engine ?</li>
     <li>Docker images vs containers</li>
@@ -888,8 +1095,12 @@ We can use it with <strong>Sinatra</strong> too!
     <li>Lets dockerize our Python app</li>
     <li>Lets dockerize our Django app</li>
 </ul>
-</div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Make your own Vagrant Box</h4>
-<p>Sometimes you need your own box to play with. Now It&rsquo;s time to build your vagrant os box!</p>
+</div></div><div class="column is-6-desktop mt-2-mobile"><div class="content"><h4 id="make-your-own-vagrant-box-course"><a title="Copy Make your own Vagrant Box url to clipboard for share" class="copy-clipboard" data-url="https://vbyazilim.com/training/#make-your-own-vagrant-box-course">Make your own Vagrant Box<span class="icon"><i class="fas fa-clipboard"></i></span></a></h4>
+
+<p class="is-size-4">
+    Sometimes you need your own box to play with. Now It&rsquo;s time to build
+    your vagrant os box!
+</p>
 <ul>
     <li>Setting up VirtualBox provider</li>
     <li>Configuring VirtualBox in detail</li>
@@ -910,39 +1121,6 @@ We can use it with <strong>Sinatra</strong> too!
         <p class="mt-1">
             <a href="#top">Go back to top ↑</a> | 
             <a href="#devops-training">Go back to DevOps ↑</a>
-        </p>
-    </div>
-</div>
-
-
-    </div>
-</section>
-<section class="section has-white-background training">
-    <div class="container">
-
-        <div class="columns">
-    <div class="column pt-0">
-        <div class="content">
-            <h3 id="javascript-training">JavaScript &nbsp;<span class="icon"><i class="fab fa-js"></i></span></h3>
-            <p>There are <strong>8</strong> available JavaScript courses.</p>
-        </div>
-    </div>
-</div>
-
-<div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>ECMA Script 2020</h4>
-<p>Coming soon...</p></div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>NodeJS 101</h4>
-<p>Coming soon...</p></div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>VueJS 3 - 101</h4>
-<p>Coming soon...</p></div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>REST API client with VueJS 3</h4>
-<p>Coming soon...</p></div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>REST API Server with NodeJS</h4>
-<p>Coming soon...</p></div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Websocket and NodeJS</h4>
-<p>Coming soon...</p></div></div></div><div class="columns mt-2"><div class="column is-5-desktop"><div class="content"><h4>ReactJS 101</h4>
-<p>Coming soon...</p></div></div><div class="column is-5-desktop is-offset-2-desktop mt-2-mobile"><div class="content"><h4>Create package for NPM</h4>
-<p>Coming soon...</p></div></div></div>
-<div class="columns">
-    <div class="column">
-        <p class="mt-1">
-            <a href="#top">Go back to top ↑</a> | 
-            <a href="#javascript-training">Go back to JavaScript ↑</a>
         </p>
     </div>
 </div>
@@ -972,7 +1150,14 @@ We can use it with <strong>Sinatra</strong> too!
                         34363 - Şişli / İstanbul<br/>
                         Türkiye<br/><br/>
                         <a href="tel:+905333774300"><span class="icon"><i class="fas fa-phone-square"></i></span>+90-(0)533-3774300</a><br/>
-                        <a href="mailto:hello@vbyazilim.com"><span class="icon"><i class="fas fa-envelope-square"></i></span>hello@vbyazilim.com</a>
+                        <script type="text/javascript">
+                            document.write('<a href="mailto:');
+                            document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                            document.write('?subject=Hello">');
+                            document.write('<span class="icon"><i class="fas fa-envelope-square"></i></span>');
+                            document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                            document.write('</a>');
+                        </script>
                     </address>
                 </div>
             </div>
@@ -993,6 +1178,11 @@ We can use it with <strong>Sinatra</strong> too!
                             <i class="fab fa-linkedin fa-2x"></i>
                         </span>
                     </a>
+                    <a target="_blank" href="https://vimeo.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-vimeo fa-2x"></i>
+                        </span>
+                    </a>
                 </p>
                 <p class="mt-1">
                     made with <a class="is-external-link" href="https://middlemanapp.com">Middleman</a><br/>
@@ -1001,11 +1191,13 @@ We can use it with <strong>Sinatra</strong> too!
                     <a class="is-external-link" href="https://sass-lang.com">Sass</a><br/>
                     
                     <a class="is-external-link" href="https://bulma.io">Bulma</a> 
-                    <a class="is-external-link" href="https://fontawesome.com">Font Awesome</a><br/>
+                    <a class="is-external-link" href="https://fontawesome.com">Font Awesome</a>
+                    <a class="is-external-link" href="https://simpleicons.org">Simple Icons</a><br/>
 
                     <a class="is-external-link" href="https://www.w3.org/TR/html/">HTML</a> 
                     <a class="is-external-link" href="https://www.w3.org/Style/CSS/">CSS</a> 
                     <a class="is-external-link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> 
+                    <a class="is-external-link" href="https://unsplash.com">Unsplash</a> 
                 </p>
                 <p class="mt-1">hosted at <a class="is-external-link" href="https://pages.github.com">GitHub Pages</a></p>
             </div>
