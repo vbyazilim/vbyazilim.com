@@ -38,4 +38,8 @@ module CustomHelpers
     out << '</a>'
     out.join
   end
+  
+  def custom_strip_tags(text)
+    Sanitize.fragment(text, elements: ['code', 'strong']).chomp
+  end
 end

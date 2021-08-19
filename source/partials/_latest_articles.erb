@@ -23,7 +23,7 @@ last_posts_amout = 3
                 <% end %>
             </time>
             <div class="is-size-5-desktop mb-2 summary">
-                <p><%= link_to strip_tags(article.summary).chomp, article, title: 'Click to read detail' %></p>
+                <p><%= link_to custom_strip_tags(article.summary), article, title: 'Click to read detail' %></p>
             </div>
         </li>
     <% end %>
