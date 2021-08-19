@@ -5,10 +5,222 @@
   <id>https://vbyazilim.com/</id>
   <link href="https://vbyazilim.com/"/>
   <link href="https://vbyazilim.com/feed.xml" rel="self"/>
-  <updated>2021-02-04T19:44:00+03:00</updated>
+  <updated>2021-08-19T11:58:00+03:00</updated>
   <author>
     <name>Uğur Özyılmazel</name>
   </author>
+  <entry>
+    <title>fancy console logger + inspector</title>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2021/08/19/fancy-console-logger-plus-inspector/"/>
+    <id>https://vbyazilim.com/blog/2021/08/19/fancy-console-logger-plus-inspector/</id>
+    <published>2021-08-19T11:58:00+03:00</published>
+    <updated>2021-08-19T12:37:16+03:00</updated>
+    <author>
+      <name>Uğur Özyılmazel</name>
+    </author>
+    <summary type="html">&lt;p&gt;How do you &lt;strong&gt;inspect&lt;/strong&gt; an object properties in Python? Do you have any better options
+than &lt;code&gt;dir()&lt;/code&gt;? Yes &lt;strong&gt;you&lt;/strong&gt; do!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;How do you &lt;strong&gt;inspect&lt;/strong&gt; an object properties in Python? Do you have any better options
+than &lt;code&gt;dir()&lt;/code&gt;? Yes &lt;strong&gt;you&lt;/strong&gt; do!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;vb-console&lt;/code&gt; is a Ruby inspired Python library. Helps two things;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Use as console logger (&lt;em&gt;according to you environment&lt;/em&gt;)&lt;/li&gt;
+&lt;li&gt;Inspect objecs&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can install via &lt;code&gt;pip&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip &lt;span class="nb"&gt;install &lt;/span&gt;vb-console
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;By default, console output is &lt;strong&gt;disabled&lt;/strong&gt;. You can enable output via:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;setting &lt;code&gt;ENABLE_CONSOLE&lt;/code&gt; environment variable&lt;/li&gt;
+&lt;li&gt;passing &lt;code&gt;enabled=True&lt;/code&gt; keyword argument&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s try with-in the python repl:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ ENABLE_CONSOLE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1 python
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;then;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;console&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'repl'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;colored&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# enable color output!
+&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'hello'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'hello'&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hello&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'world'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s"&gt;'hello'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="s"&gt;'world'&lt;/span&gt;&lt;span class="p"&gt;},)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you are in a Django app, you can use;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.conf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;console&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;
+
+&lt;span class="c1"&gt;# will be disabled in production!
+&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;settings&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DEBUG&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You have few options for console output:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;console(object)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;console(object, object, object, ...)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;console.dir(object)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s assume that you have a class;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyClass&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="s"&gt;"""Example class"""&lt;/span&gt;
+
+    &lt;span class="n"&gt;klass_var1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="n"&gt;klass_var2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+    &lt;span class="n"&gt;klass_var3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'string'&lt;/span&gt;
+    &lt;span class="n"&gt;klass_var4&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;klass_var5&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;klass_var6&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'Name'&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_name_and_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;' get_name_and_method'&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_private_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;' _private_method'&lt;/span&gt;
+
+    &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="nb"&gt;property&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+
+    &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="nb"&gt;staticmethod&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;statik&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;'Static'&lt;/span&gt;
+
+    &lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="nb"&gt;classmethod&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;klass_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;'kls'&lt;/span&gt;
+
+&lt;span class="n"&gt;my_class_instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;MyClass&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;my_class_instance&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You’ll see:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;   &lt;span class="s"&gt;'class_methods'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'klass_method'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'class_variables'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'klass_var1'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var2'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var3'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var4'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var5'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var6'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'data_attributes'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'internal_methods'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;   &lt;span class="s"&gt;'__class__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__delattr__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__dict__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__dir__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__doc__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__eq__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__format__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__ge__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__getattribute__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__gt__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__hash__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__init__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__init_subclass__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__le__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__lt__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__module__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__ne__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__new__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__reduce__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__reduce_ex__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__repr__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__setattr__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__sizeof__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__str__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__subclasshook__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__weakref__'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'methods'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'get_name_and_method'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'private_methods'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'_private_method'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'properties'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'admin'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'public_attributes'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;   &lt;span class="s"&gt;'admin'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'get_name_and_method'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_method'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var1'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var2'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var3'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var4'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                             &lt;span class="s"&gt;'klass_var5'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'klass_var6'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'statik'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'static_methods'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'statik'&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is very handy, if you need to know what methods, properties are available
+for the given object.&lt;/p&gt;
+
+&lt;p&gt;You can change output style, let’s disable default output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;console&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;
+&lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# basic is False
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Outputs will contain &lt;strong&gt;header&lt;/strong&gt; and &lt;strong&gt;footer&lt;/strong&gt; lines. &lt;code&gt;source&lt;/code&gt; gets it’s value
+from &lt;code&gt;__name__&lt;/code&gt; and currently the value is set to &lt;code&gt;__main__&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;__main__&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;instance&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;MyClass&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="err"&gt;'&lt;/span&gt;&lt;span class="nc"&gt;__main__&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;MyClass&lt;/span&gt;&lt;span class="s"&gt;'&amp;gt;].........................................................................
+{   '&lt;/span&gt;&lt;span class="n"&gt;class_methods&lt;/span&gt;&lt;span class="s"&gt;': ['&lt;/span&gt;&lt;span class="n"&gt;klass_method&lt;/span&gt;&lt;span class="s"&gt;'],
+    '&lt;/span&gt;&lt;span class="n"&gt;class_variables&lt;/span&gt;&lt;span class="s"&gt;': ['&lt;/span&gt;&lt;span class="n"&gt;klass_var1&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var2&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var3&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var4&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var5&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var6&lt;/span&gt;&lt;span class="s"&gt;'],
+    '&lt;/span&gt;&lt;span class="n"&gt;data_attributes&lt;/span&gt;&lt;span class="s"&gt;': ['&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="s"&gt;'],
+    '&lt;/span&gt;&lt;span class="n"&gt;internal_methods&lt;/span&gt;&lt;span class="s"&gt;': [   '&lt;/span&gt;&lt;span class="n"&gt;__class__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__delattr__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__dict__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__dir__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__doc__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__eq__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__format__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__ge__&lt;/span&gt;&lt;span class="s"&gt;',
+                            '&lt;/span&gt;&lt;span class="n"&gt;__getattribute__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__gt__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__hash__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__init__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__init_subclass__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__le__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__lt__&lt;/span&gt;&lt;span class="s"&gt;',
+                            '&lt;/span&gt;&lt;span class="n"&gt;__module__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__ne__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__new__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__reduce__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__reduce_ex__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__repr__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__setattr__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__sizeof__&lt;/span&gt;&lt;span class="s"&gt;',
+                            '&lt;/span&gt;&lt;span class="n"&gt;__str__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__subclasshook__&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;__weakref__&lt;/span&gt;&lt;span class="s"&gt;'],
+    '&lt;/span&gt;&lt;span class="n"&gt;methods&lt;/span&gt;&lt;span class="s"&gt;': ['&lt;/span&gt;&lt;span class="n"&gt;get_name_and_method&lt;/span&gt;&lt;span class="s"&gt;'],
+    '&lt;/span&gt;&lt;span class="n"&gt;private_methods&lt;/span&gt;&lt;span class="s"&gt;': ['&lt;/span&gt;&lt;span class="n"&gt;_private_method&lt;/span&gt;&lt;span class="s"&gt;'],
+    '&lt;/span&gt;&lt;span class="n"&gt;properties&lt;/span&gt;&lt;span class="s"&gt;': ['&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="s"&gt;'],
+    '&lt;/span&gt;&lt;span class="n"&gt;public_attributes&lt;/span&gt;&lt;span class="s"&gt;': [   '&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;get_name_and_method&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_method&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var1&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var2&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var3&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var4&lt;/span&gt;&lt;span class="s"&gt;',
+                             '&lt;/span&gt;&lt;span class="n"&gt;klass_var5&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;klass_var6&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="s"&gt;', '&lt;/span&gt;&lt;span class="n"&gt;statik&lt;/span&gt;&lt;span class="s"&gt;'],
+    '&lt;/span&gt;&lt;span class="n"&gt;static_methods&lt;/span&gt;&lt;span class="s"&gt;': ['&lt;/span&gt;&lt;span class="n"&gt;statik&lt;/span&gt;&lt;span class="s"&gt;']}
+......................................................................................................................................
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Current options are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;source&lt;/code&gt;: Name of the header if the &lt;code&gt;basic&lt;/code&gt; option is set to &lt;code&gt;False&lt;/code&gt;. It’s
+good idea to set to &lt;code&gt;__name__&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;indent&lt;/code&gt;: Indentation value, default is: &lt;code&gt;4&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;width&lt;/code&gt;: Output’s width. Default is set to Terminal’s current width.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;enabled&lt;/code&gt;: Default is &lt;code&gt;False&lt;/code&gt;. Can be modified via &lt;code&gt;ENABLE_CONSOLE&lt;/code&gt; env-var
+or setting this arg to &lt;code&gt;True&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;seperator_char&lt;/code&gt;: Default is: &lt;code&gt;.&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;colored&lt;/code&gt;: Default is &lt;code&gt;False&lt;/code&gt;. Set this to &lt;code&gt;True&lt;/code&gt; for colored output&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dir_colors&lt;/code&gt;: This is a &lt;code&gt;dict&lt;/code&gt;, default is &lt;code&gt;dict(keys=&amp;#39;yellow&amp;#39;, values=&amp;#39;default&amp;#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;out_color&lt;/code&gt;: Default is &lt;code&gt;yellow&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;header_color&lt;/code&gt;: Default is &lt;code&gt;green&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;footer_color&lt;/code&gt;: Default is &lt;code&gt;green&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;basic&lt;/code&gt;: Default is &lt;code&gt;True&lt;/code&gt;. In basic mode, header and footer are not available&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;writer&lt;/code&gt;: Default is &lt;code&gt;sys.stdout&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Valid colors are: &lt;code&gt;black&lt;/code&gt;, &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;green&lt;/code&gt;, &lt;code&gt;yellow&lt;/code&gt;, &lt;code&gt;blue&lt;/code&gt;, &lt;code&gt;magenta&lt;/code&gt;,
+&lt;code&gt;cyan&lt;/code&gt;, &lt;code&gt;white&lt;/code&gt; and &lt;code&gt;default&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Here are some examples for configuration usage:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;console&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;
+
+&lt;span class="c1"&gt;# colorized with header/footer
+&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;basic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;colored&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;console&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;
+
+&lt;span class="c1"&gt;# custom colors without header/footer
+&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;colored&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dir_colors&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'red'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'yellow'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Quick tip; &lt;code&gt;console = console(source=__name__, basic=False, colored=True)&lt;/code&gt; kills/overrides
+&lt;code&gt;console&lt;/code&gt; from import. I mean;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;console&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'hello'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'hello'&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# now, let’s try to re-define console
+&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;colored&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Traceback&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;most&lt;/span&gt; &lt;span class="n"&gt;recent&lt;/span&gt; &lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="n"&gt;last&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="s"&gt;"&amp;lt;stdin&amp;gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nb"&gt;TypeError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s"&gt;'NoneType'&lt;/span&gt; &lt;span class="nb"&gt;object&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;callable&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you want to keep &lt;code&gt;console&lt;/code&gt; from import statement;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;console&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;base_console&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base_console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'hello'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'hello'&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;base_console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;source&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;enabled&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;colored&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Console&lt;/span&gt; &lt;span class="nb"&gt;object&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="mh"&gt;0x10277cf40&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;,)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nb"&gt;dir&lt;/span&gt;&lt;span class="p"&gt;([])&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;   &lt;span class="s"&gt;'internal_methods'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="p"&gt;[&lt;/span&gt;   &lt;span class="s"&gt;'__add__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__class__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__contains__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__delattr__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__delitem__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__dir__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__doc__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__eq__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__format__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__ge__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__getattribute__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__getitem__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__gt__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__hash__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__iadd__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__imul__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__init__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__init_subclass__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__iter__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__le__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__len__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__lt__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__mul__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__ne__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__new__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__reduce__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__reduce_ex__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__repr__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__reversed__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__rmul__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__setattr__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="s"&gt;'__setitem__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__sizeof__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__str__'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'__subclasshook__'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="s"&gt;'public_attributes'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="p"&gt;[&lt;/span&gt;   &lt;span class="s"&gt;'append'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'clear'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'copy'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'count'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'extend'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'index'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'insert'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'pop'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                             &lt;span class="s"&gt;'remove'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'reverse'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'sort'&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Feel free to contribute!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/vbyazilim/vb-console"&gt;https://github.com/vbyazilim/vb-console&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Network Addresses and Named Ports</title>
     <link rel="alternate" href="https://vbyazilim.com/blog/2021/02/04/network-addresses-and-named-ports/"/>
@@ -370,231 +582,5 @@ code on &lt;a href="https://github.com/vigo/lsvirtualenvs"&gt;GitHub&lt;/a&gt;&l
 &lt;p&gt;You can install via;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;go get &lt;span class="nt"&gt;-u&lt;/span&gt; github.com/vigo/lsvirtualenvs
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
-  </entry>
-  <entry>
-    <title>How much do you care to write good Django code?</title>
-    <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/"/>
-    <id>https://vbyazilim.com/blog/2019/06/02/how-much-do-you-care-to-write-good-django-code/</id>
-    <published>2019-06-02T10:30:00+03:00</published>
-    <updated>2020-11-18T12:52:33+03:00</updated>
-    <author>
-      <name>Uğur Özyılmazel</name>
-    </author>
-    <summary type="html">&lt;p&gt;I’ve been having often conversations with fellow Djangonauts. I always ask one
-little question during the talk…&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;I’ve been having often conversations with fellow Djangonauts. I always ask one
-little question during the talk&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h3&gt;Have you ever read the Django’s “Writing code” article ?&lt;/h3&gt;
-
-&lt;p&gt;I’ve been doing Django hire interviews lately. Before I criticize or start
-review the code, I always ask the &lt;strong&gt;question&lt;/strong&gt;&amp;hellip; Unfortunately, most of the
-developers are unaware of that document. They don’t even know if It exists.&lt;/p&gt;
-
-&lt;p&gt;If you navigate through the &lt;a href="https://docs.djangoproject.com/en/dev/internals/contributing/"&gt;Contributing to Django&lt;/a&gt; page, you’ll see the
-&lt;a href="https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/"&gt;Writing code&lt;/a&gt; section under the list items. Probably, most users never
-contrive to look at the docs unless they’re planning to contribute source code.
-Rules of writing Django code is already out there&amp;hellip;&lt;/p&gt;
-
-&lt;h3&gt;Coding style&lt;/h3&gt;
-
-&lt;p&gt;If you &lt;a href="https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/"&gt;click the link&lt;/a&gt;, you’ll navigate to coding style page in Django
-documentation. I’m skipping &lt;em&gt;Python style&lt;/em&gt; part since you need to know that
-already!&lt;/p&gt;
-
-&lt;h4&gt;Sorting imports&lt;/h4&gt;
-
-&lt;p&gt;Document tells us to sort our &lt;code&gt;import&lt;/code&gt; statements with &lt;code&gt;isort&lt;/code&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;python &lt;span class="nt"&gt;-m&lt;/span&gt; pip &lt;span class="nb"&gt;install &lt;/span&gt;isort
-&lt;span class="nv"&gt;$ &lt;/span&gt;isort &lt;span class="nt"&gt;-rc&lt;/span&gt; &lt;span class="nb"&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;More detailed information can ben found &lt;a href="https://isort.readthedocs.io/en/latest/"&gt;here&lt;/a&gt;. You can also integrate
-this with your code editing tool/ide etc. I mostly use this configuration:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight toml"&gt;&lt;code&gt;&lt;span class="nn"&gt;[settings]&lt;/span&gt;
-&lt;span class="py"&gt;line_length&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;
-&lt;span class="py"&gt;multi_line_output&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
-&lt;span class="py"&gt;use_parentheses&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
-&lt;span class="py"&gt;include_trailing_comma&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
-&lt;span class="py"&gt;quiet&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
-&lt;span class="py"&gt;force_grid_wrap&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="py"&gt;known_django&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="err"&gt;django&lt;/span&gt;
-&lt;span class="py"&gt;sections&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="err"&gt;FUTURE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;STDLIB&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;DJANGO&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;THIRDPARTY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;FIRSTPARTY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="err"&gt;LOCALFOLDER&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Small example after sort process:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;collections&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Counter&lt;/span&gt;
-
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;router&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;transaction&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db.models.deletion&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Collector&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;timezone&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ugettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
-
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;..utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;console&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.signals&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;post_undelete&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pre_undelete&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;When you integrate &lt;code&gt;isort&lt;/code&gt; to your editor or maybe a git-hook, you don’t need
-to worry about the order of imports anymore&amp;hellip;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;logging&lt;/span&gt;
-
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib.auth.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="n"&gt;AbstractBaseUser&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;BaseUserManager&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;PermissionsMixin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ugettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
-
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;baseapp.utils&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;save_file&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;custom_save_file&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Also, sorting imports are explained very well in the Django docs:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c1"&gt;# future
-&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;unicode_literals&lt;/span&gt;
-
-&lt;span class="c1"&gt;# standard library
-&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;itertools&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;chain&lt;/span&gt;
-
-&lt;span class="c1"&gt;# third-party
-&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;bcrypt&lt;/span&gt;
-
-&lt;span class="c1"&gt;# Django
-&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.http&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Http404&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.http.response&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-    &lt;span class="n"&gt;Http404&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HttpResponse&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HttpResponseNotAllowed&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;StreamingHttpResponse&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-    &lt;span class="n"&gt;cookie&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="c1"&gt;# local Django
-&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LogEntry&lt;/span&gt;
-
-&lt;span class="c1"&gt;# try/except
-&lt;/span&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;yaml&lt;/span&gt;
-&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="nb"&gt;ImportError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;yaml&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
-
-&lt;span class="n"&gt;CONSTANT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;'foo'&lt;/span&gt;
-
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Example&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="c1"&gt;# ...
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h4&gt;What about models ?&lt;/h4&gt;
-
-&lt;p&gt;Django model, represents a table in database and single entity of data. That’s
-why model name should be &lt;strong&gt;singular&lt;/strong&gt;, not plural! If you want to store blog
-posts in a database, you must name It to &lt;code&gt;Post&lt;/code&gt; not &lt;del&gt;&lt;code&gt;Posts&lt;/code&gt;&lt;/del&gt;. Also, model name
-is a Python Class. You must follow the naming convention of Python which is
-&lt;code&gt;InitialCaps&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Field names should be singular except &lt;code&gt;ManyToMany&lt;/code&gt; or similar field types. Naming
-should be &lt;code&gt;snake_case&lt;/code&gt;. There are good examples, &lt;strong&gt;DO&lt;/strong&gt;es, &lt;strong&gt;DON’T&lt;/strong&gt;s in the
-docs page. Here is a good one:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;first_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;last_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CharField&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_length&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I’ve seen two most common behavior about relation models such as &lt;code&gt;ForeignKey&lt;/code&gt;
-and &lt;code&gt;MonyToMany&lt;/code&gt; fields.&lt;/p&gt;
-
-&lt;h3&gt;Please use &lt;code&gt;to=&amp;#39;ModelName&amp;#39;&lt;/code&gt; convention&lt;/h3&gt;
-
-&lt;p&gt;Fields takes &lt;code&gt;kwargs&lt;/code&gt; and &lt;code&gt;args&lt;/code&gt;. Most of the candidates did the same writing:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ugettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
-
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Category&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;category&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-        &lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="n"&gt;on_delete&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CASCADE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'posts'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="n"&gt;verbose_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'category'&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Please define relation fields with using &lt;code&gt;to&lt;/code&gt; keyword argument:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ugettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;category&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ForeignKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
-        &lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'Category'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="n"&gt;on_delete&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CASCADE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="n"&gt;related_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;'posts'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="n"&gt;verbose_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'category'&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-    &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;This helps in two ways:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;You are safe from &lt;strong&gt;circular import&lt;/strong&gt; situation. You are free to import any
-model in anywhere&amp;hellip;&lt;/li&gt;
-&lt;li&gt;This is more pythonic and readable&amp;hellip; We define all others such as
-&lt;code&gt;on_delete&lt;/code&gt;, &lt;code&gt;related_name&lt;/code&gt; why not showing which model is targeted ?&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3&gt;The order of model inner classes&lt;/h3&gt;
-
-&lt;p&gt;Django docs tell:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;All database fields&lt;/li&gt;
-&lt;li&gt;Custom manager attributes&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;class Meta&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;def __str__()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;def save()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;def get_absolute_url()&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Any custom methods&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Please follow the convention. Again, &lt;strong&gt;you are not writing&lt;/strong&gt; code to contribute
-Django. You are writing code for your self, your company, your family, your
-anything&amp;hellip; If there are some conventions, let’s follow them&amp;hellip; Why ?&lt;/p&gt;
-
-&lt;h2&gt;Convention over configuration&lt;/h2&gt;
-
-&lt;p&gt;I heard this term for the first time from &lt;a href="https://rubyonrails.org"&gt;Ruby on Rails&lt;/a&gt; community. Let’s
-keep the conventions also in &lt;code&gt;choices&lt;/code&gt; fields too:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;If choices is defined for a given model field, define each choice as a list of
-tuples, with an all-uppercase name as a class attribute on the model&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.db&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.utils.translation&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;ugettext_lazy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;STATUS_OFFLINE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-    &lt;span class="n"&gt;STATUS_ONLINE&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-    &lt;span class="n"&gt;STATUS_DELETED&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
-    &lt;span class="n"&gt;STATUS_DRAFT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
-    &lt;span class="n"&gt;STATUS_CHOICES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
-        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;STATUS_OFFLINE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Offline'&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
-        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;STATUS_ONLINE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Online'&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
-        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;STATUS_DELETED&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Deleted'&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
-        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;STATUS_DRAFT&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Draft'&lt;/span&gt;&lt;span class="p"&gt;)),&lt;/span&gt;
-    &lt;span class="p"&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;hr&gt;
-
-&lt;p&gt;Document also covers;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Template style&lt;/li&gt;
-&lt;li&gt;View style&lt;/li&gt;
-&lt;li&gt;Use of &lt;code&gt;django.conf.settings&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;and few other miscellaneous information, &lt;a href="https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/"&gt;please read&lt;/a&gt; It when you need It.&lt;/p&gt;
-</content>
   </entry>
 </feed>

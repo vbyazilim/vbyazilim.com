@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vb YAZILIM • Blog • fancy console logger + inspector • 4 minutes read</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
+    <meta name="keywords" content="training,git,python,ruby,bash,golang,javascript,reactjs,vuejs,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
+    <meta name="p:domain_verify" content="37faca05c6c17ec39d217c55756a7242"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="icon" href="/public/images/favicon-32.png">
+    <link href="/public/css/syntax.css" rel="stylesheet" />
+    
+    <link href="/public/css/application.css" rel="stylesheet" />
+    <meta property="og:title" content="vb YAZILIM | fancy console logger + inspector" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vbyazilim.com/blog/2021/08/19/fancy-console-logger-plus-inspector/" />
+    
+    <meta property="og:description" content="How do you inspect an object properties in Python? Do you have any better options
+than dir()? Yes you do!
+">
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="vb YAZILIM" />
+    
+    <meta property="og:image" content="https://vbyazilim.com/public/images/blog/2021-08-19-og-vb-console.png" />
+    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/blog/2021-08-19-og-vb-console.png" />
+    <meta property="og:image:width" content="1804" />
+    <meta property="og:image:height" content="882" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52664816-9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-52664816-9');
+    </script>
+</head>
+<body>
+    
+
+    <section class="section">
+    <div class="container">
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <a href="/" title="Home"><img src="/public/images/vb-yazilim-logo.svg" class="vb-logo" alt="" /></a>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item"><a title="Blog posts" href="/blog/">Blog</a></div>
+                <div class="level-item"><a title="Training" href="/training/">Training</a></div>
+                <div class="level-item"><a title="Türkçe" href="/tr/">Türkçe</a></div>
+                <div class="level-item"><a title="Atom feed" href="/feed.xml"><span class="icon"><i class="fas fa-rss-square"></i></span></a></div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+    
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-9-desktop">
+                <article>
+                    <div class="content is-medium">
+                        <div class="meta mb-1">
+                            <small>Uğur Özyılmazel &mdash; </small>
+                            <time pubdate datetime="2021-08-19T11:58:00+03:00" title="19 August 2021, Thursday 11:58">19 August 2021, Thursday 11:58</time>
+                             <span class="category"> &mdash; Filed under <a href="/blog/category/development/">development</a></span>
+                             <span class="read-time">reading time: 4 minutes</span>
+                        </div>
+
+                        <h1 class="title">fancy console logger + inspector</h1>
+                        
+                        <div class="tags">
+                            <span class="tag is-info"><a title="Posts with &ldquo;python&rdquo; tag" href="/blog/tag/python/">python</a></span>
+                        </div>
+
+                        <div class="yield mt-3-desktop">
+                            <p>How do you <strong>inspect</strong> an object properties in Python? Do you have any better options
+than <code>dir()</code>? Yes <strong>you</strong> do!</p>
+
+<p></p>
+
+<p><code>vb-console</code> is a Ruby inspired Python library. Helps two things;</p>
+
+<ol>
+<li>Use as console logger (<em>according to you environment</em>)</li>
+<li>Inspect objecs</li>
+</ol>
+
+<p>You can install via <code>pip</code>:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>pip <span class="nb">install </span>vb-console
+</code></pre></div>
+<p>By default, console output is <strong>disabled</strong>. You can enable output via:</p>
+
+<ul>
+<li>setting <code>ENABLE_CONSOLE</code> environment variable</li>
+<li>passing <code>enabled=True</code> keyword argument</li>
+</ul>
+
+<p>Let’s try with-in the python repl:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ ENABLE_CONSOLE</span><span class="o">=</span>1 python
+</code></pre></div>
+<p>then;</p>
+<div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">console</span> <span class="kn">import</span> <span class="n">console</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span> <span class="o">=</span> <span class="n">console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s">'repl'</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c1"># enable color output!
+</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+<span class="p">(</span><span class="s">'hello'</span><span class="p">,)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">hello</span><span class="o">=</span><span class="s">'world'</span><span class="p">)</span>
+<span class="n">console</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="p">({</span><span class="s">'hello'</span><span class="p">:</span>  <span class="s">'world'</span><span class="p">},)</span>
+</code></pre></div>
+<p>If you are in a Django app, you can use;</p>
+<div class="highlight"><pre class="highlight python"><code><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">console</span> <span class="kn">import</span> <span class="n">console</span>
+
+<span class="c1"># will be disabled in production!
+</span><span class="n">console</span> <span class="o">=</span> <span class="n">console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="n">settings</span><span class="p">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</code></pre></div>
+<p>You have few options for console output:</p>
+
+<ul>
+<li><code>console(object)</code></li>
+<li><code>console(object, object, object, ...)</code></li>
+<li><code>console.dir(object)</code></li>
+</ul>
+
+<p>Let’s assume that you have a class;</p>
+<div class="highlight"><pre class="highlight python"><code><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="s">"""Example class"""</span>
+
+    <span class="n">klass_var1</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">klass_var2</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">klass_var3</span> <span class="o">=</span> <span class="s">'string'</span>
+    <span class="n">klass_var4</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+    <span class="n">klass_var5</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">klass_var6</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">'Name'</span>
+
+    <span class="k">def</span> <span class="nf">get_name_and_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">' get_name_and_method'</span>
+
+    <span class="k">def</span> <span class="nf">_private_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">+</span> <span class="s">' _private_method'</span>
+
+    <span class="o">@</span><span class="nb">property</span>
+    <span class="k">def</span> <span class="nf">admin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">statik</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s">'Static'</span>
+
+    <span class="o">@</span><span class="nb">classmethod</span>
+    <span class="k">def</span> <span class="nf">klass_method</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">'kls'</span>
+
+<span class="n">my_class_instance</span> <span class="o">=</span> <span class="n">MyClass</span><span class="p">()</span>
+<span class="n">console</span><span class="p">.</span><span class="nb">dir</span><span class="p">(</span><span class="n">my_class_instance</span><span class="p">)</span>
+</code></pre></div>
+<p>You’ll see:</p>
+<div class="highlight"><pre class="highlight python"><code><span class="p">{</span>   <span class="s">'class_methods'</span><span class="p">:</span> <span class="p">[</span><span class="s">'klass_method'</span><span class="p">],</span>
+    <span class="s">'class_variables'</span><span class="p">:</span> <span class="p">[</span><span class="s">'klass_var1'</span><span class="p">,</span> <span class="s">'klass_var2'</span><span class="p">,</span> <span class="s">'klass_var3'</span><span class="p">,</span> <span class="s">'klass_var4'</span><span class="p">,</span> <span class="s">'klass_var5'</span><span class="p">,</span> <span class="s">'klass_var6'</span><span class="p">],</span>
+    <span class="s">'data_attributes'</span><span class="p">:</span> <span class="p">[</span><span class="s">'name'</span><span class="p">],</span>
+    <span class="s">'internal_methods'</span><span class="p">:</span> <span class="p">[</span>   <span class="s">'__class__'</span><span class="p">,</span> <span class="s">'__delattr__'</span><span class="p">,</span> <span class="s">'__dict__'</span><span class="p">,</span> <span class="s">'__dir__'</span><span class="p">,</span> <span class="s">'__doc__'</span><span class="p">,</span> <span class="s">'__eq__'</span><span class="p">,</span> <span class="s">'__format__'</span><span class="p">,</span> <span class="s">'__ge__'</span><span class="p">,</span>
+                            <span class="s">'__getattribute__'</span><span class="p">,</span> <span class="s">'__gt__'</span><span class="p">,</span> <span class="s">'__hash__'</span><span class="p">,</span> <span class="s">'__init__'</span><span class="p">,</span> <span class="s">'__init_subclass__'</span><span class="p">,</span> <span class="s">'__le__'</span><span class="p">,</span> <span class="s">'__lt__'</span><span class="p">,</span>
+                            <span class="s">'__module__'</span><span class="p">,</span> <span class="s">'__ne__'</span><span class="p">,</span> <span class="s">'__new__'</span><span class="p">,</span> <span class="s">'__reduce__'</span><span class="p">,</span> <span class="s">'__reduce_ex__'</span><span class="p">,</span> <span class="s">'__repr__'</span><span class="p">,</span> <span class="s">'__setattr__'</span><span class="p">,</span> <span class="s">'__sizeof__'</span><span class="p">,</span>
+                            <span class="s">'__str__'</span><span class="p">,</span> <span class="s">'__subclasshook__'</span><span class="p">,</span> <span class="s">'__weakref__'</span><span class="p">],</span>
+    <span class="s">'methods'</span><span class="p">:</span> <span class="p">[</span><span class="s">'get_name_and_method'</span><span class="p">],</span>
+    <span class="s">'private_methods'</span><span class="p">:</span> <span class="p">[</span><span class="s">'_private_method'</span><span class="p">],</span>
+    <span class="s">'properties'</span><span class="p">:</span> <span class="p">[</span><span class="s">'admin'</span><span class="p">],</span>
+    <span class="s">'public_attributes'</span><span class="p">:</span> <span class="p">[</span>   <span class="s">'admin'</span><span class="p">,</span> <span class="s">'get_name_and_method'</span><span class="p">,</span> <span class="s">'klass_method'</span><span class="p">,</span> <span class="s">'klass_var1'</span><span class="p">,</span> <span class="s">'klass_var2'</span><span class="p">,</span> <span class="s">'klass_var3'</span><span class="p">,</span> <span class="s">'klass_var4'</span><span class="p">,</span>
+                             <span class="s">'klass_var5'</span><span class="p">,</span> <span class="s">'klass_var6'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">,</span> <span class="s">'statik'</span><span class="p">],</span>
+    <span class="s">'static_methods'</span><span class="p">:</span> <span class="p">[</span><span class="s">'statik'</span><span class="p">]}</span>
+</code></pre></div>
+<p>This is very handy, if you need to know what methods, properties are available
+for the given object.</p>
+
+<p>You can change output style, let’s disable default output:</p>
+<div class="highlight"><pre class="highlight python"><code><span class="kn">from</span> <span class="nn">console</span> <span class="kn">import</span> <span class="n">console</span>
+<span class="n">console</span> <span class="o">=</span> <span class="n">console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">basic</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span> <span class="c1"># basic is False
+</span></code></pre></div>
+<p>Outputs will contain <strong>header</strong> and <strong>footer</strong> lines. <code>source</code> gets it’s value
+from <code>__name__</code> and currently the value is set to <code>__main__</code>:</p>
+<div class="highlight"><pre class="highlight python"><code><span class="p">[</span><span class="n">__main__</span> <span class="p">:</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">MyClass</span> <span class="o">|</span> <span class="o">&lt;</span><span class="k">class</span> <span class="err">'</span><span class="nc">__main__</span><span class="p">.</span><span class="n">MyClass</span><span class="s">'&gt;].........................................................................
+{   '</span><span class="n">class_methods</span><span class="s">': ['</span><span class="n">klass_method</span><span class="s">'],
+    '</span><span class="n">class_variables</span><span class="s">': ['</span><span class="n">klass_var1</span><span class="s">', '</span><span class="n">klass_var2</span><span class="s">', '</span><span class="n">klass_var3</span><span class="s">', '</span><span class="n">klass_var4</span><span class="s">', '</span><span class="n">klass_var5</span><span class="s">', '</span><span class="n">klass_var6</span><span class="s">'],
+    '</span><span class="n">data_attributes</span><span class="s">': ['</span><span class="n">name</span><span class="s">'],
+    '</span><span class="n">internal_methods</span><span class="s">': [   '</span><span class="n">__class__</span><span class="s">', '</span><span class="n">__delattr__</span><span class="s">', '</span><span class="n">__dict__</span><span class="s">', '</span><span class="n">__dir__</span><span class="s">', '</span><span class="n">__doc__</span><span class="s">', '</span><span class="n">__eq__</span><span class="s">', '</span><span class="n">__format__</span><span class="s">', '</span><span class="n">__ge__</span><span class="s">',
+                            '</span><span class="n">__getattribute__</span><span class="s">', '</span><span class="n">__gt__</span><span class="s">', '</span><span class="n">__hash__</span><span class="s">', '</span><span class="n">__init__</span><span class="s">', '</span><span class="n">__init_subclass__</span><span class="s">', '</span><span class="n">__le__</span><span class="s">', '</span><span class="n">__lt__</span><span class="s">',
+                            '</span><span class="n">__module__</span><span class="s">', '</span><span class="n">__ne__</span><span class="s">', '</span><span class="n">__new__</span><span class="s">', '</span><span class="n">__reduce__</span><span class="s">', '</span><span class="n">__reduce_ex__</span><span class="s">', '</span><span class="n">__repr__</span><span class="s">', '</span><span class="n">__setattr__</span><span class="s">', '</span><span class="n">__sizeof__</span><span class="s">',
+                            '</span><span class="n">__str__</span><span class="s">', '</span><span class="n">__subclasshook__</span><span class="s">', '</span><span class="n">__weakref__</span><span class="s">'],
+    '</span><span class="n">methods</span><span class="s">': ['</span><span class="n">get_name_and_method</span><span class="s">'],
+    '</span><span class="n">private_methods</span><span class="s">': ['</span><span class="n">_private_method</span><span class="s">'],
+    '</span><span class="n">properties</span><span class="s">': ['</span><span class="n">admin</span><span class="s">'],
+    '</span><span class="n">public_attributes</span><span class="s">': [   '</span><span class="n">admin</span><span class="s">', '</span><span class="n">get_name_and_method</span><span class="s">', '</span><span class="n">klass_method</span><span class="s">', '</span><span class="n">klass_var1</span><span class="s">', '</span><span class="n">klass_var2</span><span class="s">', '</span><span class="n">klass_var3</span><span class="s">', '</span><span class="n">klass_var4</span><span class="s">',
+                             '</span><span class="n">klass_var5</span><span class="s">', '</span><span class="n">klass_var6</span><span class="s">', '</span><span class="n">name</span><span class="s">', '</span><span class="n">statik</span><span class="s">'],
+    '</span><span class="n">static_methods</span><span class="s">': ['</span><span class="n">statik</span><span class="s">']}
+......................................................................................................................................
+</span></code></pre></div>
+<p>Current options are:</p>
+
+<ul>
+<li><code>source</code>: Name of the header if the <code>basic</code> option is set to <code>False</code>. It’s
+good idea to set to <code>__name__</code></li>
+<li><code>indent</code>: Indentation value, default is: <code>4</code></li>
+<li><code>width</code>: Output’s width. Default is set to Terminal’s current width.</li>
+<li><code>enabled</code>: Default is <code>False</code>. Can be modified via <code>ENABLE_CONSOLE</code> env-var
+or setting this arg to <code>True</code></li>
+<li><code>seperator_char</code>: Default is: <code>.</code></li>
+<li><code>colored</code>: Default is <code>False</code>. Set this to <code>True</code> for colored output</li>
+<li><code>dir_colors</code>: This is a <code>dict</code>, default is <code>dict(keys=&#39;yellow&#39;, values=&#39;default&#39;)</code></li>
+<li><code>out_color</code>: Default is <code>yellow</code></li>
+<li><code>header_color</code>: Default is <code>green</code></li>
+<li><code>footer_color</code>: Default is <code>green</code></li>
+<li><code>basic</code>: Default is <code>True</code>. In basic mode, header and footer are not available</li>
+<li><code>writer</code>: Default is <code>sys.stdout</code></li>
+</ul>
+
+<p>Valid colors are: <code>black</code>, <code>red</code>, <code>green</code>, <code>yellow</code>, <code>blue</code>, <code>magenta</code>,
+<code>cyan</code>, <code>white</code> and <code>default</code></p>
+
+<p>Here are some examples for configuration usage:</p>
+<div class="highlight"><pre class="highlight python"><code><span class="kn">from</span> <span class="nn">console</span> <span class="kn">import</span> <span class="n">console</span>
+
+<span class="c1"># colorized with header/footer
+</span><span class="n">console</span> <span class="o">=</span> <span class="n">console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span> <span class="n">basic</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">console</span> <span class="kn">import</span> <span class="n">console</span>
+
+<span class="c1"># custom colors without header/footer
+</span><span class="n">console</span> <span class="o">=</span> <span class="n">console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">dir_colors</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="s">'red'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s">'yellow'</span><span class="p">))</span>
+</code></pre></div>
+<p>Quick tip; <code>console = console(source=__name__, basic=False, colored=True)</code> kills/overrides
+<code>console</code> from import. I mean;</p>
+<div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">console</span> <span class="kn">import</span> <span class="n">console</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span> <span class="o">=</span> <span class="n">console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+<span class="p">(</span><span class="s">'hello'</span><span class="p">,)</span>
+
+<span class="c1"># now, let’s try to re-define console
+</span><span class="o">&gt;&gt;&gt;</span> <span class="n">console</span> <span class="o">=</span> <span class="n">console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span><span class="p">(</span><span class="n">console</span><span class="p">)</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s">"&lt;stdin&gt;"</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="nb">TypeError</span><span class="p">:</span> <span class="s">'NoneType'</span> <span class="nb">object</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">callable</span>
+</code></pre></div>
+<p>If you want to keep <code>console</code> from import statement;</p>
+<div class="highlight"><pre class="highlight python"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">console</span> <span class="kn">import</span> <span class="n">console</span> <span class="k">as</span> <span class="n">base_console</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span> <span class="o">=</span> <span class="n">base_console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span><span class="p">(</span><span class="s">'hello'</span><span class="p">)</span>
+<span class="p">(</span><span class="s">'hello'</span><span class="p">,)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span> <span class="o">=</span> <span class="n">base_console</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">__name__</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">colored</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span><span class="p">(</span><span class="n">console</span><span class="p">)</span>
+<span class="p">(</span><span class="o">&lt;</span><span class="n">console</span><span class="p">.</span><span class="n">console</span><span class="p">.</span><span class="n">Console</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x10277cf40</span><span class="o">&gt;</span><span class="p">,)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">console</span><span class="p">.</span><span class="nb">dir</span><span class="p">([])</span>
+<span class="p">{</span>   <span class="s">'internal_methods'</span><span class="p">:</span>  <span class="p">[</span>   <span class="s">'__add__'</span><span class="p">,</span> <span class="s">'__class__'</span><span class="p">,</span> <span class="s">'__contains__'</span><span class="p">,</span> <span class="s">'__delattr__'</span><span class="p">,</span> <span class="s">'__delitem__'</span><span class="p">,</span>
+                            <span class="s">'__dir__'</span><span class="p">,</span> <span class="s">'__doc__'</span><span class="p">,</span> <span class="s">'__eq__'</span><span class="p">,</span> <span class="s">'__format__'</span><span class="p">,</span> <span class="s">'__ge__'</span><span class="p">,</span>
+                            <span class="s">'__getattribute__'</span><span class="p">,</span> <span class="s">'__getitem__'</span><span class="p">,</span> <span class="s">'__gt__'</span><span class="p">,</span> <span class="s">'__hash__'</span><span class="p">,</span> <span class="s">'__iadd__'</span><span class="p">,</span>
+                            <span class="s">'__imul__'</span><span class="p">,</span> <span class="s">'__init__'</span><span class="p">,</span> <span class="s">'__init_subclass__'</span><span class="p">,</span> <span class="s">'__iter__'</span><span class="p">,</span> <span class="s">'__le__'</span><span class="p">,</span>
+                            <span class="s">'__len__'</span><span class="p">,</span> <span class="s">'__lt__'</span><span class="p">,</span> <span class="s">'__mul__'</span><span class="p">,</span> <span class="s">'__ne__'</span><span class="p">,</span> <span class="s">'__new__'</span><span class="p">,</span> <span class="s">'__reduce__'</span><span class="p">,</span>
+                            <span class="s">'__reduce_ex__'</span><span class="p">,</span> <span class="s">'__repr__'</span><span class="p">,</span> <span class="s">'__reversed__'</span><span class="p">,</span> <span class="s">'__rmul__'</span><span class="p">,</span> <span class="s">'__setattr__'</span><span class="p">,</span>
+                            <span class="s">'__setitem__'</span><span class="p">,</span> <span class="s">'__sizeof__'</span><span class="p">,</span> <span class="s">'__str__'</span><span class="p">,</span> <span class="s">'__subclasshook__'</span><span class="p">],</span>
+    <span class="s">'public_attributes'</span><span class="p">:</span>  <span class="p">[</span>   <span class="s">'append'</span><span class="p">,</span> <span class="s">'clear'</span><span class="p">,</span> <span class="s">'copy'</span><span class="p">,</span> <span class="s">'count'</span><span class="p">,</span> <span class="s">'extend'</span><span class="p">,</span> <span class="s">'index'</span><span class="p">,</span> <span class="s">'insert'</span><span class="p">,</span> <span class="s">'pop'</span><span class="p">,</span>
+                             <span class="s">'remove'</span><span class="p">,</span> <span class="s">'reverse'</span><span class="p">,</span> <span class="s">'sort'</span><span class="p">]}</span>
+</code></pre></div>
+<p>Feel free to contribute!</p>
+
+<p><a href="https://github.com/vbyazilim/vb-console">https://github.com/vbyazilim/vb-console</a></p>
+
+                        </div>
+                    </div>
+                    <div class="sharethis-inline-share-buttons" style="margin-top: 3em;"></div>
+                </article>
+            </div>
+            
+            <div class="column is-3-desktop article-right-column is-hidden-touch">
+                <div class="content is-medium">
+<h4 class="title">Related Posts</h4><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time>                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+    <div id="ga-notice" class="is-hidden">
+        <div class="notification is-size-7-touch has-text-centered is-radiusless">
+            <button class="delete mr-1"></button>
+            We are using Google Analytics on our page to track visit counts and other statistic related datas.
+            We would like to inform you about that...
+        </div>
+    </div>
+
+    <footer class="footer has-background-color-vb has-text-white">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <div class="content">
+                    <p><strong>vb YAZILIM</strong> - Uğur Özyılmazel</p>
+                    <address>
+                        Meşrutiyet Mah. Samanyolu sk. 11/7<br/>
+                        34363 - Şişli / İstanbul<br/>
+                        Türkiye<br/><br/>
+                        <a href="tel:+905333774300"><span class="icon"><i class="fas fa-phone-square"></i></span>+90-(0)533-3774300</a><br/>
+                        <script type="text/javascript">
+                            document.write('<a href="mailto:');
+                            document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                            document.write('?subject=Hello">');
+                            document.write('<span class="icon"><i class="fas fa-envelope-square"></i></span>');
+                            document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                            document.write('</a>');
+                        </script>
+                    </address>
+                </div>
+            </div>
+            <div class="column has-text-right-tablet footer-right-icons-tablet">
+                <p>
+                    <a title="GitHub repo of vb YAZILIM" target="_blank" href="https://github.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-github-square fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-twitter-square fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://linkedin.com/company/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-linkedin fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://vimeo.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-vimeo fa-2x"></i>
+                        </span>
+                    </a>
+                </p>
+                <p class="mt-1">
+                    made with <a class="is-external-link" href="https://middlemanapp.com">Middleman</a><br/>
+                    
+                    <a class="is-external-link" href="https://www.ruby-lang.org">Ruby</a> 
+                    <a class="is-external-link" href="https://sass-lang.com">Sass</a><br/>
+                    
+                    <a class="is-external-link" href="https://bulma.io">Bulma</a> 
+                    <a class="is-external-link" href="https://fontawesome.com">Font Awesome</a>
+                    <a class="is-external-link" href="https://simpleicons.org">Simple Icons</a><br/>
+
+                    <a class="is-external-link" href="https://www.w3.org/TR/html/">HTML</a> 
+                    <a class="is-external-link" href="https://www.w3.org/Style/CSS/">CSS</a> 
+                    <a class="is-external-link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> 
+                    <a class="is-external-link" href="https://unsplash.com">Unsplash</a> 
+                </p>
+                <p class="mt-1">hosted at <a class="is-external-link" href="https://pages.github.com">GitHub Pages</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!-- Start of Async Drift Code -->
+    <script>
+    "use strict";
+
+    !function() {
+      var t = window.driftt = window.drift = window.driftt || [];
+      if (!t.init) {
+        if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+        t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+        t.factory = function(e) {
+          return function() {
+            var n = Array.prototype.slice.call(arguments);
+            return n.unshift(e), t.push(n), t;
+          };
+        }, t.methods.forEach(function(e) {
+          t[e] = t.factory(e);
+        }), t.load = function(t) {
+          var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+          o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+          var i = document.getElementsByTagName("script")[0];
+          i.parentNode.insertBefore(o, i);
+        };
+      }
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    drift.load('vkw9xfpxytsv');
+    </script>
+    <!-- End of Async Drift Code -->
+
+            <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+
+    <script src="/public/js/app.js"></script>
+</body>
+</html>
