@@ -388,21 +388,35 @@ span.read-time {
 
 img.svg-icon {
   height: 2em;
-  margin-bottom: 1em;
-//  flex: 1 0 fill;
-//  filter: grayscale(100%);
-  /* grow, shrink, basis */
-//  flex: 1 0 fit-content;
+  vertical-align: middle;
 }
 
-div.dev-icons {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  background-color: #eee;
+table.top-courses {
+  td:first-of-type {
+    vertical-align: middle;
+    padding-left: 0;
+  }
 }
+
+//img.svg-icon {
+////  height: 16px;
+////  background: green;
+////  height: 2em;
+////  margin-bottom: 1em;
+////  flex: 1 0 fill;
+////  filter: grayscale(100%);
+//  /* grow, shrink, basis */
+////  flex: 1 0 fit-content;
+//}
+
+//div.dev-icons {
+//  display: flex;
+//  flex-wrap: wrap;
+//  flex-direction: row;
+//  align-items: center;
+//  justify-content: space-evenly;
+//  background-color: #eee;
+//}
 
 /* ------------------------------------------------------------------------- */
 
@@ -462,10 +476,6 @@ div.dev-icons {
 
 /* ------------------------------------------------------------------------- */
 @media (min-width: 1024px) {
-  img.svg-icon {
-    height: 3em;
-  }
-
   p.debug::after { content: " desktop"; }
   
   #ga-notice button {
@@ -498,10 +508,6 @@ div.dev-icons {
 
 /* ------------------------------------------------------------------------- */
 @media (min-width: 1216px) {
-  img.svg-icon {
-    height: 4em;
-  }
-
   p.debug::after { content: " wide-screen"; }
   
   article {
