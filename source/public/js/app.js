@@ -20,7 +20,7 @@ $(document).ready(function() {
     
     $(".copy-clipboard").on("click", function(e){
         e.preventDefault();
-        let url = $(this).data("url");
+        var url = $(this).data("url");
         navigator.clipboard.writeText(url);
         console.log("copied", url);
     });
