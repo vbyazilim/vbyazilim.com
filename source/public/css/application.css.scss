@@ -126,6 +126,10 @@ footer {
   background-position: center;
   background-size: cover;
   @include h1-bandage;
+  
+  .headline {
+    font-size: 1.4em;
+  }
 }
 
 .cover {
@@ -501,6 +505,10 @@ table.top-courses {
   }
   .training-main {
     padding-top: 20em;
+    
+    .headline {
+      font-size: 2em;
+    }
   }
 }
 /* ------------------------------------------------------------------------- */
