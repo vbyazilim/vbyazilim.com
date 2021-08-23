@@ -1,0 +1,241 @@
+---
+title: "Static Sites with mkdocs and GitHub Pages"
+date: Aug 23, 2021 09:57
+category: development
+tags: python,mkdocs,github
+author: "Uğur Özyılmazel"
+opengraph_image: "2021-08-23-og-mkdocs.png"
+# published: false
+---
+
+You can build static websites from **markdown** files and serve from **GitHub
+Pages** for free!
+
+READ_MORE
+
+Have you heard of `mkdocs` ? It’s a tiny python package that helps you to
+build static websites without a hassle. First things first, we need to install
+`mkdocs` and `mkdocs-material` for starters:
+
+```bash
+$ pip install mkdocs mkdocs-material
+```
+
+Now, let’s create a project:
+
+```bash
+$ mkdocs new my-project && cd my-project
+INFO     -  Creating project directory: my-project
+INFO     -  Writing config file: my-project/mkdocs.yml
+INFO     -  Writing initial docs: my-project/docs/index.md
+```
+
+Let’s see what we have:
+
+```bash
+$ tree .
+.
+├── docs
+│   └── index.md
+└── mkdocs.yml
+```
+
+## Configuration
+
+Here is an example configuration for a demo site:
+
+```yaml
+site_name: Demo Site
+site_description: Demo Site description
+site_author: YOUR-NAME
+site_url: https://YOUR-NAME.github.io/REPO-NAME/
+dev_addr: 127.0.0.1:9000
+theme:
+  name: 'material'
+repo_name: YOUR-GITHUB-USERNAME/REPO-NAME
+repo_url: https://github.com/YOUR-GITHUB-USERNAME/REPO-NAME
+markdown_extensions:
+  - toc
+  - extra
+  - codehilite
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+nav:
+    - "Home": "index.md"
+    - "Section 1":
+      - "Section 1 Page 1": "section-01/page-01.md"
+    - "Section 2":
+      - "Section 2 Page 1": "section-02/page-01.md"
+```
+
+## Let’s Create Folders and Files
+
+```bash
+$ mkdir docs/section-{01,02}
+$ touch docs/section-{01,02}/page-01.md
+$ echo '# Home' > docs/index.md 
+$ echo '# Section 1 / Page 1' > docs/section-01/page-01.md
+$ echo '# Section 2 / Page 1' > docs/section-02/page-01.md
+```
+
+Now lets serve:
+
+```bash
+$ mkdocs serve
+INFO     -  Building documentation...
+INFO     -  Cleaning site directory
+INFO     -  Documentation built in 0.17 seconds
+INFO     -  [10:23:34] Serving on http://127.0.0.1:9000/REPO-NAME/
+INFO     -  [10:23:35] Browser connected: http://127.0.0.1:9000/REPO-NAME/
+```
+
+Now you can open http://127.0.0.1:9000/REPO-NAME/
+
+<%= image '2021-08-23-demo-site.png', img_class: 'mini-zoom', caption: 'Demo site is up and running' %>
+
+## Let’s Add Some Code Snippets
+
+Now edit your `section-01/page-01.md`:
+
+    # Section 1 / Page 1
+    
+    Example `go` code:
+    
+    ```go
+    // JSONResponse represents data structure of json response
+    type JSONResponse struct {
+    	URL       string    `json:"url"`
+    	Status    int       `json:"status"`
+    	CheckedAt time.Time `json:"checked_at"`
+    	Elapsed   float64   `json:"elapsed,omitempty"`
+    	Length    int       `json:"length,omitempty"`
+    	Find      *string   `json:"find,omitempty"`
+    	Found     *bool     `json:"found,omitempty"`
+    }
+    ```
+    
+    Example `python` code:
+    
+    ```python
+    class KlassForSort:
+        """Example class"""
+        
+        attr1 = 1
+        Attr2 = 2
+        Name2 = 'name2'
+        
+        def __init__(self):
+            self.name = 'Name'
+            
+        def get_name_and_method(self):
+            return self.name + ' get_name_and_method'
+            
+        @property
+        def admin1(self):
+            return True
+    ```
+
+Now check the site:
+
+<%= image '2021-08-23-demo-site-code.png', img_class: 'mini-zoom', caption: 'Code snippet example' %>
+
+### Let’s Add Content Tabs
+
+    ## What about content tabs?
+
+    === "Go"
+
+        ```go
+        // JSONResponse represents data structure of json response
+        type JSONResponse struct {
+        	URL       string    `json:"url"`
+        	Status    int       `json:"status"`
+        	CheckedAt time.Time `json:"checked_at"`
+        	Elapsed   float64   `json:"elapsed,omitempty"`
+        	Length    int       `json:"length,omitempty"`
+        	Find      *string   `json:"find,omitempty"`
+        	Found     *bool     `json:"found,omitempty"`
+        }
+        ```
+
+    === "Python"
+
+        ```python
+        class KlassForSort:
+            """Example class"""
+
+            attr1 = 1
+            Attr2 = 2
+            Name2 = 'name2'
+
+            def __init__(self):
+                self.name = 'Name'
+
+            def get_name_and_method(self):
+                return self.name + ' get_name_and_method'
+
+            @property
+            def admin1(self):
+                return True
+        ```
+
+<%= image '2021-08-23-demo-site-content-tabs.png', img_class: 'mini-zoom', caption: 'Content tabs example' %>
+
+You can find more about [content tabs here][03].
+
+## Let’s Add some Icons
+
+First, we need to add these lines to our `mkdocs.yml` under: `markdown_extensions`:
+
+```yaml
+markdown_extensions:
+  - toc
+  - extra
+  - codehilite
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - pymdownx.emoji:  # <-- here!
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+```
+
+Now edit `docs/section-02/page-01.md`:
+
+    # Section 2 / Page 1
+
+    What about GitHub icon? :material-github:
+
+Here is the result:
+
+<%= image '2021-08-23-demo-site-icons.png', img_class: 'mini-zoom', caption: 'Icon example' %>
+
+You can search and improve icons [here][04]. There are tons of great features
+ships with MkDocs Material, you can find out more goodies [here][05].
+
+## Deployment
+
+Now you are all set, all you need is to create a GitHub repo and push there
+via;
+
+```bash
+$ mkdocs gh-deploy
+```
+
+Yes, thats it! Happy site building!
+
+## Links
+
+- [MkDocs][01]
+- [MkDocs Material][02]
+- [Real life example that I made with MkDocs](https://vbyazilim.github.io/django-vb-baseapp/)
+- [Another real life example that I made with MkDocs](https://vbyazilim.github.io/django-vb-admin/)
+
+[01]: https://www.mkdocs.org/
+[02]: https://squidfunk.github.io/mkdocs-material/
+[03]: https://squidfunk.github.io/mkdocs-material/reference/content-tabs/
+[04]: https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/
+[05]: https://squidfunk.github.io/mkdocs-material/reference/abbreviations/
