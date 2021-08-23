@@ -5,10 +5,225 @@
   <id>https://vbyazilim.com/</id>
   <link href="https://vbyazilim.com/"/>
   <link href="https://vbyazilim.com/feed.xml" rel="self"/>
-  <updated>2021-08-19T11:58:00+03:00</updated>
+  <updated>2021-08-23T09:57:00+03:00</updated>
   <author>
     <name>Uğur Özyılmazel</name>
   </author>
+  <entry>
+    <title>Static Sites with mkdocs and GitHub Pages</title>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/"/>
+    <id>https://vbyazilim.com/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/</id>
+    <published>2021-08-23T09:57:00+03:00</published>
+    <updated>2021-08-23T11:58:22+03:00</updated>
+    <author>
+      <name>Uğur Özyılmazel</name>
+    </author>
+    <summary type="html">&lt;p&gt;You can build static websites from &lt;strong&gt;markdown&lt;/strong&gt; files and serve from &lt;strong&gt;GitHub
+Pages&lt;/strong&gt; for free!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;You can build static websites from &lt;strong&gt;markdown&lt;/strong&gt; files and serve from &lt;strong&gt;GitHub
+Pages&lt;/strong&gt; for free!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;Have you heard of &lt;code&gt;mkdocs&lt;/code&gt; ? It’s a tiny python package that helps you to
+build static websites without a hassle. First things first, we need to install
+&lt;code&gt;mkdocs&lt;/code&gt; and &lt;code&gt;mkdocs-material&lt;/code&gt; for starters:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip &lt;span class="nb"&gt;install &lt;/span&gt;mkdocs mkdocs-material
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, let’s create a project:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdocs new my-project &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;cd &lt;/span&gt;my-project
+INFO     -  Creating project directory: my-project
+INFO     -  Writing config file: my-project/mkdocs.yml
+INFO     -  Writing initial docs: my-project/docs/index.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let’s see what we have:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;tree &lt;span class="nb"&gt;.&lt;/span&gt;
+&lt;span class="nb"&gt;.&lt;/span&gt;
+├── docs
+│   └── index.md
+└── mkdocs.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;Here is an example configuration for a demo site:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;site_name&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;Demo Site&lt;/span&gt;
+&lt;span class="na"&gt;site_description&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;Demo Site description&lt;/span&gt;
+&lt;span class="na"&gt;site_author&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;YOUR-NAME&lt;/span&gt;
+&lt;span class="na"&gt;site_url&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;https://YOUR-NAME.github.io/REPO-NAME/&lt;/span&gt;
+&lt;span class="na"&gt;dev_addr&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;127.0.0.1:9000&lt;/span&gt;
+&lt;span class="na"&gt;theme&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="na"&gt;name&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'&lt;/span&gt;&lt;span class="s"&gt;material'&lt;/span&gt;
+&lt;span class="na"&gt;repo_name&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;YOUR-GITHUB-USERNAME/REPO-NAME&lt;/span&gt;
+&lt;span class="na"&gt;repo_url&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s"&gt;https://github.com/YOUR-GITHUB-USERNAME/REPO-NAME&lt;/span&gt;
+&lt;span class="na"&gt;markdown_extensions&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;toc&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;extra&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;codehilite&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.highlight&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.superfences&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.inlinehilite&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.tabbed&lt;/span&gt;
+&lt;span class="na"&gt;nav&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Home"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;index.md"&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;Page&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;section-01/page-01.md"&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;2"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;2&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;Page&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;section-02/page-01.md"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Let’s Create Folders and Files&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;mkdir &lt;/span&gt;docs/section-&lt;span class="o"&gt;{&lt;/span&gt;01,02&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;touch &lt;/span&gt;docs/section-&lt;span class="o"&gt;{&lt;/span&gt;01,02&lt;span class="o"&gt;}&lt;/span&gt;/page-01.md
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'# Home'&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; docs/index.md 
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'# Section 1 / Page 1'&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; docs/section-01/page-01.md
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;'# Section 2 / Page 1'&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; docs/section-02/page-01.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now lets serve:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdocs serve
+INFO     -  Building documentation...
+INFO     -  Cleaning site directory
+INFO     -  Documentation built &lt;span class="k"&gt;in &lt;/span&gt;0.17 seconds
+INFO     -  &lt;span class="o"&gt;[&lt;/span&gt;10:23:34] Serving on http://127.0.0.1:9000/REPO-NAME/
+INFO     -  &lt;span class="o"&gt;[&lt;/span&gt;10:23:35] Browser connected: http://127.0.0.1:9000/REPO-NAME/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now you can open &lt;a href="http://127.0.0.1:9000/REPO-NAME/"&gt;http://127.0.0.1:9000/REPO-NAME/&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2021-08-23-demo-site.png" alt="Image" /&gt;&lt;figcaption&gt;Demo site is up and running&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;h2&gt;Let’s Add Some Code Snippets&lt;/h2&gt;
+
+&lt;p&gt;Now edit your &lt;code&gt;section-01/page-01.md&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Section 1 / Page 1
+
+Example `go` code:
+
+```go
+// JSONResponse represents data structure of json response
+type JSONResponse struct {
+    URL       string    `json:"url"`
+    Status    int       `json:"status"`
+    CheckedAt time.Time `json:"checked_at"`
+    Elapsed   float64   `json:"elapsed,omitempty"`
+    Length    int       `json:"length,omitempty"`
+    Find      *string   `json:"find,omitempty"`
+    Found     *bool     `json:"found,omitempty"`
+}
+```
+
+Example `python` code:
+
+```python
+class KlassForSort:
+    """Example class"""
+
+    attr1 = 1
+    Attr2 = 2
+    Name2 = 'name2'
+
+    def __init__(self):
+        self.name = 'Name'
+
+    def get_name_and_method(self):
+        return self.name + ' get_name_and_method'
+
+    @property
+    def admin1(self):
+        return True
+```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now check the site:&lt;/p&gt;
+
+&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2021-08-23-demo-site-code.png" alt="Image" /&gt;&lt;figcaption&gt;Code snippet example&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;h3&gt;Let’s Add Content Tabs&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;## What about content tabs?
+
+=== "Go"
+
+    ```go
+    // JSONResponse represents data structure of json response
+    type JSONResponse struct {
+        URL       string    `json:"url"`
+        Status    int       `json:"status"`
+        CheckedAt time.Time `json:"checked_at"`
+        Elapsed   float64   `json:"elapsed,omitempty"`
+        Length    int       `json:"length,omitempty"`
+        Find      *string   `json:"find,omitempty"`
+        Found     *bool     `json:"found,omitempty"`
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    class KlassForSort:
+        """Example class"""
+
+        attr1 = 1
+        Attr2 = 2
+        Name2 = 'name2'
+
+        def __init__(self):
+            self.name = 'Name'
+
+        def get_name_and_method(self):
+            return self.name + ' get_name_and_method'
+
+        @property
+        def admin1(self):
+            return True
+    ```
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2021-08-23-demo-site-content-tabs.png" alt="Image" /&gt;&lt;figcaption&gt;Content tabs example&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;You can find more about &lt;a href="https://squidfunk.github.io/mkdocs-material/reference/content-tabs/"&gt;content tabs here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Let’s Add some Icons&lt;/h2&gt;
+
+&lt;p&gt;First, we need to add these lines to our &lt;code&gt;mkdocs.yml&lt;/code&gt; under: &lt;code&gt;markdown_extensions&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight yaml"&gt;&lt;code&gt;&lt;span class="na"&gt;markdown_extensions&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;toc&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;extra&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;codehilite&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.highlight&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.superfences&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.inlinehilite&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.tabbed&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.emoji&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- here!&lt;/span&gt;
+      &lt;span class="na"&gt;emoji_index&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;!!python/name:materialx.emoji.twemoji&lt;/span&gt;
+      &lt;span class="na"&gt;emoji_generator&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;!!python/name:materialx.emoji.to_svg&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now edit &lt;code&gt;docs/section-02/page-01.md&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Section 2 / Page 1
+
+What about GitHub icon? :material-github:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Here is the result:&lt;/p&gt;
+
+&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2021-08-23-demo-site-icons.png" alt="Image" /&gt;&lt;figcaption&gt;Icon example&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+
+&lt;p&gt;You can search and improve icons &lt;a href="https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/"&gt;here&lt;/a&gt;. There are tons of great features
+ships with MkDocs Material, you can find out more goodies &lt;a href="https://squidfunk.github.io/mkdocs-material/reference/abbreviations/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Deployment&lt;/h2&gt;
+
+&lt;p&gt;Now you are all set, all you need is to create a GitHub repo and push there
+via;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;mkdocs gh-deploy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Yes, thats it! Happy site building!&lt;/p&gt;
+
+&lt;h2&gt;Links&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.mkdocs.org/"&gt;MkDocs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://squidfunk.github.io/mkdocs-material/"&gt;MkDocs Material&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://vbyazilim.github.io/django-vb-baseapp/"&gt;Real life example that I made with MkDocs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://vbyazilim.github.io/django-vb-admin/"&gt;Another real life example that I made with MkDocs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry>
     <title>fancy console logger + inspector</title>
     <link rel="alternate" href="https://vbyazilim.com/blog/2021/08/19/fancy-console-logger-plus-inspector/"/>
@@ -523,64 +738,5 @@ you can modify UserAdminForm on &lt;code&gt;__init__&lt;/code&gt; level too. Mod
 &lt;code&gt;admin.py&lt;/code&gt;. I mostly use custom User model in my projects therefore I put
 related code there.&lt;/p&gt;
 </content>
-  </entry>
-  <entry>
-    <title>Better tool for listing virtual environments</title>
-    <link rel="alternate" href="https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/"/>
-    <id>https://vbyazilim.com/blog/2019/06/03/better-tool-for-listing-virtual-environment/</id>
-    <published>2019-06-03T10:00:00+03:00</published>
-    <updated>2020-11-18T12:52:33+03:00</updated>
-    <author>
-      <name>Uğur Özyılmazel</name>
-    </author>
-    <summary type="html">&lt;p&gt;I love &lt;code&gt;virtualenvwrapper&lt;/code&gt;. You can manage your virtual environments such as
-create/delete or list. Also you can kick additional variables on activation.
-&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;I love &lt;code&gt;virtualenvwrapper&lt;/code&gt;. You can manage your virtual environments such as
-create/delete or list. Also you can kick additional variables on activation.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;virtualenvwrapper&lt;/code&gt; stores environments under &lt;code&gt;~/.virtualenvs/&lt;/code&gt;. When you ask
-for listings of installed environments in your user environment, It basically
-iterates over folder names under &lt;code&gt;~/.virtualenvs/&lt;/code&gt; folder.&lt;/p&gt;
-
-&lt;p&gt;I currently have &lt;strong&gt;24&lt;/strong&gt; folders, which means 24 virtual environments are
-available. Let’s ask for list:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;time &lt;/span&gt;lsvirtualenv
-
-real    0m5.254s
-user    0m3.627s
-sys     0m1.241s
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;What was the operation ?&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;cd&lt;/code&gt; to &lt;code&gt;~/.virtualenvs/&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;loop through folders and print their name&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;It took &lt;strong&gt;5 seconds&lt;/strong&gt; on a &lt;strong&gt;2,9 GHz Intel Core i7&lt;/strong&gt; MacBook Pro :) Don’t you
-think It’s a bit too much ? I tried to implement same functionality via Bash
-script:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;time &lt;/span&gt;ls-virtual-env
-real    0m0.514s
-user    0m0.114s
-sys     0m0.169s
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;It took almost half of a second. I wondered, If I can boost the speed up more!
-Yes I can&amp;hellip; I implemented the same functionality on &lt;strong&gt;Golang&lt;/strong&gt; and added
-extra features such as getting the Python version, coloring etc&amp;hellip;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;time &lt;/span&gt;lsvirtualenvs
-real    0m0.066s
-user    0m0.139s
-sys     0m0.190s
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Unbelievable! All done in mili-seconds. Most of the time consumed while
-executing &lt;code&gt;python --version&lt;/code&gt; command. You can download or inspect the
-code on &lt;a href="https://github.com/vigo/lsvirtualenvs"&gt;GitHub&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;You can install via;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;go get &lt;span class="nt"&gt;-u&lt;/span&gt; github.com/vigo/lsvirtualenvs
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
   </entry>
 </feed>

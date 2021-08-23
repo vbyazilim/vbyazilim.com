@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vb YAZILIM • Blog • Static Sites with mkdocs and GitHub Pages • 3 minutes read</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
+    <meta name="keywords" content="training,git,python,ruby,bash,golang,javascript,reactjs,vuejs,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
+    <meta name="p:domain_verify" content="37faca05c6c17ec39d217c55756a7242"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="icon" href="/public/images/favicon-32.png">
+    <link href="/public/css/syntax.css" rel="stylesheet" />
+    
+    <link href="/public/css/application.css" rel="stylesheet" />
+    <meta property="og:title" content="vb YAZILIM | Static Sites with mkdocs and GitHub Pages" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vbyazilim.com/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/" />
+    
+    <meta property="og:description" content="You can build static websites from markdown files and serve from GitHub
+Pages for free!
+">
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="vb YAZILIM" />
+    
+    <meta property="og:image" content="https://vbyazilim.com/public/images/blog/2021-08-23-og-mkdocs.png" />
+    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/blog/2021-08-23-og-mkdocs.png" />
+    <meta property="og:image:width" content="4096" />
+    <meta property="og:image:height" content="1755" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52664816-9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-52664816-9');
+    </script>
+</head>
+<body>
+    
+
+    <section class="section">
+    <div class="container">
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <a href="/" title="Home"><img src="/public/images/vb-yazilim-logo.svg" class="vb-logo" alt="" /></a>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item"><a title="Home" href="/">Home</a></div>
+                <div class="level-item"><a title="Blog posts" href="/blog/">Blog</a></div>
+                <div class="level-item"><a title="Training" href="/training/">Training</a></div>
+                <div class="level-item"><a title="Türkçe" href="/tr/">Türkçe</a></div>
+                <div class="level-item"><a title="Atom feed" href="/feed.xml"><span class="icon"><i class="fas fa-rss-square"></i></span></a></div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+    
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-9-desktop">
+                <article>
+                    <div class="content is-medium">
+                        <div class="meta mb-1">
+                            <small>Uğur Özyılmazel &mdash; </small>
+                            <time pubdate datetime="2021-08-23T09:57:00+03:00" title="23 August 2021, Monday 09:57">23 August 2021, Monday 09:57</time>
+                             <span class="category"> &mdash; Filed under <a href="/blog/category/development/">development</a></span>
+                             <span class="read-time">reading time: 3 minutes</span>
+                        </div>
+
+                        <h1 class="title">Static Sites with mkdocs and GitHub Pages</h1>
+                        
+                        <div class="tags">
+                            <span class="tag is-info"><a title="Posts with &ldquo;python&rdquo; tag" href="/blog/tag/python/">python</a></span>
+                            <span class="tag is-info"><a title="Posts with &ldquo;mkdocs&rdquo; tag" href="/blog/tag/mkdocs/">mkdocs</a></span>
+                            <span class="tag is-info"><a title="Posts with &ldquo;github&rdquo; tag" href="/blog/tag/github/">github</a></span>
+                        </div>
+
+                        <div class="yield mt-3-desktop">
+                            <p>You can build static websites from <strong>markdown</strong> files and serve from <strong>GitHub
+Pages</strong> for free!</p>
+
+<p></p>
+
+<p>Have you heard of <code>mkdocs</code> ? It’s a tiny python package that helps you to
+build static websites without a hassle. First things first, we need to install
+<code>mkdocs</code> and <code>mkdocs-material</code> for starters:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>pip <span class="nb">install </span>mkdocs mkdocs-material
+</code></pre></div>
+<p>Now, let’s create a project:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>mkdocs new my-project <span class="o">&amp;&amp;</span> <span class="nb">cd </span>my-project
+INFO     -  Creating project directory: my-project
+INFO     -  Writing config file: my-project/mkdocs.yml
+INFO     -  Writing initial docs: my-project/docs/index.md
+</code></pre></div>
+<p>Let’s see what we have:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>tree <span class="nb">.</span>
+<span class="nb">.</span>
+├── docs
+│   └── index.md
+└── mkdocs.yml
+</code></pre></div>
+<h2>Configuration</h2>
+
+<p>Here is an example configuration for a demo site:</p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">site_name</span><span class="pi">:</span> <span class="s">Demo Site</span>
+<span class="na">site_description</span><span class="pi">:</span> <span class="s">Demo Site description</span>
+<span class="na">site_author</span><span class="pi">:</span> <span class="s">YOUR-NAME</span>
+<span class="na">site_url</span><span class="pi">:</span> <span class="s">https://YOUR-NAME.github.io/REPO-NAME/</span>
+<span class="na">dev_addr</span><span class="pi">:</span> <span class="s">127.0.0.1:9000</span>
+<span class="na">theme</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">material'</span>
+<span class="na">repo_name</span><span class="pi">:</span> <span class="s">YOUR-GITHUB-USERNAME/REPO-NAME</span>
+<span class="na">repo_url</span><span class="pi">:</span> <span class="s">https://github.com/YOUR-GITHUB-USERNAME/REPO-NAME</span>
+<span class="na">markdown_extensions</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">toc</span>
+  <span class="pi">-</span> <span class="s">extra</span>
+  <span class="pi">-</span> <span class="s">codehilite</span>
+  <span class="pi">-</span> <span class="s">pymdownx.highlight</span>
+  <span class="pi">-</span> <span class="s">pymdownx.superfences</span>
+  <span class="pi">-</span> <span class="s">pymdownx.inlinehilite</span>
+  <span class="pi">-</span> <span class="s">pymdownx.tabbed</span>
+<span class="na">nav</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">Home"</span><span class="pi">:</span> <span class="s2">"</span><span class="s">index.md"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">Section</span><span class="nv"> </span><span class="s">1"</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">Section</span><span class="nv"> </span><span class="s">1</span><span class="nv"> </span><span class="s">Page</span><span class="nv"> </span><span class="s">1"</span><span class="pi">:</span> <span class="s2">"</span><span class="s">section-01/page-01.md"</span>
+    <span class="pi">-</span> <span class="s2">"</span><span class="s">Section</span><span class="nv"> </span><span class="s">2"</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s2">"</span><span class="s">Section</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">Page</span><span class="nv"> </span><span class="s">1"</span><span class="pi">:</span> <span class="s2">"</span><span class="s">section-02/page-01.md"</span>
+</code></pre></div>
+<h2>Let’s Create Folders and Files</h2>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">mkdir </span>docs/section-<span class="o">{</span>01,02<span class="o">}</span>
+<span class="nv">$ </span><span class="nb">touch </span>docs/section-<span class="o">{</span>01,02<span class="o">}</span>/page-01.md
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'# Home'</span> <span class="o">&gt;</span> docs/index.md 
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'# Section 1 / Page 1'</span> <span class="o">&gt;</span> docs/section-01/page-01.md
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'# Section 2 / Page 1'</span> <span class="o">&gt;</span> docs/section-02/page-01.md
+</code></pre></div>
+<p>Now lets serve:</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>mkdocs serve
+INFO     -  Building documentation...
+INFO     -  Cleaning site directory
+INFO     -  Documentation built <span class="k">in </span>0.17 seconds
+INFO     -  <span class="o">[</span>10:23:34] Serving on http://127.0.0.1:9000/REPO-NAME/
+INFO     -  <span class="o">[</span>10:23:35] Browser connected: http://127.0.0.1:9000/REPO-NAME/
+</code></pre></div>
+<p>Now you can open <a href="http://127.0.0.1:9000/REPO-NAME/">http://127.0.0.1:9000/REPO-NAME/</a></p>
+
+<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2021-08-23-demo-site.png" alt="Image" /><figcaption>Demo site is up and running</figcaption></figure></div>
+
+<h2>Let’s Add Some Code Snippets</h2>
+
+<p>Now edit your <code>section-01/page-01.md</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code># Section 1 / Page 1
+
+Example `go` code:
+
+```go
+// JSONResponse represents data structure of json response
+type JSONResponse struct {
+    URL       string    `json:"url"`
+    Status    int       `json:"status"`
+    CheckedAt time.Time `json:"checked_at"`
+    Elapsed   float64   `json:"elapsed,omitempty"`
+    Length    int       `json:"length,omitempty"`
+    Find      *string   `json:"find,omitempty"`
+    Found     *bool     `json:"found,omitempty"`
+}
+```
+
+Example `python` code:
+
+```python
+class KlassForSort:
+    """Example class"""
+
+    attr1 = 1
+    Attr2 = 2
+    Name2 = 'name2'
+
+    def __init__(self):
+        self.name = 'Name'
+
+    def get_name_and_method(self):
+        return self.name + ' get_name_and_method'
+
+    @property
+    def admin1(self):
+        return True
+```
+</code></pre></div>
+<p>Now check the site:</p>
+
+<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2021-08-23-demo-site-code.png" alt="Image" /><figcaption>Code snippet example</figcaption></figure></div>
+
+<h3>Let’s Add Content Tabs</h3>
+<div class="highlight"><pre class="highlight plaintext"><code>## What about content tabs?
+
+=== "Go"
+
+    ```go
+    // JSONResponse represents data structure of json response
+    type JSONResponse struct {
+        URL       string    `json:"url"`
+        Status    int       `json:"status"`
+        CheckedAt time.Time `json:"checked_at"`
+        Elapsed   float64   `json:"elapsed,omitempty"`
+        Length    int       `json:"length,omitempty"`
+        Find      *string   `json:"find,omitempty"`
+        Found     *bool     `json:"found,omitempty"`
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    class KlassForSort:
+        """Example class"""
+
+        attr1 = 1
+        Attr2 = 2
+        Name2 = 'name2'
+
+        def __init__(self):
+            self.name = 'Name'
+
+        def get_name_and_method(self):
+            return self.name + ' get_name_and_method'
+
+        @property
+        def admin1(self):
+            return True
+    ```
+</code></pre></div>
+<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2021-08-23-demo-site-content-tabs.png" alt="Image" /><figcaption>Content tabs example</figcaption></figure></div>
+
+<p>You can find more about <a href="https://squidfunk.github.io/mkdocs-material/reference/content-tabs/">content tabs here</a>.</p>
+
+<h2>Let’s Add some Icons</h2>
+
+<p>First, we need to add these lines to our <code>mkdocs.yml</code> under: <code>markdown_extensions</code>:</p>
+<div class="highlight"><pre class="highlight yaml"><code><span class="na">markdown_extensions</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">toc</span>
+  <span class="pi">-</span> <span class="s">extra</span>
+  <span class="pi">-</span> <span class="s">codehilite</span>
+  <span class="pi">-</span> <span class="s">pymdownx.highlight</span>
+  <span class="pi">-</span> <span class="s">pymdownx.superfences</span>
+  <span class="pi">-</span> <span class="s">pymdownx.inlinehilite</span>
+  <span class="pi">-</span> <span class="s">pymdownx.tabbed</span>
+  <span class="pi">-</span> <span class="s">pymdownx.emoji</span><span class="pi">:</span>  <span class="c1"># &lt;-- here!</span>
+      <span class="na">emoji_index</span><span class="pi">:</span> <span class="kt">!!python/name:materialx.emoji.twemoji</span>
+      <span class="na">emoji_generator</span><span class="pi">:</span> <span class="kt">!!python/name:materialx.emoji.to_svg</span>
+</code></pre></div>
+<p>Now edit <code>docs/section-02/page-01.md</code>:</p>
+<div class="highlight"><pre class="highlight plaintext"><code># Section 2 / Page 1
+
+What about GitHub icon? :material-github:
+</code></pre></div>
+<p>Here is the result:</p>
+
+<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2021-08-23-demo-site-icons.png" alt="Image" /><figcaption>Icon example</figcaption></figure></div>
+
+<p>You can search and improve icons <a href="https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/">here</a>. There are tons of great features
+ships with MkDocs Material, you can find out more goodies <a href="https://squidfunk.github.io/mkdocs-material/reference/abbreviations/">here</a>.</p>
+
+<h2>Deployment</h2>
+
+<p>Now you are all set, all you need is to create a GitHub repo and push there
+via;</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>mkdocs gh-deploy
+</code></pre></div>
+<p>Yes, thats it! Happy site building!</p>
+
+<h2>Links</h2>
+
+<ul>
+<li><a href="https://www.mkdocs.org/">MkDocs</a></li>
+<li><a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a></li>
+<li><a href="https://vbyazilim.github.io/django-vb-baseapp/">Real life example that I made with MkDocs</a></li>
+<li><a href="https://vbyazilim.github.io/django-vb-admin/">Another real life example that I made with MkDocs</a></li>
+</ul>
+
+                        </div>
+                    </div>
+                    <div class="sharethis-inline-share-buttons" style="margin-top: 3em;"></div>
+                </article>
+            </div>
+            
+            <div class="column is-3-desktop article-right-column is-hidden-touch">
+                <div class="content is-medium">
+<h4 class="title">Related Posts</h4><p><a href="/blog/2021/08/19/fancy-console-logger-plus-inspector/" title="fancy console logger + inspector">fancy console logger + inspector</a></p><time datetime="2021-08-19T11:58:00+03:00">19 August 2021, Thursday 11:58</time><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2021/08/19/fancy-console-logger-plus-inspector/" title="fancy console logger + inspector">fancy console logger + inspector</a></p><time datetime="2021-08-19T11:58:00+03:00">19 August 2021, Thursday 11:58</time><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time><p><a href="/blog/2019/07/07/quick-query-optimization-in-bare-django-project/" title="Quick query optimization in bare Django project">Quick query optimization in bare Django project</a></p><time datetime="2019-07-07T14:37:00+03:00">07 July 2019, Sunday 14:37</time>                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+    <div id="ga-notice" class="is-hidden">
+        <div class="notification is-size-7-touch has-text-centered is-radiusless">
+            <button class="delete mr-1"></button>
+            We are using Google Analytics on our page to track visit counts and other statistic related datas.
+            We would like to inform you about that...
+        </div>
+    </div>
+
+    <footer class="footer has-background-color-vb has-text-white">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <div class="content">
+                    <p><strong>vb YAZILIM</strong> - Uğur Özyılmazel</p>
+                    <address>
+                        Meşrutiyet Mah. Samanyolu sk. 11/7<br/>
+                        34363 - Şişli / İstanbul<br/>
+                        Türkiye<br/><br/>
+                        <a href="tel:+905333774300"><span class="icon"><i class="fas fa-phone-square"></i></span>+90-(0)533-3774300</a><br/>
+                        <script type="text/javascript">
+                            document.write('<a href="mailto:');
+                            document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                            document.write('?subject=Hello">');
+                            document.write('<span class="icon"><i class="fas fa-envelope-square"></i></span>');
+                            document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                            document.write('</a>');
+                        </script>
+                    </address>
+                </div>
+            </div>
+            <div class="column has-text-right-tablet footer-right-icons-tablet">
+                <p>
+                    <a title="GitHub repo of vb YAZILIM" target="_blank" href="https://github.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-github-square fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-twitter-square fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://linkedin.com/company/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-linkedin fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://vimeo.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-vimeo fa-2x"></i>
+                        </span>
+                    </a>
+                </p>
+                <p class="mt-1">
+                    made with <a class="is-external-link" href="https://middlemanapp.com">Middleman</a><br/>
+                    
+                    <a class="is-external-link" href="https://www.ruby-lang.org">Ruby</a> 
+                    <a class="is-external-link" href="https://sass-lang.com">Sass</a><br/>
+                    
+                    <a class="is-external-link" href="https://bulma.io">Bulma</a> 
+                    <a class="is-external-link" href="https://fontawesome.com">Font Awesome</a>
+                    <a class="is-external-link" href="https://simpleicons.org">Simple Icons</a><br/>
+
+                    <a class="is-external-link" href="https://www.w3.org/TR/html/">HTML</a> 
+                    <a class="is-external-link" href="https://www.w3.org/Style/CSS/">CSS</a> 
+                    <a class="is-external-link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> 
+                    <a class="is-external-link" href="https://unsplash.com">Unsplash</a> 
+                </p>
+                <p class="mt-1">hosted at <a class="is-external-link" href="https://pages.github.com">GitHub Pages</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!-- Start of Async Drift Code -->
+    <script>
+    "use strict";
+
+    !function() {
+      var t = window.driftt = window.drift = window.driftt || [];
+      if (!t.init) {
+        if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+        t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+        t.factory = function(e) {
+          return function() {
+            var n = Array.prototype.slice.call(arguments);
+            return n.unshift(e), t.push(n), t;
+          };
+        }, t.methods.forEach(function(e) {
+          t[e] = t.factory(e);
+        }), t.load = function(t) {
+          var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+          o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+          var i = document.getElementsByTagName("script")[0];
+          i.parentNode.insertBefore(o, i);
+        };
+      }
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    drift.load('vkw9xfpxytsv');
+    </script>
+    <!-- End of Async Drift Code -->
+
+            <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+
+    <script src="/public/js/app.js"></script>
+</body>
+</html>
