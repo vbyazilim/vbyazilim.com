@@ -9,7 +9,7 @@ gem 'redcarpet', '~> 3.4'
 gem 'stringex', '~> 2.8', '>= 2.8.5'
 
 gem 'builder', '~> 3.2', '>= 3.2.4'
-gem 'nokogiri', '~> 1.12', '>= 1.12.3'
+gem 'nokogiri', '~> 1.12'
 gem 'image_size', '~> 2.0', '>= 2.0.1'
 gem 'readingtime', '~> 0.4.0'
 gem 'sanitize', '~> 6.0'
