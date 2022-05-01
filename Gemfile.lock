@@ -146,7 +146,7 @@ DEPENDENCIES
   middleman-blog (~> 4.0, >= 4.0.3)
   middleman-livereload (~> 3.4, >= 3.4.7)
   middleman-syntax (~> 3.2)
-  nokogiri (~> 1.13, >= 1.13.4)
+  nokogiri (>= 1.13.4)
   pry (~> 0.14.1)
   readingtime (~> 0.4.0)
   redcarpet (~> 3.5, >= 3.5.1)
