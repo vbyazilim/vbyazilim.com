@@ -2,12 +2,21 @@
 
 Brand new version of our website!
 
+## Requirements
+
+- `ruby 3.1.2` ( `ruby 3.1.2p20`)
+- `arm64-darwin-21`
+
+Check yours via `bundle platform`
+
 ## Installation
 
 ```bash
 $ git clone https://github.com/vbyazilim/vbyazilim.com.git
 $ cd vbyazilim.com/
-$ bundle install --path=vendor/bundle --binstubs
+$ bundle config set --local path 'vendor/bundle'
+$ bundle config set --local bin 'bin'
+$ bundle
 
 # run server
 $ rake
