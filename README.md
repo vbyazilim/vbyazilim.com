@@ -1,3 +1,7 @@
+![Version](https://img.shields.io/badge/version-0.0.0-orange.svg)
+[![pages-build-deployment](https://github.com/vbyazilim/vbyazilim.com/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/vbyazilim/vbyazilim.com/actions/workflows/pages/pages-build-deployment)
+
+
 # vbyazilim.com
 
 Brand new version of our website!
@@ -25,7 +29,7 @@ $ rake
 $ rake -T
 
 rake build                    # Build site
-rake deploy                   # Deploy
+rake deploy[bump]             # Deploy to gh-pages with bump
 rake new:article[title,date]  # Post new Article
 rake runserver                # Run development server
 ```

@@ -47,10 +47,17 @@ namespace :new do
   end
 end
 
-desc "Deploy"
-task :deploy do
+desc "Deploy to gh-pages with bump"
+task :deploy, [:bump] do |_, args|
+  args.with_defaults(bump: 'patch')
+
   now = Time.now.strftime("%Y-%m-%d-%H-%M")
   system %{
+    cd build/ &&
+    git pull &&
+    cd ../ &&
+    bumpversion #{args.bump} &&
+    git push &&
     bundle exec middleman build --clean --verbose &&
     cd build/ &&
     git add . &&
