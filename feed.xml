@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://vbyazilim.com/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/"/>
     <id>https://vbyazilim.com/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/</id>
     <published>2021-08-23T09:57:00+03:00</published>
-    <updated>2021-08-23T11:58:22+03:00</updated>
+    <updated>2022-08-18T08:22:56+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -66,11 +66,11 @@ INFO     -  Writing initial docs: my-project/docs/index.md
   &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.inlinehilite&lt;/span&gt;
   &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.tabbed&lt;/span&gt;
 &lt;span class="na"&gt;nav&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Home"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;index.md"&lt;/span&gt;
-    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;Page&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;section-01/page-01.md"&lt;/span&gt;
-    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;2"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;
-      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;2&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;Page&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;section-02/page-01.md"&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Home"&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;index.md"&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;Page&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;section-01/page-01.md"&lt;/span&gt;
+    &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;2"&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;
+      &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;Section&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;2&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;Page&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;1"&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="s"&gt;section-02/page-01.md"&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Let’s Create Folders and Files&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;mkdir &lt;/span&gt;docs/section-&lt;span class="o"&gt;{&lt;/span&gt;01,02&lt;span class="o"&gt;}&lt;/span&gt;
@@ -190,7 +190,7 @@ class KlassForSort:
   &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.superfences&lt;/span&gt;
   &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.inlinehilite&lt;/span&gt;
   &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.tabbed&lt;/span&gt;
-  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="s"&gt;pymdownx.emoji&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- here!&lt;/span&gt;
+  &lt;span class="pi"&gt;-&lt;/span&gt; &lt;span class="na"&gt;pymdownx.emoji&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# &amp;lt;-- here!&lt;/span&gt;
       &lt;span class="na"&gt;emoji_index&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;!!python/name:materialx.emoji.twemoji&lt;/span&gt;
       &lt;span class="na"&gt;emoji_generator&lt;/span&gt;&lt;span class="pi"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;!!python/name:materialx.emoji.to_svg&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -229,7 +229,7 @@ via;&lt;/p&gt;
     <link rel="alternate" href="https://vbyazilim.com/blog/2021/08/19/fancy-console-logger-plus-inspector/"/>
     <id>https://vbyazilim.com/blog/2021/08/19/fancy-console-logger-plus-inspector/</id>
     <published>2021-08-19T11:58:00+03:00</published>
-    <updated>2021-08-19T12:37:16+03:00</updated>
+    <updated>2022-08-18T08:22:56+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -441,7 +441,7 @@ or setting this arg to &lt;code&gt;True&lt;/code&gt;&lt;/li&gt;
     <link rel="alternate" href="https://vbyazilim.com/blog/2021/02/04/network-addresses-and-named-ports/"/>
     <id>https://vbyazilim.com/blog/2021/02/04/network-addresses-and-named-ports/</id>
     <published>2021-02-04T19:44:00+03:00</published>
-    <updated>2021-02-05T07:59:57+03:00</updated>
+    <updated>2022-08-18T08:22:56+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -509,7 +509,7 @@ definitions.&lt;/p&gt;
     <link rel="alternate" href="https://vbyazilim.com/blog/2020/07/27/argument-reuse/"/>
     <id>https://vbyazilim.com/blog/2020/07/27/argument-reuse/</id>
     <published>2020-07-27T13:38:00+03:00</published>
-    <updated>2020-11-18T12:52:33+03:00</updated>
+    <updated>2022-08-18T08:22:56+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -578,7 +578,7 @@ function only once. Here is a bit complex example:&lt;/p&gt;
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/"/>
     <id>https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/</id>
     <published>2019-08-11T17:00:00+03:00</published>
-    <updated>2020-11-18T12:52:33+03:00</updated>
+    <updated>2022-08-18T08:22:56+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
@@ -653,7 +653,7 @@ to install package dependencies via &lt;code&gt;pipx install PACKAGE --include-d
     <link rel="alternate" href="https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/"/>
     <id>https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/</id>
     <published>2019-07-07T14:37:00+03:00</published>
-    <updated>2020-11-18T12:52:33+03:00</updated>
+    <updated>2022-08-18T08:22:56+03:00</updated>
     <author>
       <name>Uğur Özyılmazel</name>
     </author>
