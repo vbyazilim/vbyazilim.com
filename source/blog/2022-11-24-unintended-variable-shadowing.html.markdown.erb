@@ -1,0 +1,109 @@
+---
+title: "Unintended variable shadowing"
+date: Nov 24, 2022 09:04
+category: development
+tags: golang
+author: "Uğur Özyılmazel"
+opengraph_image: "2020-07-27-og-golang.png"
+---
+
+In golang, you need to be careful while declaring your variables for re-using.
+READ_MORE
+
+If you declare a variable in a block and re-declare in an inner block, you will
+face the **variable shadowing** situation! Let’s see what I mean;
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func getFunnyName() string {
+	return "jambalaya"
+}
+
+func main() {
+	var name string // declare name
+	name = "none"
+
+	if time.Now().Year() > 1984 {
+		// this is totally different variable
+		// in an inner block and shadows
+		// var name string
+		name := getFunnyName()
+
+		// name jambalaya
+		fmt.Println("name", name)
+	} else {
+		fmt.Println("name", name)
+	}
+
+	// name final value none
+	fmt.Println("name final value", name)
+}
+```
+
+as you see, `name := getFunnyName()` is in the inner block and totally different
+declaration. It has nothing to do with `var name string`.
+
+How do we fix that? First we need to check shadow issues via `go vet`. You need
+to install;
+
+```bash
+go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
+```
+
+then you need to run it over your code;
+
+```bash
+go vet -vettool=$(command -v shadow) main.go 
+# command-line-arguments
+./main.go:20:3: declaration of "name" shadows declaration at line 13
+```
+
+Yep! here it is, you catch the bug! now, it’s time to fix the code;
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func getFunnyName() string {
+	return "jambalaya"
+}
+
+func main() {
+	var name string // declare name
+	name = "none"
+
+	if time.Now().Year() > 1984 {
+         // this set real name value
+		name = getFunnyName()
+
+		// name jambalaya
+		fmt.Println("name", name)
+	} else {
+		fmt.Println("name", name)
+	}
+
+	// name final value jambalaya
+	fmt.Println("name final value", name)
+}
+```
+
+always keep this in mind, whenever you write `if` blocks or `;` in your checks
+such as;
+
+```go
+if variable := expression; variable != nil {
+	// do your thing...
+}
+```
+
+this means everything happens in your **defined block scope**!
