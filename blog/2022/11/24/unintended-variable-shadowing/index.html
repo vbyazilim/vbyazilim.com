@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>vb YAZILIM • Blog • Argument reuse • 1 minutes read</title>
+    <title>vb YAZILIM • Blog • Unintended variable shadowing • 1 minutes read</title>
     <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
 
     <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
@@ -15,11 +15,11 @@
     <link href="/public/css/syntax.css" rel="stylesheet" />
     
     <link href="/public/css/application.css" rel="stylesheet" />
-    <meta property="og:title" content="vb YAZILIM | Argument reuse" />
+    <meta property="og:title" content="vb YAZILIM | Unintended variable shadowing" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://vbyazilim.com/blog/2020/07/27/argument-reuse/" />
+    <meta property="og:url" content="https://vbyazilim.com/blog/2022/11/24/unintended-variable-shadowing/" />
     
-    <meta property="og:description" content="Golang’s fmt package provides many features for formatting and printing.">
+    <meta property="og:description" content="In golang, you need to be careful while declaring your variables for re-using.">
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="vb YAZILIM" />
     
@@ -68,74 +68,103 @@
                     <div class="content is-medium">
                         <div class="meta mb-1">
                             <small>Uğur Özyılmazel &mdash; </small>
-                            <time pubdate datetime="2020-07-27T13:38:00+03:00" title="27 July 2020, Monday 13:38">27 July 2020, Monday 13:38</time>
+                            <time pubdate datetime="2022-11-24T09:04:00+03:00" title="24 November 2022, Thursday 09:04">24 November 2022, Thursday 09:04</time>
                              <span class="category"> &mdash; Filed under <a href="/blog/category/development/">development</a></span>
                              <span class="read-time">reading time: 1 minutes</span>
                         </div>
 
-                        <h1 class="title">Argument reuse</h1>
+                        <h1 class="title">Unintended variable shadowing</h1>
                         
                         <div class="tags">
                             <span class="tag is-info"><a title="Posts with &ldquo;golang&rdquo; tag" href="/blog/tag/golang/">golang</a></span>
                         </div>
 
                         <div class="yield mt-3-desktop">
-                            <p>Golang’s <code>fmt</code> package provides many features for formatting and printing.
+                            <p>In golang, you need to be careful while declaring your variables for re-using.
 </p>
 
-<div class="zoomable "><figure class="image"><img class="mini-zoom" src="/public/images/blog/2020-07-27-golang.png" alt="Image" /></figure></div>
-
-<p>Here is a small example:</p>
+<p>If you declare a variable in a block and re-declare in an inner block, you will
+face the <strong>variable shadowing</strong> situation! Let’s see what I mean;</p>
 <div class="highlight"><pre class="highlight go"><code><span class="k">package</span> <span class="n">main</span>
 
-<span class="k">import</span> <span class="s">"fmt"</span>
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">getFunnyName</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">"jambalaya"</span>
+<span class="p">}</span>
 
 <span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">s</span> <span class="o">:=</span> <span class="s">"Hello"</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="c">// Hello</span>
+    <span class="k">var</span> <span class="n">name</span> <span class="kt">string</span> <span class="c">// declare name</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">"none"</span>
+
+    <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span><span class="o">.</span><span class="n">Year</span><span class="p">()</span> <span class="o">&gt;</span> <span class="m">1984</span> <span class="p">{</span>
+        <span class="c">// this is totally different variable</span>
+        <span class="c">// in an inner block and shadows</span>
+        <span class="c">// var name string</span>
+        <span class="n">name</span> <span class="o">:=</span> <span class="n">getFunnyName</span><span class="p">()</span>
+
+        <span class="c">// name jambalaya</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c">// name final value none</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"name final value"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Sometimes you need to use same object for displaying in different formats.
-Most people use this way:</p>
+<p>as you see, <code>name := getFunnyName()</code> is in the inner block and totally different
+declaration. It has nothing to do with <code>var name string</code>.</p>
+
+<p>How do we fix that? First we need to check shadow issues via <code>go vet</code>. You need
+to install;</p>
+<div class="highlight"><pre class="highlight shell"><code>go <span class="nb">install </span>golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
+</code></pre></div>
+<p>then you need to run it over your code;</p>
+<div class="highlight"><pre class="highlight shell"><code>go vet <span class="nt">-vettool</span><span class="o">=</span><span class="si">$(</span><span class="nb">command</span> <span class="nt">-v</span> shadow<span class="si">)</span> main.go 
+<span class="c"># command-line-arguments</span>
+./main.go:20:3: declaration of <span class="s2">"name"</span> shadows declaration at line 13
+</code></pre></div>
+<p>Yep! here it is, you catch the bug! now, it’s time to fix the code;</p>
 <div class="highlight"><pre class="highlight go"><code><span class="k">package</span> <span class="n">main</span>
 
-<span class="k">import</span> <span class="s">"fmt"</span>
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"time"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">getFunnyName</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">"jambalaya"</span>
+<span class="p">}</span>
 
 <span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">s</span> <span class="o">:=</span> <span class="s">"Hello"</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"value: %s, type: %T</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="c">// value: Hello, type: string</span>
+    <span class="k">var</span> <span class="n">name</span> <span class="kt">string</span> <span class="c">// declare name</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">"none"</span>
+
+    <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span><span class="o">.</span><span class="n">Year</span><span class="p">()</span> <span class="o">&gt;</span> <span class="m">1984</span> <span class="p">{</span>
+         <span class="c">// this set real name value</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">getFunnyName</span><span class="p">()</span>
+
+        <span class="c">// name jambalaya</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c">// name final value jambalaya</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"name final value"</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>As you see, we use <code>s</code> twice. We have another option: <code>[INDEX]</code> usage:</p>
-<div class="highlight"><pre class="highlight go"><code><span class="k">package</span> <span class="n">main</span>
-
-<span class="k">import</span> <span class="s">"fmt"</span>
-
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">s</span> <span class="o">:=</span> <span class="s">"Hello"</span>
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"value: %[1]s, type: %[1]T</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="c">// value: Hello, type: string</span>
+<p>always keep this in mind, whenever you write <code>if</code> blocks or <code>;</code> in your checks
+such as;</p>
+<div class="highlight"><pre class="highlight go"><code><span class="k">if</span> <span class="n">variable</span> <span class="o">:=</span> <span class="n">expression</span><span class="p">;</span> <span class="n">variable</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+    <span class="c">// do your thing...</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><code>%[1]s</code> means, use the first argument&hellip; Now, we are passing <code>s</code> to <code>Printf</code>
-function only once. Here is a bit complex example:</p>
-<div class="highlight"><pre class="highlight go"><code><span class="k">package</span> <span class="n">main</span>
-
-<span class="k">import</span> <span class="s">"fmt"</span>
-
-<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">s</span> <span class="o">:=</span> <span class="s">"Hello"</span>
-    <span class="n">n</span> <span class="o">:=</span> <span class="m">1</span>
-
-    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"value of s: %[1]s, type of s: %[1]T</span><span class="se">\n</span><span class="s">value of n: %[2]d, type of n: %[2]T</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> 
-    <span class="c">// value of s: Hello, type of s: string</span>
-    <span class="c">// value of n: 1, type of n: int</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>Happy coding!</p>
-
-<hr>
-
-<p>Golang logo is a trade mark of <a href="https://blog.golang.org/go-brand">Google</a></p>
+<p>this means everything happens in your <strong>defined block scope</strong>!</p>
 
                         </div>
                     </div>
@@ -145,7 +174,7 @@ function only once. Here is a bit complex example:</p>
             
             <div class="column is-3-desktop article-right-column is-hidden-touch">
                 <div class="content is-medium">
-<h4 class="title">Related Posts</h4><p><a href="/blog/2022/11/24/unintended-variable-shadowing/" title="Unintended variable shadowing">Unintended variable shadowing</a></p><time datetime="2022-11-24T09:04:00+03:00">24 November 2022, Thursday 09:04</time><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2022/11/24/unintended-variable-shadowing/" title="Unintended variable shadowing">Unintended variable shadowing</a></p><time datetime="2022-11-24T09:04:00+03:00">24 November 2022, Thursday 09:04</time><p><a href="/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/" title="Static Sites with mkdocs and GitHub Pages">Static Sites with mkdocs and GitHub Pages</a></p><time datetime="2021-08-23T09:57:00+03:00">23 August 2021, Monday 09:57</time><p><a href="/blog/2021/08/19/fancy-console-logger-plus-inspector/" title="fancy console logger + inspector">fancy console logger + inspector</a></p><time datetime="2021-08-19T11:58:00+03:00">19 August 2021, Thursday 11:58</time><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time>                </div>
+<h4 class="title">Related Posts</h4><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/" title="Static Sites with mkdocs and GitHub Pages">Static Sites with mkdocs and GitHub Pages</a></p><time datetime="2021-08-23T09:57:00+03:00">23 August 2021, Monday 09:57</time><p><a href="/blog/2021/08/19/fancy-console-logger-plus-inspector/" title="fancy console logger + inspector">fancy console logger + inspector</a></p><time datetime="2021-08-19T11:58:00+03:00">19 August 2021, Thursday 11:58</time><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><p><a href="/blog/2019/08/11/pipx-life-saver/" title="pipx : life saver">pipx : life saver</a></p><time datetime="2019-08-11T17:00:00+03:00">11 August 2019, Sunday 17:00</time>                </div>
             </div>
         </div>
     </div>

@@ -5,10 +5,108 @@
   <id>https://vbyazilim.com/</id>
   <link href="https://vbyazilim.com/"/>
   <link href="https://vbyazilim.com/feed.xml" rel="self"/>
-  <updated>2021-08-23T09:57:00+03:00</updated>
+  <updated>2022-11-24T09:04:00+03:00</updated>
   <author>
     <name>Uğur Özyılmazel</name>
   </author>
+  <entry>
+    <title>Unintended variable shadowing</title>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2022/11/24/unintended-variable-shadowing/"/>
+    <id>https://vbyazilim.com/blog/2022/11/24/unintended-variable-shadowing/</id>
+    <published>2022-11-24T09:04:00+03:00</published>
+    <updated>2022-11-24T09:39:52+03:00</updated>
+    <author>
+      <name>Uğur Özyılmazel</name>
+    </author>
+    <summary type="html">&lt;p&gt;In golang, you need to be careful while declaring your variables for re-using.
+&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;In golang, you need to be careful while declaring your variables for re-using.
+&lt;/p&gt;
+
+&lt;p&gt;If you declare a variable in a block and re-declare in an inner block, you will
+face the &lt;strong&gt;variable shadowing&lt;/strong&gt; situation! Let’s see what I mean;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
+
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s"&gt;"fmt"&lt;/span&gt;
+    &lt;span class="s"&gt;"time"&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;getFunnyName&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;"jambalaya"&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="c"&gt;// declare name&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"none"&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Year&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;1984&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c"&gt;// this is totally different variable&lt;/span&gt;
+        &lt;span class="c"&gt;// in an inner block and shadows&lt;/span&gt;
+        &lt;span class="c"&gt;// var name string&lt;/span&gt;
+        &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;getFunnyName&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="c"&gt;// name jambalaya&lt;/span&gt;
+        &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c"&gt;// name final value none&lt;/span&gt;
+    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"name final value"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;as you see, &lt;code&gt;name := getFunnyName()&lt;/code&gt; is in the inner block and totally different
+declaration. It has nothing to do with &lt;code&gt;var name string&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;How do we fix that? First we need to check shadow issues via &lt;code&gt;go vet&lt;/code&gt;. You need
+to install;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;go &lt;span class="nb"&gt;install &lt;/span&gt;golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;then you need to run it over your code;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;go vet &lt;span class="nt"&gt;-vettool&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;command&lt;/span&gt; &lt;span class="nt"&gt;-v&lt;/span&gt; shadow&lt;span class="si"&gt;)&lt;/span&gt; main.go 
+&lt;span class="c"&gt;# command-line-arguments&lt;/span&gt;
+./main.go:20:3: declaration of &lt;span class="s2"&gt;"name"&lt;/span&gt; shadows declaration at line 13
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Yep! here it is, you catch the bug! now, it’s time to fix the code;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
+
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s"&gt;"fmt"&lt;/span&gt;
+    &lt;span class="s"&gt;"time"&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;getFunnyName&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;"jambalaya"&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="c"&gt;// declare name&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;"none"&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Year&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="m"&gt;1984&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+         &lt;span class="c"&gt;// this set real name value&lt;/span&gt;
+        &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;getFunnyName&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="c"&gt;// name jambalaya&lt;/span&gt;
+        &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"name"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c"&gt;// name final value jambalaya&lt;/span&gt;
+    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"name final value"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;always keep this in mind, whenever you write &lt;code&gt;if&lt;/code&gt; blocks or &lt;code&gt;;&lt;/code&gt; in your checks
+such as;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;expression&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="c"&gt;// do your thing...&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;this means everything happens in your &lt;strong&gt;defined block scope&lt;/strong&gt;!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Static Sites with mkdocs and GitHub Pages</title>
     <link rel="alternate" href="https://vbyazilim.com/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/"/>
@@ -646,97 +744,6 @@ to install package dependencies via &lt;code&gt;pipx install PACKAGE --include-d
 &lt;li&gt;Creator/Maintainer: &lt;a href="https://github.com/cs01/"&gt;Chad Smith&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Logo by &lt;a href="https://github.com/IrishMorales"&gt;@IrishMorales&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Quick query optimization in bare Django project</title>
-    <link rel="alternate" href="https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/"/>
-    <id>https://vbyazilim.com/blog/2019/07/07/quick-query-optimization-in-bare-django-project/</id>
-    <published>2019-07-07T14:37:00+03:00</published>
-    <updated>2022-08-18T08:22:56+03:00</updated>
-    <author>
-      <name>Uğur Özyılmazel</name>
-    </author>
-    <summary type="html">&lt;p&gt;You’ve just installed Django and started new project without any models or
-anything else. Created superuser and jumped in to User Admin… What will
-you see ? &lt;strong&gt;35&lt;/strong&gt; queries…
-&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;You’ve just installed Django and started new project without any models or
-anything else. Created superuser and jumped in to User Admin&amp;hellip; What will
-you see ? &lt;strong&gt;35&lt;/strong&gt; queries&amp;hellip;
-&lt;/p&gt;
-
-&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2019-07-07-01-user-model-before-optimization.png" alt="Image" /&gt;&lt;figcaption&gt;Pure Django User Admin&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
-
-&lt;p&gt;Why ? &lt;code&gt;Permission&lt;/code&gt; model’s &lt;code&gt;ForeignKey&lt;/code&gt; relation with &lt;code&gt;ContentType&lt;/code&gt; model mostly
-causes this performance issue. If you check the source code, you’ll see the problem;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Permission&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__str__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;"%s | %s | %s"&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
-            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content_type&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;app_label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;    &lt;span class="c1"&gt;# &amp;lt;- this
-&lt;/span&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content_type&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;              &lt;span class="c1"&gt;# &amp;lt;- this
-&lt;/span&gt;            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
-        &lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Well, let’s not call this a problem&amp;hellip; We are lucky because Django provides
-great solutions. Before we fix this, let’s verify that two fields are making
-this big queries: &lt;code&gt;user_permissions&lt;/code&gt; and &lt;code&gt;groups&lt;/code&gt; in &lt;code&gt;User&lt;/code&gt; model. How I
-verified ? Just excluded those two fields from Admin Form:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="c1"&gt;# for the sake of example, there is no app installed, no models, nothing.
-# therefore i'm using `urls.py` for demonstration
-# urls.py
-&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;admin&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib.auth.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.urls&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;UserAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelAdmin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;list_filter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'is_staff'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;list_display&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'email'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'first_name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'last_name'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;exclude&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'groups'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'user_permissions'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unregister&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;            &lt;span class="c1"&gt;# get rid of Django's default UserAdmin
-&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;UserAdmin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;# register our UserAdmin
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Woow! We have generated &lt;strong&gt;5 queries&lt;/strong&gt; only&amp;hellip; From &lt;strong&gt;35&lt;/strong&gt; to &lt;strong&gt;5&lt;/strong&gt; by excluding two
-fields&amp;hellip;&lt;/p&gt;
-
-&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2019-07-07-02-user-model-exclude-groups-and-user-permissions.png" alt="Image" /&gt;&lt;figcaption&gt;Exclude &amp;ldquo;user_permissions&amp;rdquo; and &amp;ldquo;groups&amp;rdquo;&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
-
-&lt;p&gt;Now the best is coming&amp;hellip; After Django version 2, &lt;code&gt;ModelAdmin&lt;/code&gt; gained a new
-feature/option called &lt;code&gt;autocomplete_fields&lt;/code&gt;. Let’s transform previous code:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight python"&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.conf&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;settings&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;admin&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.urls&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;include&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.contrib.auth.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Permission&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PermissionAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelAdmin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;search_fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'name'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;UserAdmin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ModelAdmin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;list_filter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'is_staff'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="n"&gt;list_display&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'email'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'first_name'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'last_name'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;autocomplete_fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'groups'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'user_permissions'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-
-&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unregister&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;UserAdmin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;admin&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;site&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Permission&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PermissionAdmin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now we have generated &lt;strong&gt;7 queries only!&lt;/strong&gt; If you hit refresh, Django will
-use cached query and you’ll see 6 queries only :)&lt;/p&gt;
-
-&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2019-07-07-03-user-model-after-autocomplete-fields.png" alt="Image" /&gt;&lt;figcaption&gt;Power of &amp;ldquo;autocomplete_fields&amp;rdquo;&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
-
-&lt;p&gt;You can also override ModelAdmin’s &lt;code&gt;formfield_for_manytomany&lt;/code&gt; and make
-&lt;code&gt;select_related&lt;/code&gt; and &lt;code&gt;prefetch_related&lt;/code&gt; queries on &lt;code&gt;kwargs[&amp;#39;queryset&amp;#39;]&lt;/code&gt; or
-you can modify UserAdminForm on &lt;code&gt;__init__&lt;/code&gt; level too. ModelAdmin’s
-&lt;code&gt;autocomplete_fields&lt;/code&gt; option is a query and life saver!&lt;/p&gt;
-
-&lt;p&gt;Again, do not use &lt;code&gt;urls.py&lt;/code&gt; for adding custom Admin. Use your model’s Admin
-&lt;code&gt;admin.py&lt;/code&gt;. I mostly use custom User model in my projects therefore I put
-related code there.&lt;/p&gt;
 </content>
   </entry>
 </feed>
