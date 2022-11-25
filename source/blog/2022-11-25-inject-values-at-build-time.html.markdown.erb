@@ -1,0 +1,58 @@
+---
+title: "Inject values at build time"
+date: Nov 25, 2022 09:26
+category: development
+tags: golang
+author: "Uğur Özyılmazel"
+opengraph_image: "2020-07-27-og-golang.png"
+---
+
+Do you know that, It is possible to inject values to variables at build on golang?
+READ_MORE
+
+Let’s assume that you are building a command-line tool and you want to inject
+latest build/commit hash to your application. Maybe you are building a rest
+api service and you want to add deployed commit hash to you health check
+endpoint to see which build is running?
+
+You have a package called `version`:
+
+```go
+package version
+
+// CommitHash represents current build/commit hash.
+var CommitHash string
+```
+
+Now build your project. Now we’ll use `nm` tool to find out symbols defined or
+used by an object file, archive, or executable. You can find more details
+about `nm` via `go doc cmd/nm`.
+
+```bash
+$ go build
+$ go tool nm ./yourEXE | grep CommitHash
+
+100444070 B github.com/YOURNAME/YOURAPP/app/version.CommitHash # just an example output
+```
+
+Grab the full name; `github.com/YOURNAME/YOURAPP/app/version.CommitHash` and
+
+```bash
+$ go build -ldflags="-X 'github.com/YOURNAME/YOURAPP/app/version.CommitHash=$(git rev-parse HEAD)'"
+```
+
+Now the latest commit hash value is injected to `version.CommitHash`. This
+bash command `git rev-parse HEAD` returns the hash. This is just a `string` :)
+
+You can inject whatever you want;
+
+```bash
+$ go build -ldflags="-X 'github.com/YOURNAME/YOURAPP/app/version.CommitHash=hello'"
+```
+
+If you check `go help build` you’ll see;
+
+    -ldflags '[pattern=]arg list'
+    	arguments to pass on each go tool link invocation.
+
+That’s it!
