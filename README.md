@@ -1,4 +1,4 @@
-![Version](https://img.shields.io/badge/version-0.0.2-orange.svg)
+![Version](https://img.shields.io/badge/version-0.0.3-orange.svg)
 [![pages-build-deployment](https://github.com/vbyazilim/vbyazilim.com/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/vbyazilim/vbyazilim.com/actions/workflows/pages/pages-build-deployment)
 
 
