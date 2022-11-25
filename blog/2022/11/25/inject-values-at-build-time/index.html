@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>vb YAZILIM • Blog posts by tag</title>
+    <title>vb YAZILIM • Blog • Inject values at build time • 1 minutes read</title>
     <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
 
     <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
@@ -15,7 +15,19 @@
     <link href="/public/css/syntax.css" rel="stylesheet" />
     
     <link href="/public/css/application.css" rel="stylesheet" />
+    <meta property="og:title" content="vb YAZILIM | Inject values at build time" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vbyazilim.com/blog/2022/11/25/inject-values-at-build-time/" />
     
+    <meta property="og:description" content="Do you know that, It is possible to inject values to variables at build on golang?">
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="vb YAZILIM" />
+    
+    <meta property="og:image" content="https://vbyazilim.com/public/images/blog/2020-07-27-og-golang.png" />
+    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/blog/2020-07-27-og-golang.png" />
+    <meta property="og:image:width" content="1000" />
+    <meta property="og:image:height" content="562" />
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52664816-9"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -48,95 +60,76 @@
 </section>
 
     
-<section class="section blog">
-    <div class="container">
-        <div class="columns is-vcentered">
-            <div class="column">
-                <div class="content">
-                    <h1>
-                        <span>Browsing &ldquo;pipx&rdquo; tag</span>
-                    </h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="hero is-vb">
-    <div class="hero-body">
-        <div class="container">
-            <h2 class="subtitle">
-                Found <strong>1</strong> post.
-                Displaying page <strong>1</strong> of 1
-            </h2>
-        </div>
-    </div>
-</section>
-
-<section class="section has-white-background">
+<section class="section">
     <div class="container">
         <div class="columns">
-            <div class="column is-8-desktop is-6-tablet">
-                
-                
-                <div class="list-articles">
-                    <ul>
-                        <li>
-                            <a href="/blog/2019/08/11/pipx-life-saver/" class="is-size-4-desktop">pipx : life saver</a>
-                            <time pubdate datetime="2019-08-11T17:00:00+03:00" title="11 August 2019, Sunday 17:00">
-                                11 August 2019, Sunday 17:00
-                            </time>
-                            <div class="is-size-5-desktop"><p>If you are a Python developer, you probably use different virtual environments
-depending on your project’s requirements.
-</p></div>
-                                <div class="tags mt-1 mb-2">
-                                    <span class="tag is-info"><a title="Posts with &ldquo;python&rdquo; tag" target="_blank" href="/blog/tag/python/">python</a></span>
-                                    <span class="tag is-info"><a title="Posts with &ldquo;pipx&rdquo; tag" target="_blank" href="/blog/tag/pipx/">pipx</a></span>
-                                    
-                                </div>
-                        </li>
-                    </ul>
-                </div>
+            <div class="column is-9-desktop">
+                <article>
+                    <div class="content is-medium">
+                        <div class="meta mb-1">
+                            <small>Uğur Özyılmazel &mdash; </small>
+                            <time pubdate datetime="2022-11-25T09:26:00+03:00" title="25 November 2022, Friday 09:26">25 November 2022, Friday 09:26</time>
+                             <span class="category"> &mdash; Filed under <a href="/blog/category/development/">development</a></span>
+                             <span class="read-time">reading time: 1 minutes</span>
+                        </div>
+
+                        <h1 class="title">Inject values at build time</h1>
+                        
+                        <div class="tags">
+                            <span class="tag is-info"><a title="Posts with &ldquo;golang&rdquo; tag" href="/blog/tag/golang/">golang</a></span>
+                        </div>
+
+                        <div class="yield mt-3-desktop">
+                            <p>Do you know that, It is possible to inject values to variables at build on golang?
+</p>
+
+<p>Let’s assume that you are building a command-line tool and you want to inject
+latest build/commit hash to your application. Maybe you are building a rest
+api service and you want to add deployed commit hash to you health check
+endpoint to see which build is running?</p>
+
+<p>You have a package called <code>version</code>:</p>
+<div class="highlight"><pre class="highlight go"><code><span class="k">package</span> <span class="n">version</span>
+
+<span class="c">// CommitHash represents current build/commit hash.</span>
+<span class="k">var</span> <span class="n">CommitHash</span> <span class="kt">string</span>
+</code></pre></div>
+<p>Now build your project. Now we’ll use <code>nm</code> tool to find out symbols defined or
+used by an object file, archive, or executable. You can find more details
+about <code>nm</code> via <code>go doc cmd/nm</code>.</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>go build
+<span class="nv">$ </span>go tool nm ./yourEXE | <span class="nb">grep </span>CommitHash
+
+100444070 B github.com/YOURNAME/YOURAPP/app/version.CommitHash <span class="c"># just an example output</span>
+</code></pre></div>
+<p>Grab the full name; <code>github.com/YOURNAME/YOURAPP/app/version.CommitHash</code> and</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>go build <span class="nt">-ldflags</span><span class="o">=</span><span class="s2">"-X 'github.com/YOURNAME/YOURAPP/app/version.CommitHash=</span><span class="si">$(</span>git rev-parse HEAD<span class="si">)</span><span class="s2">'"</span>
+</code></pre></div>
+<p>Now the latest commit hash value is injected to <code>version.CommitHash</code>. This
+bash command <code>git rev-parse HEAD</code> returns the hash. This is just a <code>string</code> :)</p>
+
+<p>You can inject whatever you want;</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>go build <span class="nt">-ldflags</span><span class="o">=</span><span class="s2">"-X 'github.com/YOURNAME/YOURAPP/app/version.CommitHash=hello'"</span>
+</code></pre></div>
+<p>If you check <code>go help build</code> you’ll see;</p>
+<div class="highlight"><pre class="highlight plaintext"><code>-ldflags '[pattern=]arg list'
+    arguments to pass on each go tool link invocation.
+</code></pre></div>
+<p>That’s it!</p>
+
+                        </div>
+                    </div>
+                    <div class="sharethis-inline-share-buttons" style="margin-top: 3em;"></div>
+                </article>
             </div>
-            <div class="column is-3-tablet is-2-desktop is-offset-2-desktop is-offset-3-tablet">
-                <div class="content">
-                    <h4 class="is-size-5-desktop is-size-6-tablet">By Category</h4>
-                </div>
-                <ul>
-                    <li><a href="/blog/category/development/">development</a></li>
-                    <li><a href="/blog/category/news/">news</a></li>
-                </ul>
-                <hr/>
-                <div class="content">
-                    <h4 class="is-size-5-desktop is-size-6-tablet">By Tag</h4>
-                </div>
-                <ul>
-                    <li><a href="/blog/tag/golang/">golang</a></li>
-                    <li><a href="/blog/tag/python/">python</a></li>
-                    <li><a href="/blog/tag/mkdocs/">mkdocs</a></li>
-                    <li><a href="/blog/tag/github/">github</a></li>
-                    <li><a href="/blog/tag/pipx/">pipx</a></li>
-                    <li><a href="/blog/tag/django/">django</a></li>
-                    <li><a href="/blog/tag/djangoadmin/">djangoadmin</a></li>
-                </ul>
-                <hr/>
-                
-                <div class="content">
-                    <h4 class="is-size-5-desktop is-size-6-tablet">By Year</h4>
-                </div>
-                <ul>
-                    <li><a href="/blog/year/2022/">2022 has 2 posts</a></li>
-                    <li><a href="/blog/year/2021/">2021 has 3 posts</a></li>
-                    <li><a href="/blog/year/2020/">2020 has 1 post</a></li>
-                    <li><a href="/blog/year/2019/">2019 has 5 posts</a></li>
-                </ul>
-                
+            
+            <div class="column is-3-desktop article-right-column is-hidden-touch">
+                <div class="content is-medium">
+<h4 class="title">Related Posts</h4><p><a href="/blog/2022/11/24/unintended-variable-shadowing/" title="Unintended variable shadowing">Unintended variable shadowing</a></p><time datetime="2022-11-24T09:04:00+03:00">24 November 2022, Thursday 09:04</time><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2022/11/24/unintended-variable-shadowing/" title="Unintended variable shadowing">Unintended variable shadowing</a></p><time datetime="2022-11-24T09:04:00+03:00">24 November 2022, Thursday 09:04</time><p><a href="/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/" title="Static Sites with mkdocs and GitHub Pages">Static Sites with mkdocs and GitHub Pages</a></p><time datetime="2021-08-23T09:57:00+03:00">23 August 2021, Monday 09:57</time><p><a href="/blog/2021/08/19/fancy-console-logger-plus-inspector/" title="fancy console logger + inspector">fancy console logger + inspector</a></p><time datetime="2021-08-19T11:58:00+03:00">19 August 2021, Thursday 11:58</time><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time>                </div>
             </div>
         </div>
     </div>
 </section>
-
-
 
 
 
@@ -250,7 +243,8 @@ depending on your project’s requirements.
     </script>
     <!-- End of Async Drift Code -->
 
-    
+            <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+
     <script src="/public/js/app.js"></script>
 </body>
 </html>

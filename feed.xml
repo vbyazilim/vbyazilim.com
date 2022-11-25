@@ -5,10 +5,59 @@
   <id>https://vbyazilim.com/</id>
   <link href="https://vbyazilim.com/"/>
   <link href="https://vbyazilim.com/feed.xml" rel="self"/>
-  <updated>2022-11-24T09:04:00+03:00</updated>
+  <updated>2022-11-25T09:26:00+03:00</updated>
   <author>
     <name>Uğur Özyılmazel</name>
   </author>
+  <entry>
+    <title>Inject values at build time</title>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2022/11/25/inject-values-at-build-time/"/>
+    <id>https://vbyazilim.com/blog/2022/11/25/inject-values-at-build-time/</id>
+    <published>2022-11-25T09:26:00+03:00</published>
+    <updated>2022-11-25T09:48:22+03:00</updated>
+    <author>
+      <name>Uğur Özyılmazel</name>
+    </author>
+    <summary type="html">&lt;p&gt;Do you know that, It is possible to inject values to variables at build on golang?
+&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Do you know that, It is possible to inject values to variables at build on golang?
+&lt;/p&gt;
+
+&lt;p&gt;Let’s assume that you are building a command-line tool and you want to inject
+latest build/commit hash to your application. Maybe you are building a rest
+api service and you want to add deployed commit hash to you health check
+endpoint to see which build is running?&lt;/p&gt;
+
+&lt;p&gt;You have a package called &lt;code&gt;version&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;package&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;
+
+&lt;span class="c"&gt;// CommitHash represents current build/commit hash.&lt;/span&gt;
+&lt;span class="k"&gt;var&lt;/span&gt; &lt;span class="n"&gt;CommitHash&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now build your project. Now we’ll use &lt;code&gt;nm&lt;/code&gt; tool to find out symbols defined or
+used by an object file, archive, or executable. You can find more details
+about &lt;code&gt;nm&lt;/code&gt; via &lt;code&gt;go doc cmd/nm&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;go build
+&lt;span class="nv"&gt;$ &lt;/span&gt;go tool nm ./yourEXE | &lt;span class="nb"&gt;grep &lt;/span&gt;CommitHash
+
+100444070 B github.com/YOURNAME/YOURAPP/app/version.CommitHash &lt;span class="c"&gt;# just an example output&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Grab the full name; &lt;code&gt;github.com/YOURNAME/YOURAPP/app/version.CommitHash&lt;/code&gt; and&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;go build &lt;span class="nt"&gt;-ldflags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"-X 'github.com/YOURNAME/YOURAPP/app/version.CommitHash=&lt;/span&gt;&lt;span class="si"&gt;$(&lt;/span&gt;git rev-parse HEAD&lt;span class="si"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;'"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now the latest commit hash value is injected to &lt;code&gt;version.CommitHash&lt;/code&gt;. This
+bash command &lt;code&gt;git rev-parse HEAD&lt;/code&gt; returns the hash. This is just a &lt;code&gt;string&lt;/code&gt; :)&lt;/p&gt;
+
+&lt;p&gt;You can inject whatever you want;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;go build &lt;span class="nt"&gt;-ldflags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"-X 'github.com/YOURNAME/YOURAPP/app/version.CommitHash=hello'"&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you check &lt;code&gt;go help build&lt;/code&gt; you’ll see;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;-ldflags '[pattern=]arg list'
+    arguments to pass on each go tool link invocation.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That’s it!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Unintended variable shadowing</title>
     <link rel="alternate" href="https://vbyazilim.com/blog/2022/11/24/unintended-variable-shadowing/"/>
@@ -669,81 +718,6 @@ function only once. Here is a bit complex example:&lt;/p&gt;
 &lt;hr&gt;
 
 &lt;p&gt;Golang logo is a trade mark of &lt;a href="https://blog.golang.org/go-brand"&gt;Google&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>pipx : life saver</title>
-    <link rel="alternate" href="https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/"/>
-    <id>https://vbyazilim.com/blog/2019/08/11/pipx-life-saver/</id>
-    <published>2019-08-11T17:00:00+03:00</published>
-    <updated>2022-08-18T08:22:56+03:00</updated>
-    <author>
-      <name>Uğur Özyılmazel</name>
-    </author>
-    <summary type="html">&lt;p&gt;If you are a Python developer, you probably use different virtual environments
-depending on your project’s requirements.
-&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;If you are a Python developer, you probably use different virtual environments
-depending on your project’s requirements.
-&lt;/p&gt;
-
-&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2019-08-11-pipx.png" alt="Image" /&gt;&lt;/figure&gt;&lt;/div&gt;
-
-&lt;p&gt;I manage my Python environments via &lt;a href="https://github.com/pyenv/pyenv"&gt;pyenv&lt;/a&gt;. It’s great tool for Python
-version and package isolation. Some of the Python packages include binary
-tools for global usage such as &lt;code&gt;pip&lt;/code&gt;, &lt;code&gt;django-admin&lt;/code&gt; and many more.&lt;/p&gt;
-
-&lt;p&gt;When you switch Python version via changing directory or activating a virtualenv,
-you loose global binary helpers. All of the binary/executables are isolated
-and you can not access those tools on a global scope.&lt;/p&gt;
-
-&lt;p&gt;My global Python version is set on &lt;code&gt;~/.bashrc&lt;/code&gt;. Without activating any
-virtualenv, my global Python is under the &lt;code&gt;~/.pyenv/shims/python&lt;/code&gt; and whenever
-I &lt;code&gt;pip install package&lt;/code&gt;, can be accessible from &lt;code&gt;~/.pyenv/versions/3.7.0/bin/&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;If I activate any environment, &lt;code&gt;pyenv&lt;/code&gt; shims the &lt;code&gt;$PATH&lt;/code&gt; and accessing
-previously installed binaries were almost impossible until &lt;a href="https://pipxproject.github.io/pipx/"&gt;pipx&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;pipx&lt;/code&gt; creates isolated environments for each package and provides system-wide
-access to your &lt;code&gt;pipx&lt;/code&gt; based installed modules. By default, &lt;code&gt;pipx&lt;/code&gt; creates and
-installs everything based on &lt;code&gt;~/.local/pipx&lt;/code&gt; folder.&lt;/p&gt;
-
-&lt;p&gt;I like to use &lt;a href="https://github.com/peritus/bumpversion"&gt;bumpversion&lt;/a&gt; for my projects. I installed &lt;code&gt;bumpversion&lt;/code&gt;
-package via &lt;code&gt;pipx&lt;/code&gt; and after that, &lt;code&gt;bumpversion&lt;/code&gt; became available for any
-Python version or any virtualenv without activating or doing extra tricks.&lt;/p&gt;
-
-&lt;h2&gt;Installation&lt;/h2&gt;
-
-&lt;p&gt;First, install &lt;code&gt;pipx&lt;/code&gt; via &lt;code&gt;pip&lt;/code&gt; and fix your &lt;code&gt;$PATH&lt;/code&gt; variable;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pip &lt;span class="nb"&gt;install&lt;/span&gt; &lt;span class="nt"&gt;--user&lt;/span&gt; pipx
-
-&lt;span class="c"&gt;# fix your $PATH, ~/.bashrc ?&lt;/span&gt;
-&lt;span class="nb"&gt;export &lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="k"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;HOME&lt;/span&gt;&lt;span class="k"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;/.local/bin:&lt;/span&gt;&lt;span class="k"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="k"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now try;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pipx &lt;span class="nt"&gt;--help&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;for bash-completion support, add this to your shell startup (such as &lt;code&gt;~/.bashrc&lt;/code&gt;)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="si"&gt;$(&lt;/span&gt;register-python-argcomplete pipx&lt;span class="si"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;Usage&lt;/h2&gt;
-
-&lt;p&gt;Now, install any Python package via &lt;code&gt;pipx install PACKAGE&lt;/code&gt;. You can let &lt;code&gt;pipx&lt;/code&gt;
-to install package dependencies via &lt;code&gt;pipx install PACKAGE --include-deps&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pipx &lt;span class="nb"&gt;install &lt;/span&gt;bumpversion
-&lt;span class="nv"&gt;$ &lt;/span&gt;pipx &lt;span class="nb"&gt;install &lt;/span&gt;twine
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Check what you’ve installed:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;pipx list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now your Python executables are accessible from anywhere in your environment!&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Creator/Maintainer: &lt;a href="https://github.com/cs01/"&gt;Chad Smith&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Logo by &lt;a href="https://github.com/IrishMorales"&gt;@IrishMorales&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
