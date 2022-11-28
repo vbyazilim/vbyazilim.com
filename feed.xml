@@ -5,10 +5,163 @@
   <id>https://vbyazilim.com/</id>
   <link href="https://vbyazilim.com/"/>
   <link href="https://vbyazilim.com/feed.xml" rel="self"/>
-  <updated>2022-11-25T09:26:00+03:00</updated>
+  <updated>2022-11-28T09:57:00+03:00</updated>
   <author>
     <name>Uğur Özyılmazel</name>
   </author>
+  <entry>
+    <title>Struct field alignment in golang</title>
+    <link rel="alternate" href="https://vbyazilim.com/blog/2022/11/28/struct-field-alignment-in-golang/"/>
+    <id>https://vbyazilim.com/blog/2022/11/28/struct-field-alignment-in-golang/</id>
+    <published>2022-11-28T09:57:00+03:00</published>
+    <updated>2022-11-28T11:03:31+03:00</updated>
+    <author>
+      <name>Uğur Özyılmazel</name>
+    </author>
+    <summary type="html">&lt;p&gt;Field order in structs are important for memory usage.
+&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Field order in structs are important for memory usage.
+&lt;/p&gt;
+
+&lt;p&gt;Consider, you have a &lt;code&gt;user&lt;/code&gt; struct;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;admin&lt;/span&gt;  &lt;span class="kt"&gt;bool&lt;/span&gt;   &lt;span class="c"&gt;// 1 byte&lt;/span&gt;
+    &lt;span class="n"&gt;age&lt;/span&gt;    &lt;span class="kt"&gt;int&lt;/span&gt;    &lt;span class="c"&gt;// 8 bytes&lt;/span&gt;
+    &lt;span class="n"&gt;banned&lt;/span&gt; &lt;span class="kt"&gt;bool&lt;/span&gt;   &lt;span class="c"&gt;// 1 byte&lt;/span&gt;
+    &lt;span class="n"&gt;group&lt;/span&gt;  &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="c"&gt;// 16 bytes&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;   &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="c"&gt;// 16 bytes&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;each field has byte capacity to hold data. If we sum the total byte usage of
+the given struct fields, we see: &lt;code&gt;42 bytes&lt;/code&gt;;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;1 byte&lt;/code&gt; for &lt;code&gt;admin&lt;/code&gt; field (bool)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;8 bytes&lt;/code&gt; for &lt;code&gt;age&lt;/code&gt; field (int)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;1 byte&lt;/code&gt; for &lt;code&gt;banned&lt;/code&gt; field (bool)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;16 bytes&lt;/code&gt; for &lt;code&gt;group&lt;/code&gt; field (string)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;16 bytes&lt;/code&gt; for &lt;code&gt;name&lt;/code&gt; field (string)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;if we check the real sum;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
+
+&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s"&gt;"fmt"&lt;/span&gt;
+    &lt;span class="s"&gt;"unsafe"&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;admin&lt;/span&gt;  &lt;span class="kt"&gt;bool&lt;/span&gt;   &lt;span class="c"&gt;// 1 byte&lt;/span&gt;
+    &lt;span class="n"&gt;age&lt;/span&gt;    &lt;span class="kt"&gt;int&lt;/span&gt;    &lt;span class="c"&gt;// 8 bytes&lt;/span&gt;
+    &lt;span class="n"&gt;banned&lt;/span&gt; &lt;span class="kt"&gt;bool&lt;/span&gt;   &lt;span class="c"&gt;// 1 byte&lt;/span&gt;
+    &lt;span class="n"&gt;group&lt;/span&gt;  &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="c"&gt;// 16 bytes&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;   &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="c"&gt;// 16 bytes&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;unsafe&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Sizeof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c"&gt;// 56 bytes&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;we see the size of struct is &lt;code&gt;56 bytes&lt;/code&gt;&amp;hellip; Where this &lt;code&gt;14 bytes&lt;/code&gt; are coming
+from? (&lt;code&gt;56 - 42 = 14&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;64-bit machines use &lt;code&gt;8 bytes&lt;/code&gt; of chunks:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt;+--------+
+|1xxxxxxx|          admin (bool)    [8 bytes consumed instead of 1 byte]
++--------+    
++--------+
+|12345678|          age (int)       [8 bytes consumed]
++--------+    
++--------+
+|1xxxxxxx|          banned (bool)   [8 bytes consumed instead of 1 byte]
++--------+    
++--------+--------+
+|12345678|12345678| group (string)  [2 * 8 bytes = 16 bytes consumed]
++--------+--------+    
++--------+--------+
+|12345678|12345678| name (string)   [2 * 8 bytes = 16 bytes consumed]
++--------+--------+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;if you check the &lt;code&gt;admin&lt;/code&gt; and &lt;code&gt;banned&lt;/code&gt; fields, there are 7 &lt;code&gt;xxxxxxx&lt;/code&gt; chars
+represents the unused areas. We consumed &lt;strong&gt;8 bytes per field&lt;/strong&gt; instead of &lt;strong&gt;1
+bytes&lt;/strong&gt;. If you add this code and run;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;reflect&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TypeOf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NumField&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Field&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"offset"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Offset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"align"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Align&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="s"&gt;"size"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Size&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;you’ll see;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;admin&lt;/code&gt; offset 0 align 1 size 1&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;age&lt;/code&gt; offset 8 align 8 size 8&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;banned&lt;/code&gt; offset 16 align 1 size 1&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;group&lt;/code&gt; offset 24 align 8 size 16&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; offset 40 align 8 size 16&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What is offset? It’s like you have a slice of items (array), every item has
+&lt;strong&gt;8 bytes&lt;/strong&gt; of data, offset is the index of element.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt; 0        8        16       24       32       40
+ |        |        |        |        |        |
+|12345678|12345678|12345678|12345678|12345678|12345678|
+ |        |        |        |                 |
+ admin    |        banned   |                 name
+          age               group
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Due to current field order of struct, &lt;code&gt;admin&lt;/code&gt; and &lt;code&gt;banned&lt;/code&gt; fields consume
+extra &lt;code&gt;7 bytes&lt;/code&gt; to cover/handle &lt;code&gt;8 bytes&lt;/code&gt; of chunk.&lt;/p&gt;
+
+&lt;p&gt;How can we fix that? Go team has a tool for this situation, called &lt;code&gt;fieldalignment&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;go &lt;span class="nb"&gt;install &lt;/span&gt;golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, let’s see the problem;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight shell"&gt;&lt;code&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;fieldalignment struct-alignment.go 
+struct-alignment.go:9:11: struct of size 56 could be 48
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This tells us;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;hey, this struct could consume &lt;strong&gt;48 bytes&lt;/strong&gt; instead of &lt;strong&gt;56 bytes&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now let’s run with &lt;code&gt;-fix&lt;/code&gt; args;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;fieldalignment&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fix&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alignment&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="k"&gt;go&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="n"&gt;changes&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;fly&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you check the file, you’ll see the new struct field order:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;group&lt;/span&gt;  &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="c"&gt;// 16 bytes&lt;/span&gt;
+    &lt;span class="n"&gt;name&lt;/span&gt;   &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="c"&gt;// 16 bytes&lt;/span&gt;
+    &lt;span class="n"&gt;age&lt;/span&gt;    &lt;span class="kt"&gt;int&lt;/span&gt;    &lt;span class="c"&gt;// 8 bytes&lt;/span&gt;
+    &lt;span class="n"&gt;admin&lt;/span&gt;  &lt;span class="kt"&gt;bool&lt;/span&gt;   &lt;span class="c"&gt;// 1 byte&lt;/span&gt;
+    &lt;span class="n"&gt;banned&lt;/span&gt; &lt;span class="kt"&gt;bool&lt;/span&gt;   &lt;span class="c"&gt;// 1 byte&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now new offsets and size;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;group&lt;/code&gt; offset 0 align 8 size 16&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt; offset 16 align 8 size 16&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;age&lt;/code&gt; offset 32 align 8 size 8&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;admin&lt;/code&gt; offset 40 align 1 size 1&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;banned&lt;/code&gt; offset 41 align 1 size 1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now the new size of the struct is &lt;code&gt;48 bytes&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre class="highlight plaintext"&gt;&lt;code&gt; 0        8        16       24       32       40
+ |        |        |        |        |        |
+|12345678|12345678|12345678|12345678|12345678|12345678|
+ |                 |                 |        ||
+ group             name              age      |banned
+                                              admin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;fieldalignment&lt;/code&gt; tool is always your friend! For the bigger projects and bigger
+structs, always keep this in mind: &lt;strong&gt;field order is important&lt;/strong&gt;!&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Inject values at build time</title>
     <link rel="alternate" href="https://vbyazilim.com/blog/2022/11/25/inject-values-at-build-time/"/>
@@ -649,75 +802,6 @@ http             80/tcp     www www-http # World Wide Web HTTP
 &lt;p&gt;This list goes on and on&amp;hellip; So, you can set &lt;code&gt;:http&lt;/code&gt; as &lt;code&gt;addr&lt;/code&gt; argument in &lt;code&gt;ListenAndServe&lt;/code&gt;
 function. Also you can use this convention almost everywhere! Enjoy named port
 definitions.&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>Argument reuse</title>
-    <link rel="alternate" href="https://vbyazilim.com/blog/2020/07/27/argument-reuse/"/>
-    <id>https://vbyazilim.com/blog/2020/07/27/argument-reuse/</id>
-    <published>2020-07-27T13:38:00+03:00</published>
-    <updated>2022-08-18T08:22:56+03:00</updated>
-    <author>
-      <name>Uğur Özyılmazel</name>
-    </author>
-    <summary type="html">&lt;p&gt;Golang’s &lt;code&gt;fmt&lt;/code&gt; package provides many features for formatting and printing.
-&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;Golang’s &lt;code&gt;fmt&lt;/code&gt; package provides many features for formatting and printing.
-&lt;/p&gt;
-
-&lt;div class="zoomable "&gt;&lt;figure class="image"&gt;&lt;img class="mini-zoom" src="/public/images/blog/2020-07-27-golang.png" alt="Image" /&gt;&lt;/figure&gt;&lt;/div&gt;
-
-&lt;p&gt;Here is a small example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
-
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="s"&gt;"fmt"&lt;/span&gt;
-
-&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s"&gt;"Hello"&lt;/span&gt;
-    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"%s&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;// Hello&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sometimes you need to use same object for displaying in different formats.
-Most people use this way:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
-
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="s"&gt;"fmt"&lt;/span&gt;
-
-&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s"&gt;"Hello"&lt;/span&gt;
-    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"value: %s, type: %T&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;// value: Hello, type: string&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;As you see, we use &lt;code&gt;s&lt;/code&gt; twice. We have another option: &lt;code&gt;[INDEX]&lt;/code&gt; usage:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
-
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="s"&gt;"fmt"&lt;/span&gt;
-
-&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s"&gt;"Hello"&lt;/span&gt;
-    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"value: %[1]s, type: %[1]T&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c"&gt;// value: Hello, type: string&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;%[1]s&lt;/code&gt; means, use the first argument&amp;hellip; Now, we are passing &lt;code&gt;s&lt;/code&gt; to &lt;code&gt;Printf&lt;/code&gt;
-function only once. Here is a bit complex example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre class="highlight go"&gt;&lt;code&gt;&lt;span class="k"&gt;package&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;
-
-&lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="s"&gt;"fmt"&lt;/span&gt;
-
-&lt;span class="k"&gt;func&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="s"&gt;"Hello"&lt;/span&gt;
-    &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
-
-    &lt;span class="n"&gt;fmt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"value of s: %[1]s, type of s: %[1]T&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;value of n: %[2]d, type of n: %[2]T&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
-    &lt;span class="c"&gt;// value of s: Hello, type of s: string&lt;/span&gt;
-    &lt;span class="c"&gt;// value of n: 1, type of n: int&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Happy coding!&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;p&gt;Golang logo is a trade mark of &lt;a href="https://blog.golang.org/go-brand"&gt;Google&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>vb YAZILIM • Blog • Struct field alignment in golang • 3 minutes read</title>
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <meta name="description" content="We are software development, training and consultancy company. We provide highly skilled Django application development services.">
+    <meta name="keywords" content="training,git,python,ruby,bash,golang,javascript,reactjs,vuejs,applescript,django,flask,sinatra,ror,rails,ruby on rails,postgresql,deployment,gentoo,redis" />
+    <meta name="p:domain_verify" content="37faca05c6c17ec39d217c55756a7242"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="icon" href="/public/images/favicon-32.png">
+    <link href="/public/css/syntax.css" rel="stylesheet" />
+    
+    <link href="/public/css/application.css" rel="stylesheet" />
+    <meta property="og:title" content="vb YAZILIM | Struct field alignment in golang" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://vbyazilim.com/blog/2022/11/28/struct-field-alignment-in-golang/" />
+    
+    <meta property="og:description" content="Field order in structs are important for memory usage.">
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="vb YAZILIM" />
+    
+    <meta property="og:image" content="https://vbyazilim.com/public/images/blog/2020-07-27-og-golang.png" />
+    <meta property="og:image:secure_url" content="https://vbyazilim.com/public/images/blog/2020-07-27-og-golang.png" />
+    <meta property="og:image:width" content="1000" />
+    <meta property="og:image:height" content="562" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-52664816-9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-52664816-9');
+    </script>
+</head>
+<body>
+    
+
+    <section class="section">
+    <div class="container">
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <a href="/" title="Home"><img src="/public/images/vb-yazilim-logo.svg" class="vb-logo" alt="" /></a>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item"><a title="Home" href="/">Home</a></div>
+                <div class="level-item"><a title="Blog posts" href="/blog/">Blog</a></div>
+                <div class="level-item"><a title="Training" href="/training/">Training</a></div>
+                <div class="level-item"><a title="Türkçe" href="/tr/">Türkçe</a></div>
+                <div class="level-item"><a title="Atom feed" href="/feed.xml"><span class="icon"><i class="fas fa-rss-square"></i></span></a></div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+    
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-9-desktop">
+                <article>
+                    <div class="content is-medium">
+                        <div class="meta mb-1">
+                            <small>Uğur Özyılmazel &mdash; </small>
+                            <time pubdate datetime="2022-11-28T09:57:00+03:00" title="28 November 2022, Monday 09:57">28 November 2022, Monday 09:57</time>
+                             <span class="category"> &mdash; Filed under <a href="/blog/category/development/">development</a></span>
+                             <span class="read-time">reading time: 3 minutes</span>
+                        </div>
+
+                        <h1 class="title">Struct field alignment in golang</h1>
+                        
+                        <div class="tags">
+                            <span class="tag is-info"><a title="Posts with &ldquo;golang&rdquo; tag" href="/blog/tag/golang/">golang</a></span>
+                        </div>
+
+                        <div class="yield mt-3-desktop">
+                            <p>Field order in structs are important for memory usage.
+</p>
+
+<p>Consider, you have a <code>user</code> struct;</p>
+<div class="highlight"><pre class="highlight go"><code><span class="k">type</span> <span class="n">user</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">admin</span>  <span class="kt">bool</span>   <span class="c">// 1 byte</span>
+    <span class="n">age</span>    <span class="kt">int</span>    <span class="c">// 8 bytes</span>
+    <span class="n">banned</span> <span class="kt">bool</span>   <span class="c">// 1 byte</span>
+    <span class="n">group</span>  <span class="kt">string</span> <span class="c">// 16 bytes</span>
+    <span class="n">name</span>   <span class="kt">string</span> <span class="c">// 16 bytes</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>each field has byte capacity to hold data. If we sum the total byte usage of
+the given struct fields, we see: <code>42 bytes</code>;</p>
+
+<ul>
+<li><code>1 byte</code> for <code>admin</code> field (bool)</li>
+<li><code>8 bytes</code> for <code>age</code> field (int)</li>
+<li><code>1 byte</code> for <code>banned</code> field (bool)</li>
+<li><code>16 bytes</code> for <code>group</code> field (string)</li>
+<li><code>16 bytes</code> for <code>name</code> field (string)</li>
+</ul>
+
+<p>if we check the real sum;</p>
+<div class="highlight"><pre class="highlight go"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+    <span class="s">"fmt"</span>
+    <span class="s">"unsafe"</span>
+<span class="p">)</span>
+
+<span class="k">type</span> <span class="n">user</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">admin</span>  <span class="kt">bool</span>   <span class="c">// 1 byte</span>
+    <span class="n">age</span>    <span class="kt">int</span>    <span class="c">// 8 bytes</span>
+    <span class="n">banned</span> <span class="kt">bool</span>   <span class="c">// 1 byte</span>
+    <span class="n">group</span>  <span class="kt">string</span> <span class="c">// 16 bytes</span>
+    <span class="n">name</span>   <span class="kt">string</span> <span class="c">// 16 bytes</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">u</span> <span class="o">:=</span> <span class="n">user</span><span class="p">{}</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">unsafe</span><span class="o">.</span><span class="n">Sizeof</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="c">// 56 bytes</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>we see the size of struct is <code>56 bytes</code>&hellip; Where this <code>14 bytes</code> are coming
+from? (<code>56 - 42 = 14</code>)</p>
+
+<p>64-bit machines use <code>8 bytes</code> of chunks:</p>
+<div class="highlight"><pre class="highlight plaintext"><code>+--------+
+|1xxxxxxx|          admin (bool)    [8 bytes consumed instead of 1 byte]
++--------+    
++--------+
+|12345678|          age (int)       [8 bytes consumed]
++--------+    
++--------+
+|1xxxxxxx|          banned (bool)   [8 bytes consumed instead of 1 byte]
++--------+    
++--------+--------+
+|12345678|12345678| group (string)  [2 * 8 bytes = 16 bytes consumed]
++--------+--------+    
++--------+--------+
+|12345678|12345678| name (string)   [2 * 8 bytes = 16 bytes consumed]
++--------+--------+    
+</code></pre></div>
+<p>if you check the <code>admin</code> and <code>banned</code> fields, there are 7 <code>xxxxxxx</code> chars
+represents the unused areas. We consumed <strong>8 bytes per field</strong> instead of <strong>1
+bytes</strong>. If you add this code and run;</p>
+<div class="highlight"><pre class="highlight go"><code><span class="n">t</span> <span class="o">:=</span> <span class="n">reflect</span><span class="o">.</span><span class="n">TypeOf</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">t</span><span class="o">.</span><span class="n">NumField</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+    <span class="n">f</span> <span class="o">:=</span> <span class="n">t</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span> <span class="s">"offset"</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">Offset</span><span class="p">,</span> <span class="s">"align"</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">Align</span><span class="p">(),</span> <span class="s">"size"</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">Size</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>you’ll see;</p>
+
+<ul>
+<li><code>admin</code> offset 0 align 1 size 1</li>
+<li><code>age</code> offset 8 align 8 size 8</li>
+<li><code>banned</code> offset 16 align 1 size 1</li>
+<li><code>group</code> offset 24 align 8 size 16</li>
+<li><code>name</code> offset 40 align 8 size 16</li>
+</ul>
+
+<p>What is offset? It’s like you have a slice of items (array), every item has
+<strong>8 bytes</strong> of data, offset is the index of element.</p>
+<div class="highlight"><pre class="highlight plaintext"><code> 0        8        16       24       32       40
+ |        |        |        |        |        |
+|12345678|12345678|12345678|12345678|12345678|12345678|
+ |        |        |        |                 |
+ admin    |        banned   |                 name
+          age               group
+</code></pre></div>
+<p>Due to current field order of struct, <code>admin</code> and <code>banned</code> fields consume
+extra <code>7 bytes</code> to cover/handle <code>8 bytes</code> of chunk.</p>
+
+<p>How can we fix that? Go team has a tool for this situation, called <code>fieldalignment</code>:</p>
+<div class="highlight"><pre class="highlight shell"><code>go <span class="nb">install </span>golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
+</code></pre></div>
+<p>Now, let’s see the problem;</p>
+<div class="highlight"><pre class="highlight shell"><code><span class="nv">$ </span>fieldalignment struct-alignment.go 
+struct-alignment.go:9:11: struct of size 56 could be 48
+</code></pre></div>
+<p>This tells us;</p>
+
+<blockquote>
+<p>hey, this struct could consume <strong>48 bytes</strong> instead of <strong>56 bytes</strong></p>
+</blockquote>
+
+<p>Now let’s run with <code>-fix</code> args;</p>
+<div class="highlight"><pre class="highlight go"><code><span class="err">$</span> <span class="n">fieldalignment</span> <span class="o">-</span><span class="n">fix</span> <span class="k">struct</span><span class="o">-</span><span class="n">alignment</span><span class="o">.</span><span class="k">go</span> <span class="err">#</span> <span class="n">changes</span> <span class="n">the</span> <span class="n">code</span> <span class="n">on</span><span class="o">-</span><span class="n">the</span><span class="o">-</span><span class="n">fly</span>
+</code></pre></div>
+<p>If you check the file, you’ll see the new struct field order:</p>
+<div class="highlight"><pre class="highlight go"><code><span class="k">type</span> <span class="n">user</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">group</span>  <span class="kt">string</span> <span class="c">// 16 bytes</span>
+    <span class="n">name</span>   <span class="kt">string</span> <span class="c">// 16 bytes</span>
+    <span class="n">age</span>    <span class="kt">int</span>    <span class="c">// 8 bytes</span>
+    <span class="n">admin</span>  <span class="kt">bool</span>   <span class="c">// 1 byte</span>
+    <span class="n">banned</span> <span class="kt">bool</span>   <span class="c">// 1 byte</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now new offsets and size;</p>
+
+<ul>
+<li><code>group</code> offset 0 align 8 size 16</li>
+<li><code>name</code> offset 16 align 8 size 16</li>
+<li><code>age</code> offset 32 align 8 size 8</li>
+<li><code>admin</code> offset 40 align 1 size 1</li>
+<li><code>banned</code> offset 41 align 1 size 1</li>
+</ul>
+
+<p>Now the new size of the struct is <code>48 bytes</code>.</p>
+<div class="highlight"><pre class="highlight plaintext"><code> 0        8        16       24       32       40
+ |        |        |        |        |        |
+|12345678|12345678|12345678|12345678|12345678|12345678|
+ |                 |                 |        ||
+ group             name              age      |banned
+                                              admin
+</code></pre></div>
+<p><code>fieldalignment</code> tool is always your friend! For the bigger projects and bigger
+structs, always keep this in mind: <strong>field order is important</strong>!</p>
+
+                        </div>
+                    </div>
+                    <div class="sharethis-inline-share-buttons" style="margin-top: 3em;"></div>
+                </article>
+            </div>
+            
+            <div class="column is-3-desktop article-right-column is-hidden-touch">
+                <div class="content is-medium">
+<h4 class="title">Related Posts</h4><p><a href="/blog/2022/11/25/inject-values-at-build-time/" title="Inject values at build time">Inject values at build time</a></p><time datetime="2022-11-25T09:26:00+03:00">25 November 2022, Friday 09:26</time><p><a href="/blog/2022/11/24/unintended-variable-shadowing/" title="Unintended variable shadowing">Unintended variable shadowing</a></p><time datetime="2022-11-24T09:04:00+03:00">24 November 2022, Thursday 09:04</time><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time><p><a href="/blog/2020/07/27/argument-reuse/" title="Argument reuse">Argument reuse</a></p><time datetime="2020-07-27T13:38:00+03:00">27 July 2020, Monday 13:38</time><p><a href="/blog/2019/06/03/better-tool-for-listing-virtual-environment/" title="Better tool for listing virtual environments">Better tool for listing virtual environments</a></p><time datetime="2019-06-03T10:00:00+03:00">03 June 2019, Monday 10:00</time><hr /><h4 class="title">Lastest Posts</h4><p><a href="/blog/2022/11/25/inject-values-at-build-time/" title="Inject values at build time">Inject values at build time</a></p><time datetime="2022-11-25T09:26:00+03:00">25 November 2022, Friday 09:26</time><p><a href="/blog/2022/11/24/unintended-variable-shadowing/" title="Unintended variable shadowing">Unintended variable shadowing</a></p><time datetime="2022-11-24T09:04:00+03:00">24 November 2022, Thursday 09:04</time><p><a href="/blog/2021/08/23/static-sites-with-mkdocs-and-github-pages/" title="Static Sites with mkdocs and GitHub Pages">Static Sites with mkdocs and GitHub Pages</a></p><time datetime="2021-08-23T09:57:00+03:00">23 August 2021, Monday 09:57</time><p><a href="/blog/2021/08/19/fancy-console-logger-plus-inspector/" title="fancy console logger + inspector">fancy console logger + inspector</a></p><time datetime="2021-08-19T11:58:00+03:00">19 August 2021, Thursday 11:58</time><p><a href="/blog/2021/02/04/network-addresses-and-named-ports/" title="Network Addresses and Named Ports">Network Addresses and Named Ports</a></p><time datetime="2021-02-04T19:44:00+03:00">04 February 2021, Thursday 19:44</time>                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+    <div id="ga-notice" class="is-hidden">
+        <div class="notification is-size-7-touch has-text-centered is-radiusless">
+            <button class="delete mr-1"></button>
+            We are using Google Analytics on our page to track visit counts and other statistic related datas.
+            We would like to inform you about that...
+        </div>
+    </div>
+
+    <footer class="footer has-background-color-vb has-text-white">
+    <div class="container">
+        <div class="columns">
+            <div class="column">
+                <div class="content">
+                    <p><strong>vb YAZILIM</strong> - Uğur Özyılmazel</p>
+                    <address>
+                        Meşrutiyet Mah. Samanyolu sk. 11/7<br/>
+                        34363 - Şişli / İstanbul<br/>
+                        Türkiye<br/><br/>
+                        <a href="tel:+905333774300"><span class="icon"><i class="fas fa-phone-square"></i></span>+90-(0)533-3774300</a><br/>
+                        <script type="text/javascript">
+                            document.write('<a href="mailto:');
+                            document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                            document.write('?subject=Hello">');
+                            document.write('<span class="icon"><i class="fas fa-envelope-square"></i></span>');
+                            document.write("uryyb\100iolnmvyvz\056pbz".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));
+                            document.write('</a>');
+                        </script>
+                    </address>
+                </div>
+            </div>
+            <div class="column has-text-right-tablet footer-right-icons-tablet">
+                <p>
+                    <a title="GitHub repo of vb YAZILIM" target="_blank" href="https://github.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-github-square fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-twitter-square fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://linkedin.com/company/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-linkedin fa-2x"></i>
+                        </span>
+                    </a>
+                    <a target="_blank" href="https://vimeo.com/vbyazilim">
+                        <span class="icon is-medium">
+                            <i class="fab fa-vimeo fa-2x"></i>
+                        </span>
+                    </a>
+                </p>
+                <p class="mt-1">
+                    made with <a class="is-external-link" href="https://middlemanapp.com">Middleman</a><br/>
+                    
+                    <a class="is-external-link" href="https://www.ruby-lang.org">Ruby</a> 
+                    <a class="is-external-link" href="https://sass-lang.com">Sass</a><br/>
+                    
+                    <a class="is-external-link" href="https://bulma.io">Bulma</a> 
+                    <a class="is-external-link" href="https://fontawesome.com">Font Awesome</a>
+                    <a class="is-external-link" href="https://simpleicons.org">Simple Icons</a><br/>
+
+                    <a class="is-external-link" href="https://www.w3.org/TR/html/">HTML</a> 
+                    <a class="is-external-link" href="https://www.w3.org/Style/CSS/">CSS</a> 
+                    <a class="is-external-link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript</a> 
+                    <a class="is-external-link" href="https://unsplash.com">Unsplash</a> 
+                </p>
+                <p class="mt-1">hosted at <a class="is-external-link" href="https://pages.github.com">GitHub Pages</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script data-search-pseudo-elements defer src="//use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <!-- Start of Async Drift Code -->
+    <script>
+    "use strict";
+
+    !function() {
+      var t = window.driftt = window.drift = window.driftt || [];
+      if (!t.init) {
+        if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+        t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+        t.factory = function(e) {
+          return function() {
+            var n = Array.prototype.slice.call(arguments);
+            return n.unshift(e), t.push(n), t;
+          };
+        }, t.methods.forEach(function(e) {
+          t[e] = t.factory(e);
+        }), t.load = function(t) {
+          var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+          o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+          var i = document.getElementsByTagName("script")[0];
+          i.parentNode.insertBefore(o, i);
+        };
+      }
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    drift.load('vkw9xfpxytsv');
+    </script>
+    <!-- End of Async Drift Code -->
+
+            <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d2213a5b54cea00128f1df8&product=social-ab' async='async'></script>
+
+    <script src="/public/js/app.js"></script>
+</body>
+</html>
