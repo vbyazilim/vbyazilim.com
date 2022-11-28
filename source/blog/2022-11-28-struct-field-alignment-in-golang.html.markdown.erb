@@ -1,0 +1,165 @@
+---
+title: "Struct field alignment in golang"
+date: Nov 28, 2022 09:57
+category: development
+tags: golang
+author: "Uğur Özyılmazel"
+opengraph_image: "2020-07-27-og-golang.png"
+---
+
+Field order in structs are important for memory usage.
+READ_MORE
+
+Consider, you have a `user` struct;
+
+```go
+type user struct {
+	admin  bool   // 1 byte
+	age    int    // 8 bytes
+	banned bool   // 1 byte
+	group  string // 16 bytes
+	name   string // 16 bytes
+}
+```
+
+each field has byte capacity to hold data. If we sum the total byte usage of
+the given struct fields, we see: `42 bytes`;
+
+- `1 byte` for `admin` field (bool)
+- `8 bytes` for `age` field (int)
+- `1 byte` for `banned` field (bool)
+- `16 bytes` for `group` field (string)
+- `16 bytes` for `name` field (string)
+
+if we check the real sum;
+
+```go
+package main
+
+import (
+	"fmt"
+	"unsafe"
+)
+
+type user struct {
+	admin  bool   // 1 byte
+	age    int    // 8 bytes
+	banned bool   // 1 byte
+	group  string // 16 bytes
+	name   string // 16 bytes
+}
+
+func main() {
+	u := user{}
+	fmt.Println(unsafe.Sizeof(u)) // 56 bytes
+}
+```
+
+we see the size of struct is `56 bytes`... Where this `14 bytes` are coming
+from? (`56 - 42 = 14`)
+
+64-bit machines use `8 bytes` of chunks:
+
+    +--------+
+    |1xxxxxxx|          admin (bool)    [8 bytes consumed instead of 1 byte]
+    +--------+    
+    +--------+
+    |12345678|          age (int)       [8 bytes consumed]
+    +--------+    
+    +--------+
+    |1xxxxxxx|          banned (bool)   [8 bytes consumed instead of 1 byte]
+    +--------+    
+    +--------+--------+
+    |12345678|12345678| group (string)  [2 * 8 bytes = 16 bytes consumed]
+    +--------+--------+    
+    +--------+--------+
+    |12345678|12345678| name (string)   [2 * 8 bytes = 16 bytes consumed]
+    +--------+--------+    
+
+if you check the `admin` and `banned` fields, there are 7 `xxxxxxx` chars
+represents the unused areas. We consumed **8 bytes per field** instead of **1
+bytes**. If you add this code and run;
+
+```go
+t := reflect.TypeOf(u)
+for i := 0; i < t.NumField(); i++ {
+	f := t.Field(i)
+	fmt.Println(f.Name, "offset", f.Offset, "align", f.Type.Align(), "size", f.Type.Size())
+}
+```
+
+you’ll see;
+
+- `admin` offset 0 align 1 size 1
+- `age` offset 8 align 8 size 8
+- `banned` offset 16 align 1 size 1
+- `group` offset 24 align 8 size 16
+- `name` offset 40 align 8 size 16
+
+What is offset? It’s like you have a slice of items (array), every item has
+**8 bytes** of data, offset is the index of element.
+
+     0        8        16       24       32       40
+     |        |        |        |        |        |
+    |12345678|12345678|12345678|12345678|12345678|12345678|
+     |        |        |        |                 |
+     admin    |        banned   |                 name
+              age               group
+
+Due to current field order of struct, `admin` and `banned` fields consume
+extra `7 bytes` to cover/handle `8 bytes` of chunk.
+
+How can we fix that? Go team has a tool for this situation, called `fieldalignment`:
+
+```bash
+go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest
+```
+
+Now, let’s see the problem;
+
+```bash
+$ fieldalignment struct-alignment.go 
+struct-alignment.go:9:11: struct of size 56 could be 48
+```
+
+This tells us;
+
+> hey, this struct could consume **48 bytes** instead of **56 bytes**
+
+Now let’s run with `-fix` args;
+
+```go
+$ fieldalignment -fix struct-alignment.go # changes the code on-the-fly
+```
+
+If you check the file, you’ll see the new struct field order:
+
+```go
+type user struct {
+	group  string // 16 bytes
+	name   string // 16 bytes
+	age    int    // 8 bytes
+	admin  bool   // 1 byte
+	banned bool   // 1 byte
+}
+```
+
+Now new offsets and size;
+
+- `group` offset 0 align 8 size 16
+- `name` offset 16 align 8 size 16
+- `age` offset 32 align 8 size 8
+- `admin` offset 40 align 1 size 1
+- `banned` offset 41 align 1 size 1
+
+Now the new size of the struct is `48 bytes`.
+
+     0        8        16       24       32       40
+     |        |        |        |        |        |
+    |12345678|12345678|12345678|12345678|12345678|12345678|
+     |                 |                 |        ||
+     group             name              age      |banned
+                                                  admin
+
+`fieldalignment` tool is always your friend! For the bigger projects and bigger
+structs, always keep this in mind: **field order is important**!
