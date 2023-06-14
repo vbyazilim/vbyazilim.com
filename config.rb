@@ -29,6 +29,10 @@ proxy '/training/index.html', '/pages/training.html'
 proxy '/tr/index.html', '/pages/tr/index.html'
 proxy '/tr/servisler/index.html', '/pages/tr/services.html'
 proxy '/tr/egitimler/index.html', '/pages/tr/training.html'
+proxy '/tr/e-dukkan/index.html', '/pages/tr/store.html'
+proxy '/tr/e-dukkan/kullanim-sartlari/index.html', '/pages/tr/store/terms.html'
+proxy '/tr/e-dukkan/geri-odeme-politikasi/index.html', '/pages/tr/store/refund.html'
+proxy '/tr/e-dukkan/gizlilik-politikasi/index.html', '/pages/tr/store/privacy.html'
 
 activate :blog do |blog|
   blog.custom_collections = {
