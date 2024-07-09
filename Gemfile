@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '3.1.2'
+ruby '3.3.0'
 
 gem 'middleman', '~> 4.4', '>= 4.4.2'
 gem 'middleman-blog', '~> 4.0', '>= 4.0.3'
@@ -18,6 +18,11 @@ gem 'sanitize', '~> 6.0'
 gem 'addressable', '~> 2.8'
 gem 'rexml', '~> 3.2', '>= 3.2.5'
 gem 'kramdown', '~> 2.4'
+
+gem 'bigdecimal'
+gem 'mutex_m'
+gem 'base64'
+gem 'csv'
 
 group :development do
   gem 'pry', '~> 0.14.1'
