@@ -120,7 +120,7 @@ GEM
       ffi (~> 1.0)
     readingtime (0.4.0)
     redcarpet (3.6.0)
-    rexml (3.3.1)
+    rexml (3.3.3)
       strscan
     rouge (3.30.0)
     sanitize (6.1.1)
@@ -165,7 +165,7 @@ DEPENDENCIES
   pry (~> 0.14.1)
   readingtime (~> 0.4.0)
   redcarpet (~> 3.5, >= 3.5.1)
-  rexml (~> 3.2, >= 3.2.5)
+  rexml (~> 3.3)
   sanitize (~> 6.0)
   stringex (~> 2.8, >= 2.8.5)
 
