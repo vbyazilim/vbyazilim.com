@@ -16,7 +16,7 @@ gem 'readingtime', '~> 0.4.0'
 gem 'sanitize', '~> 6.0'
 
 gem 'addressable', '~> 2.8'
-gem 'rexml', '~> 3.3'
+gem 'rexml', '~> 3.4'
 gem 'kramdown', '~> 2.4'
 
 gem 'bigdecimal'
