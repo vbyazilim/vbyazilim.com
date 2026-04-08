@@ -15,7 +15,7 @@ gem 'image_size', '~> 3.0', '>= 3.0.1'
 gem 'readingtime', '~> 0.4.0'
 gem 'sanitize', '~> 6.0'
 
-gem 'addressable', '~> 2.8'
+gem 'addressable', '~> 2.9'
 gem 'rexml', '~> 3.4'
 gem 'kramdown', '~> 2.4'
 
